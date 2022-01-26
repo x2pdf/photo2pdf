@@ -1,20 +1,20 @@
 # photo2pdf
 
 * 下载最新稳定版本：
-    1. Windows:
-    2. Mac:
+    1. Windows: https://github.com/x2pdf/photo2pdf/releases/tag/v22.01
+    2. Mac: https://github.com/x2pdf/photo2pdf/releases/tag/v22.02
 * 应用中 Key 的获取方式
     1. 淘宝搜索店铺： x2pdf
-    2. 请点访问URL：todo
+    2. 请点访问URL：https://shop436261732.taobao.com/
     3. 如若以上所提供获取的方式，您的情况均不方便或者无法使用的，敬请邮件联系：x2pdf@outlook.com。
 
 
 * Download the latest stable version:
-    1. Windows:
-    2. Mac:
+    1. Windows: https://github.com/x2pdf/photo2pdf/releases/tag/v22.01
+    2. Mac: https://github.com/x2pdf/photo2pdf/releases/tag/v22.02
 * How to get the Key in the application
     1. Taobao search store: x2pdf
-    2. Please visit the URL: todo
+    2. Please visit the URL: https://shop436261732.taobao.com/
     3. If the methods provided above are inconvenient or unavailable for your situation, please email:
        x2pdf@outlook.com.
 
