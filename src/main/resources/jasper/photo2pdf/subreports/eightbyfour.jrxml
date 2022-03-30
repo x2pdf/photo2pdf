@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.11.0.final using JasperReports Library version 6.11.0-0c4056ccaa4d25a5a8c45672d2f764ea3498bebb  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="1by1" pageWidth="523" pageHeight="842" columnWidth="523" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="563cf7d7-0bb1-434d-a9f7-64af505884a1">
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="photo1" class="java.lang.String"/>
+	<field name="photo1Mark" class="java.lang.String"/>
+	<field name="photo2" class="java.lang.String"/>
+	<field name="photo2Mark" class="java.lang.String"/>
+	<field name="photo3" class="java.lang.String"/>
+	<field name="photo3Mark" class="java.lang.String"/>
+	<field name="photo4" class="java.lang.String"/>
+	<field name="photo4Mark" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="95" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<image hAlign="Center" vAlign="Middle" onErrorType="Icon">
+				<reportElement x="0" y="0" width="126" height="80" uuid="2aba2396-fb30-4b9c-ae48-4ff1bb5b5312">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<imageExpression><![CDATA[$F{photo1}]]></imageExpression>
+			</image>
+			<textField textAdjust="ScaleFont" isBlankWhenNull="true">
+				<reportElement x="0" y="80" width="126" height="15" uuid="b7800f2d-43d4-4f49-9be9-efdf5c01fb39">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="等线" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{photo1Mark}]]></textFieldExpression>
+			</textField>
+			<image hAlign="Center" vAlign="Middle" onErrorType="Icon">
+				<reportElement x="126" y="0" width="126" height="80" uuid="d4a19ca4-b7ee-4ec1-8848-bc48ba722a69">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<imageExpression><![CDATA[$F{photo2}]]></imageExpression>
+			</image>
+			<textField textAdjust="ScaleFont" isBlankWhenNull="true">
+				<reportElement x="126" y="80" width="126" height="15" uuid="008169ab-f313-439e-9005-d343a5c592df">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="等线" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{photo2Mark}]]></textFieldExpression>
+			</textField>
+			<image hAlign="Center" vAlign="Middle" onErrorType="Icon">
+				<reportElement x="270" y="0" width="126" height="80" uuid="84db3fe3-5ca8-47a3-8abc-71ba0c799375">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<imageExpression><![CDATA[$F{photo3}]]></imageExpression>
+			</image>
+			<textField textAdjust="ScaleFont" isBlankWhenNull="true">
+				<reportElement x="270" y="80" width="126" height="15" uuid="c482daca-7867-4657-911e-db0fc5c20cf6">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="等线" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{photo3Mark}]]></textFieldExpression>
+			</textField>
+			<image hAlign="Center" vAlign="Middle" onErrorType="Icon">
+				<reportElement x="396" y="0" width="126" height="80" uuid="2b19fc18-8d32-4126-867c-c8dabe291b1c">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<imageExpression><![CDATA[$F{photo4}]]></imageExpression>
+			</image>
+			<textField textAdjust="ScaleFont" isBlankWhenNull="true">
+				<reportElement x="396" y="80" width="126" height="15" uuid="5333a3bb-614d-4f69-8422-b4e0f2d6d353">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="等线" size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{photo4Mark}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

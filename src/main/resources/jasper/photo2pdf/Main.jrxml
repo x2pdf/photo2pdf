@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.11.0.final using JasperReports Library version 6.11.0-0c4056ccaa4d25a5a8c45672d2f764ea3498bebb  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="main" pageWidth="595" pageHeight="842" columnWidth="523" leftMargin="36" rightMargin="36" topMargin="36" bottomMargin="36" isTitleNewPage="true" isSummaryNewPage="true" uuid="0d6914c2-a944-45e1-9141-c5723535de49">
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String"/>
+	<parameter name="fourbytwoList" class="java.util.ArrayList"/>
+	<parameter name="twobyoneList" class="java.util.ArrayList"/>
+	<parameter name="eightbyfourList" class="java.util.ArrayList"/>
+	<parameter name="fourbyoneList" class="java.util.ArrayList"/>
+	<parameter name="isNeedCoverPage" class="java.lang.String"/>
+	<parameter name="isNeedSummaryPage" class="java.lang.String"/>
+	<parameter name="title" class="java.lang.String"/>
+	<parameter name="subtitle" class="java.lang.String"/>
+	<parameter name="desc" class="java.lang.String"/>
+	<parameter name="coverPhoto" class="java.lang.String"/>
+	<parameter name="summaryPhoto" class="java.lang.String"/>
+	<parameter name="summaryDesc" class="java.lang.String"/>
+	<parameter name="pdfGeneInfo" class="java.lang.String"/>
+	<parameter name="onebyoneList" class="java.util.ArrayList"/>
+	<parameter name="onebytwoList" class="java.util.ArrayList"/>
+	<parameter name="isFullCover" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="770" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<printWhenExpression><![CDATA["Y".equalsIgnoreCase($P{isNeedCoverPage})]]></printWhenExpression>
+			<textField textAdjust="ScaleFont" isBlankWhenNull="true">
+				<reportElement x="0" y="410" width="523" height="60" uuid="33c3883e-558f-4b6a-81ce-59702eb33c12">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="等线" size="37" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{title}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="ScaleFont" isBlankWhenNull="true">
+				<reportElement x="0" y="470" width="523" height="30" uuid="01c6aab8-cfa2-49e9-8d72-717b03141c10">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="等线" size="19"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{subtitle}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="ScaleFont" isBlankWhenNull="true">
+				<reportElement x="0" y="500" width="522" height="160" isRemoveLineWhenBlank="true" uuid="57e68565-1c5b-4419-a316-e5439122b298">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="等线" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{desc}]]></textFieldExpression>
+			</textField>
+			<image hAlign="Center" vAlign="Bottom">
+				<reportElement x="61" y="100" width="400" height="300" uuid="998cef52-117d-414c-9484-fe4bd24a6c4d">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<imageExpression><![CDATA[$P{coverPhoto}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<detail>
+		<band height="50">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<printWhenExpression><![CDATA[$P{fourbytwoList} != null]]></printWhenExpression>
+			<subreport>
+				<reportElement x="0" y="0" width="523" height="50" isRemoveLineWhenBlank="true" uuid="d49b35bd-54fd-4117-8078-e6fe09264581">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<printWhenExpression><![CDATA["N".equals($P{isFullCover})]]></printWhenExpression>
+				</reportElement>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{fourbytwoList})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "fourbytwo.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="50">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<printWhenExpression><![CDATA[$P{fourbyoneList} != null]]></printWhenExpression>
+			<subreport>
+				<reportElement x="0" y="0" width="523" height="50" isRemoveLineWhenBlank="true" uuid="e2cef808-f7ad-4447-8f39-2333f17d7a56">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<printWhenExpression><![CDATA["N".equals($P{isFullCover})]]></printWhenExpression>
+				</reportElement>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{fourbyoneList})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "fourbyone.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="50">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<printWhenExpression><![CDATA[$P{twobyoneList}  != null]]></printWhenExpression>
+			<subreport>
+				<reportElement x="0" y="0" width="523" height="50" isRemoveLineWhenBlank="true" uuid="60a32be5-492d-4dc9-86e4-9eede3928bc0">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<printWhenExpression><![CDATA["N".equals($P{isFullCover})]]></printWhenExpression>
+				</reportElement>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{twobyoneList})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "twobyone.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="50">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<printWhenExpression><![CDATA[$P{eightbyfourList} != null]]></printWhenExpression>
+			<subreport>
+				<reportElement x="0" y="0" width="523" height="50" isRemoveLineWhenBlank="true" uuid="c37d7868-4429-4fdf-926c-60e246f1edb5">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<printWhenExpression><![CDATA["N".equals($P{isFullCover})]]></printWhenExpression>
+				</reportElement>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{eightbyfourList})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "eightbyfour.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="50">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<printWhenExpression><![CDATA[$P{onebyoneList} != null]]></printWhenExpression>
+			<subreport>
+				<reportElement x="0" y="0" width="523" height="50" isRemoveLineWhenBlank="true" uuid="7d2ceee4-f59e-4221-b50f-8e06fab10d00">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<printWhenExpression><![CDATA["N".equals($P{isFullCover})]]></printWhenExpression>
+				</reportElement>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{onebyoneList})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "onebyone.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="50">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<printWhenExpression><![CDATA[$P{onebytwoList} != null]]></printWhenExpression>
+			<subreport>
+				<reportElement x="0" y="0" width="523" height="50" isRemoveLineWhenBlank="true" uuid="85389996-d54b-4f66-96f1-f92b0e2b6056">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<printWhenExpression><![CDATA["N".equals($P{isFullCover})]]></printWhenExpression>
+				</reportElement>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{onebytwoList})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "onebytwo.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="50">
+			<subreport>
+				<reportElement x="0" y="0" width="523" height="50" isRemoveLineWhenBlank="true" uuid="00cb2b19-31c6-4004-9cef-3a3b78576121">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<printWhenExpression><![CDATA["Y".equals($P{isFullCover})]]></printWhenExpression>
+				</reportElement>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{fourbytwoList})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "fourbytwo_full.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="50">
+			<subreport>
+				<reportElement x="0" y="0" width="523" height="50" isRemoveLineWhenBlank="true" uuid="38881572-2e02-438f-82cc-80e20646f5f0">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<printWhenExpression><![CDATA["Y".equals($P{isFullCover})]]></printWhenExpression>
+				</reportElement>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{fourbyoneList})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "fourbyone_full.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="50">
+			<subreport>
+				<reportElement x="0" y="0" width="523" height="50" isRemoveLineWhenBlank="true" uuid="901c4002-7185-41b4-ba4f-ea643fce6bc5">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<printWhenExpression><![CDATA["Y".equals($P{isFullCover})]]></printWhenExpression>
+				</reportElement>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{twobyoneList})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "twobyone_full.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="50">
+			<subreport>
+				<reportElement x="0" y="0" width="523" height="50" isRemoveLineWhenBlank="true" uuid="1d20ec0f-e9d0-46c5-9b0a-ded7f7c5bae2">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<printWhenExpression><![CDATA["Y".equals($P{isFullCover})]]></printWhenExpression>
+				</reportElement>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{eightbyfourList})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "eightbyfour_full.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="50">
+			<subreport>
+				<reportElement x="0" y="0" width="523" height="50" isRemoveLineWhenBlank="true" uuid="038a2a51-d788-498f-ad21-7d52a30ae70f">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<printWhenExpression><![CDATA["Y".equals($P{isFullCover})]]></printWhenExpression>
+				</reportElement>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{onebyoneList})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "onebyone_full.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="50">
+			<subreport>
+				<reportElement x="0" y="0" width="523" height="50" isRemoveLineWhenBlank="true" uuid="4a0b4018-b9c3-41d4-9e32-7400a606f483">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<printWhenExpression><![CDATA["Y".equals($P{isFullCover})]]></printWhenExpression>
+				</reportElement>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{onebytwoList})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "onebytwo_full.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<summary>
+		<band height="460">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<printWhenExpression><![CDATA[$P{isNeedSummaryPage}.equals("Y")]]></printWhenExpression>
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="49" y="3" width="423" height="317" isRemoveLineWhenBlank="true" uuid="e960f3cb-bcbf-43af-add6-fa9e65511836">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<imageExpression><![CDATA[$P{summaryPhoto}]]></imageExpression>
+			</image>
+			<textField textAdjust="ScaleFont" isBlankWhenNull="true">
+				<reportElement x="0" y="320" width="523" height="70" isRemoveLineWhenBlank="true" uuid="48f8eaf1-c7e1-49ce-8f02-d4c646715946">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="等线" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{summaryDesc}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="ScaleFont" isBlankWhenNull="true">
+				<reportElement x="0" y="390" width="523" height="30" isRemoveLineWhenBlank="true" uuid="97be3e57-ff9d-4579-948e-8b0e6a6d2ca3">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="等线" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{pdfGeneInfo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>
