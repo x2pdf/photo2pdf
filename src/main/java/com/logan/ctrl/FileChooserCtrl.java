@@ -28,6 +28,7 @@ public class FileChooserCtrl {
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("Photo Format",
                         "*.heic", "*.HEIC", "*.Heic",
+                        "*.heif", "*.HEIF", "*.Heif",
                         "*.jpeg", "*.JPEG", "*.Jpeg",
                         "*.jpg", "*.JPG", "*.Jpg",
                         "*.png", "*.PNG", "*.Png"
@@ -81,6 +82,7 @@ public class FileChooserCtrl {
                         "*.jpg", "*.JPG", "*.Jpg",
                         "*.png", "*.PNG", "*.Png",
                         "*.heic", "*.HEIC", "*.Heic",
+                        "*.heif", "*.HEIF", "*.Heif",
                         "*.jfif", "*.JFIF",
                         "*.bmp", "*.BMP",
                         "*.gif", "*.GIF"

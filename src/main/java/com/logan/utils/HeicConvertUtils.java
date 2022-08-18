@@ -38,7 +38,7 @@ public class HeicConvertUtils {
         for (String selectPhoto : selectPhotos) {
             String fileFullName = selectPhoto.substring(selectPhoto.lastIndexOf(File.separator) + 1);
             String fileFormat = fileFullName.substring(fileFullName.lastIndexOf(".") + 1);
-            if ("heic".equalsIgnoreCase(fileFormat)) {
+            if ("heic".equalsIgnoreCase(fileFormat) || "heif".equalsIgnoreCase(fileFormat)) {
                 heicPhotos.add(selectPhoto);
             }
         }
@@ -119,7 +119,7 @@ public class HeicConvertUtils {
         for (String selectPhoto : selectPhotos) {
             String fileFullName = selectPhoto.substring(selectPhoto.lastIndexOf(File.separator) + 1);
             String fileFormat = fileFullName.substring(fileFullName.lastIndexOf(".") + 1);
-            if ("heic".equalsIgnoreCase(fileFormat)) {
+            if ("heic".equalsIgnoreCase(fileFormat) || "heif".equalsIgnoreCase(fileFormat)) {
                 String s = CacheData.getHeic2convertPhotoMap().get(selectPhoto);
                 if (null != s) {
                     res.add(s);
@@ -151,7 +151,7 @@ public class HeicConvertUtils {
         String previewPhotosPath = LocalFileUtils.mkTempDir("previewPhotos");
         String fileFullName = from.substring(from.lastIndexOf(File.separator) + 1);
         String fileFormat = fileFullName.substring(fileFullName.lastIndexOf(".") + 1);
-        if ("heic".equalsIgnoreCase(fileFormat)) {
+        if ("heic".equalsIgnoreCase(fileFormat) || "heif".equalsIgnoreCase(fileFormat)) {
             String fileName = fileFullName.substring(0, fileFullName.lastIndexOf("."));
             String fileNameNew = previewPhotosPath + fileName + ".png";
             if (convert("png", from, fileNameNew) == 0) {
@@ -223,6 +223,7 @@ public class HeicConvertUtils {
             Runtime runtime = Runtime.getRuntime();
             String[] command;
             String nodejsPath = SysConfig.NODEJS_PATH;
+            // node heic2png.js D:\Logan\code\photo2pdf\xxx.heic=D:\Logan\code\photo2pdf\xxx.png
             if ("jpeg".equalsIgnoreCase(targetFormat)) {
                 command = new String[]{nodejsPath + "node", "heic2png.js", from + "=" + to};
             } else {
