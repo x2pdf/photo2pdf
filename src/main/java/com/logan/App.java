@@ -34,7 +34,7 @@ import javafx.stage.WindowEvent;
  */
 public class App extends Application {
     private final static String statement =
-            "Please use it for learning purposes only.\n" +
+            "Please use it for learning purposes only.  --author Logan Qin\n" +
                     "Thank you for your understanding and cooperation.\n" +
                     "All Rights Reserved.\n";
 

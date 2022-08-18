@@ -17,6 +17,8 @@ import javafx.scene.text.TextAlignment;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -133,6 +135,93 @@ public class HelpCtrl {
         });
 
 
+        // ================================== compress pdf photos =========================================
+        String ratioCompressPDF = "0.7";
+        ArrayList<String> ratioCompressPDFChoices = new ArrayList<>();
+        ratioCompressPDFChoices.add("1.0");
+        ratioCompressPDFChoices.add("0.9");
+        ratioCompressPDFChoices.add("0.8");
+        ratioCompressPDFChoices.add("0.7");
+        ratioCompressPDFChoices.add("0.6");
+        ratioCompressPDFChoices.add("0.5");
+        ratioCompressPDFChoices.add("0.4");
+        ratioCompressPDFChoices.add("0.3");
+        ratioCompressPDFChoices.add("0.2");
+        ratioCompressPDFChoices.add("0.1");
+        AnchorPane compressPDFPhotoAnchorPane = SingleRowAnchorPaneUtils.getTextTextChoiceBoxButton(
+                SysConfig.getLang("CompressPDFPictures") + ":",
+                ratioCompressPDF, ratioCompressPDFChoices, SysConfig.getLang("SelectFile"));
+
+        ChoiceBox ratioPDFChoiceBox = SingleRowAnchorPaneUtils.getChoiceBox(compressPDFPhotoAnchorPane);
+        ratioPDFChoiceBox.setOnAction((event) -> {
+            int selectedIndex = ratioPDFChoiceBox.getSelectionModel().getSelectedIndex();
+            if (selectedIndex == 0) {
+                CacheData.setCompressPDFPhotoRatio(1.0f);
+            } else if (selectedIndex == 1) {
+                CacheData.setCompressPDFPhotoRatio(0.9f);
+            } else if (selectedIndex == 2) {
+                CacheData.setCompressPDFPhotoRatio(0.8f);
+            } else if (selectedIndex == 3) {
+                CacheData.setCompressPDFPhotoRatio(0.7f);
+            } else if (selectedIndex == 4) {
+                CacheData.setCompressPDFPhotoRatio(0.6f);
+            } else if (selectedIndex == 5) {
+                CacheData.setCompressPDFPhotoRatio(0.5f);
+            } else if (selectedIndex == 6) {
+                CacheData.setCompressPDFPhotoRatio(0.4f);
+            } else if (selectedIndex == 7) {
+                CacheData.setCompressPDFPhotoRatio(0.3f);
+            } else if (selectedIndex == 8) {
+                CacheData.setCompressPDFPhotoRatio(0.2f);
+            } else if (selectedIndex == 9) {
+                CacheData.setCompressPDFPhotoRatio(0.1f);
+            } else {
+                // default
+                CacheData.setCompressPDFPhotoRatio(0.7f);
+            }
+        });
+
+        Button ratioPDFPhotoButton = SingleRowAnchorPaneUtils.getButton(compressPDFPhotoAnchorPane);
+        ratioPDFPhotoButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                FileChooserCtrl fileChooserCtrl = new FileChooserCtrl();
+                ArrayList<String> pdfs = fileChooserCtrl.selectPDFs();
+                if (pdfs == null || pdfs.size() == 0) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Info");
+                    alert.setContentText(SysConfig.getLang("NoFileSelected"));
+                    alert.showAndWait();
+                    return;
+                }
+
+                LocalDateTime time = LocalDateTime.now();
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH_mm_ss");
+                String fmtTime = dtf.format(time);
+                String savePath = GeneParamConfig.getPdfSavePath() + "photo2pdf_compress_pdf_" + fmtTime + File.separator;
+                for (String pdf : pdfs) {
+                    try {
+                        String fileFullName = pdf.substring(pdf.lastIndexOf(File.separator) + 1);
+                        String msg = SysConfig.getLang("EnterPasswordIfHave");
+                        String password = AlertUtils.getInputPasswordByOne(fileFullName, msg);
+                        if (password == null) {
+                            LogUtils.info("encryptButton inputDialog cancel");
+                            return;
+                        }
+                        PDFBoxUtils.compressPDFImages(new File(pdf), password, savePath, CacheData.getCompressPDFPhotoRatio());
+                    } catch (Exception e) {
+                        LogUtils.error(e.getMessage());
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle(SysConfig.getLang("Error"));
+                        alert.setContentText(SysConfig.getLang("PasswordError"));
+                        alert.showAndWait();
+                    }
+                }
+
+                AlertUtils.openExplorer(savePath);
+            }
+        });
+
         // ================================== FormatConversion =========================================
         String format = "jpg";
         ArrayList<String> formatChoices = new ArrayList<>();
@@ -177,7 +266,6 @@ public class HelpCtrl {
                         String fileFullName = path.substring(path.lastIndexOf(File.separator) + 1);
                         String fileName = fileFullName.substring(0, fileFullName.lastIndexOf("."));
                         String AbsFileFullName = savePath + fileName + "." + CacheData.getToFormat();
-
                         boolean b = PhotoUtils.compressPic(path, AbsFileFullName, CacheData.getToFormat(), 1);
                     } catch (Exception e) {
                         LogUtils.error("FormatConversion error: " + e.getMessage());
@@ -446,7 +534,8 @@ public class HelpCtrl {
         });
 
 
-        VBox formatConversionVBox = new VBox(formatConversionAnchorPane, compressPhotoAnchorPane, scalingAnchorPane, customScalingAnchorPane);
+        VBox formatConversionVBox = new VBox(compressPDFPhotoAnchorPane,
+                formatConversionAnchorPane, compressPhotoAnchorPane, scalingAnchorPane, customScalingAnchorPane);
         formatConversionVBox.setSpacing(4);
 
         Text experimentalTitle = new Text(SysConfig.getLang("ExperimentalFeature"));

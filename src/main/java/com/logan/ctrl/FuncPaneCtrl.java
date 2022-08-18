@@ -49,9 +49,11 @@ public class FuncPaneCtrl {
                 if (selectPhotos.size() == 0) {
                     return;
                 }
+                // 过滤并处理其中的 heic 图片
+                ArrayList<String> selectPhotosFilter = HeicConvertUtils.heicPhotoFilterMultiThread(selectPhotos);
 
                 // 2. 将选择的图片同步到其他缓存的list
-                CacheData.syncSelectPhoto2OtherList(selectPhotos);
+                CacheData.syncSelectPhoto2OtherList(selectPhotosFilter);
 
                 // 3. 刷新预览显示
                 GridPane gridPane = CacheData.gridPane;

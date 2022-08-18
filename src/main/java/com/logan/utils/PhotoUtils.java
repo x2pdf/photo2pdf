@@ -116,6 +116,16 @@ public class PhotoUtils {
         return true;
     }
 
+    public static String getHEICConvertName(String targetFileFormat, String originalFullName) {
+        String fileName = originalFullName.substring(0, originalFullName.lastIndexOf("."));
+        return fileName + "_compress_" + getRand() + "." + targetFileFormat;
+    }
+
+    public static String getHEICConvertName(String originalFullName) {
+        String fileName = originalFullName.substring(0, originalFullName.lastIndexOf("."));
+        return fileName + "_compress_" + getRand() + ".jpeg";
+    }
+
 
     public static String getCompressName(String originalFullName) {
         String fileName = originalFullName.substring(0, originalFullName.lastIndexOf("."));

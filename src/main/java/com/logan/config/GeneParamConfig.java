@@ -47,7 +47,6 @@ public class GeneParamConfig implements Serializable {
     private static boolean isUserDragPdf = false;
     // 用户正在拖动的pdf的绝对路径
     private static String userDragPdf = "";
-
     // pdf 要保存的目标路径，默认为用户桌面路径
     private static String pdfSavePath = "";
     // 每一页pdf页面的照片排布行数
