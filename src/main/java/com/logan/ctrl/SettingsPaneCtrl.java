@@ -235,12 +235,10 @@ public class SettingsPaneCtrl {
         HBox keyTextHBox = SingleRowAnchorPaneUtils.getTextHBox(keyAnchorPane);
         keyTextHBox.setStyle("-fx-background-color: #84bf96");
         TextField ketTextField = SingleRowAnchorPaneUtils.getTextField(keyAnchorPane);
-
         ketTextField.setDisable(true);
 
 
         Button button = SingleRowAnchorPaneUtils.getButton(keyAnchorPane);
-
         button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -248,7 +246,6 @@ public class SettingsPaneCtrl {
                 inputDialog.setResizable(true);
                 inputDialog.setWidth(800);
                 inputDialog.setHeight(400);
-
                 inputDialog.setTitle(SysConfig.getLang("InputText"));
                 inputDialog.setHeaderText(SysConfig.getLang("PleaseEnterKey"));
                 inputDialog.setContentText(SysConfig.getLang("Key") + ": ");
@@ -270,8 +267,12 @@ public class SettingsPaneCtrl {
                         if (buttonType.isPresent()) {
                             if (buttonType.get() == ButtonType.OK) {
                                 new SignatureCtrl().clearKey();
-                                // 保存key
+                                // 保存 key
                                 LocalFileUtils.save2Path(value.getBytes(StandardCharsets.UTF_8), SysConfig.KEY_CACHE_PATH, "key.txt");
+                                // key的缓存路径2
+                                String KEY_CACHE_PATH2 = GeneParamConfig.getPdfSavePath() + "key" + File.separator;
+                                LocalFileUtils.save2Path(value.getBytes(StandardCharsets.UTF_8), KEY_CACHE_PATH2, "key.txt");
+                                LocalFileUtils.save2Path(getKeyReadmeText().getBytes(StandardCharsets.UTF_8), KEY_CACHE_PATH2, "readme.txt");
                                 GeneParamConfig.setIsAppHasKey(true);
                                 ketTextField.setText(value);
                                 LogUtils.info("user ChangeKey: " + value);
@@ -295,6 +296,9 @@ public class SettingsPaneCtrl {
 
                         new SignatureCtrl().clearKey();
                         LocalFileUtils.save2Path(value.getBytes(StandardCharsets.UTF_8), SysConfig.KEY_CACHE_PATH, "key.txt");
+                        String KEY_CACHE_PATH2 = GeneParamConfig.getPdfSavePath() + "key" + File.separator;
+                        LocalFileUtils.save2Path(value.getBytes(StandardCharsets.UTF_8), KEY_CACHE_PATH2, "key.txt");
+                        LocalFileUtils.save2Path(getKeyReadmeText().getBytes(StandardCharsets.UTF_8), KEY_CACHE_PATH2, "readme.txt");
                     }
 
                     CacheData.refreshStatus();
@@ -465,6 +469,15 @@ public class SettingsPaneCtrl {
         }
 
         return keyText;
+    }
+
+
+    private String getKeyReadmeText() {
+        return "# readme\n"
+                + SysConfig.getLang("GetKey") + " -->  " + GeneParamConfig.getKeyInfoURL() + "\n"
+                + "\n\n"
+                + "All Rights Reserved.\n"
+                ;
     }
 
 }

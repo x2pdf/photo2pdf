@@ -52,8 +52,8 @@ public class PDFBoxUtils {
 
             mergePdf.setDestinationFileName(savePath);
 
-            // 4GB
-            MemoryUsageSetting memoryUsageSetting = MemoryUsageSetting.setupMixed(4194304000L);
+            // 3 * 4GB
+            MemoryUsageSetting memoryUsageSetting = MemoryUsageSetting.setupMixed(3 * 4194304000L);
             mergePdf.mergeDocuments(memoryUsageSetting);
             long spend = System.currentTimeMillis() - start;
             LogUtils.info("merge2One spend(ms): " + spend);
@@ -194,6 +194,74 @@ public class PDFBoxUtils {
         long spend = System.currentTimeMillis() - start;
         LogUtils.info("extractImages size: " + i);
         LogUtils.info("extractImages spend(ms): " + spend);
+        System.gc();
+    }
+
+
+    public static void compressPDFImages(File pdf, String password, String outFold, float compressRatio) throws IOException {
+        System.gc();
+        LogUtils.info("compressPDFImages starting");
+        long start = System.currentTimeMillis();
+        int i = 1;
+        try (final PDDocument document = PDDocument.load(pdf, password)) {
+            File file = new File(outFold);
+            if (!file.exists()) {
+                file.mkdirs();
+            }
+            ArrayList<String> tempPhotos = new ArrayList<>();
+            PDPageTree list = document.getPages();
+            for (PDPage page : list) {
+                PDResources pdResources = page.getResources();
+                for (COSName name : pdResources.getXObjectNames()) {
+                    PDXObject o = pdResources.getXObject(name);
+                    if (o instanceof PDImageXObject) {
+                        try {
+                            PDImageXObject image = (PDImageXObject) o;
+
+                            // 优化图片的格式，pdf中图片的原始格式 todo
+//                            InputStream inputStream = image.createInputStream();
+//                            ImageInputStream iis = ImageIO.createImageInputStream(inputStream);
+//                            Iterator<ImageReader> iter = ImageIO.getImageReaders(iis);
+//                            if (!iter.hasNext()) {
+//                                throw new RuntimeException("No readers found!");
+//                            }
+//                            ImageReader reader = iter.next();
+//                            String formatName = reader.getFormatName();
+//                            System.out.println("formatName   " + formatName);
+
+                            String filename = outFold + "image_" + String.format("%05d", i) + "_photo2pdf" + ".png";
+                            ImageIO.write(image.getImage(), "png", new File(filename));
+
+                            String AbsFileFullName = outFold + "image_compress" + String.format("%05d", i) + "_photo2pdf" + ".jpg";
+                            boolean b = PhotoUtils.compressPic(filename, AbsFileFullName, "jpg", compressRatio);
+                            if (b) {
+                                PDImageXObject replacement_img = PDImageXObject.createFromFile(AbsFileFullName, document);
+                                pdResources.put(name, replacement_img);
+                            } else {
+                                LogUtils.error("compressPDFImages fail, i: " + i);
+                            }
+                            tempPhotos.add(filename);
+                            tempPhotos.add(AbsFileFullName);
+                            i++;
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+            String name = "photo2pdf_compress_pdf_" + pdf.getName();
+//            System.out.println("compressRatio: " + compressRatio);
+            document.save(outFold + name + ".pdf");
+
+            // 清理数据
+            for (String tempPhoto : tempPhotos) {
+                LocalFileUtils.deleteFile(tempPhoto);
+            }
+        }
+
+        long spend = System.currentTimeMillis() - start;
+        LogUtils.info("compressPDFImages size: " + i);
+        LogUtils.info("compressPDFImages spend(ms): " + spend);
         System.gc();
     }
 

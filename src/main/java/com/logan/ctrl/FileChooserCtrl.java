@@ -3,6 +3,7 @@ package com.logan.ctrl;
 import com.logan.config.CacheData;
 import com.logan.config.GeneParamConfig;
 import com.logan.config.SysConfig;
+import com.logan.utils.HeicConvertUtils;
 import com.logan.utils.LogUtils;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
@@ -26,6 +27,7 @@ public class FileChooserCtrl {
 //        fileChooser.setInitialDirectory(new File("D:" + File.separator));
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("Photo Format",
+                        "*.heic", "*.HEIC", "*.Heic",
                         "*.jpeg", "*.JPEG", "*.Jpeg",
                         "*.jpg", "*.JPG", "*.Jpg",
                         "*.png", "*.PNG", "*.Png"
@@ -78,6 +80,7 @@ public class FileChooserCtrl {
                         "*.jpeg", "*.JPEG", "*.Jpeg",
                         "*.jpg", "*.JPG", "*.Jpg",
                         "*.png", "*.PNG", "*.Png",
+                        "*.heic", "*.HEIC", "*.Heic",
                         "*.jfif", "*.JFIF",
                         "*.bmp", "*.BMP",
                         "*.gif", "*.GIF"
@@ -95,8 +98,9 @@ public class FileChooserCtrl {
             strings.add(file.getAbsolutePath());
         }
 
-        LogUtils.info("selectPhotos photo size: " + strings.size());
-        return strings;
+        ArrayList<String> selectPhotosFilter = HeicConvertUtils.heicPhotoFilterMultiThread(strings);
+        LogUtils.info("selectPhotos photo size: " + selectPhotosFilter.size());
+        return selectPhotosFilter;
     }
 
     public ArrayList<String> selectPhotos4ExperimentCompress() {

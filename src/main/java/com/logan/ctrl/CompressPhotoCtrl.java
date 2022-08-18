@@ -3,6 +3,7 @@ package com.logan.ctrl;
 import com.logan.config.CacheData;
 import com.logan.config.GeneParamConfig;
 import com.logan.config.SysConfig;
+import com.logan.utils.HeicConvertUtils;
 import com.logan.utils.LocalFileUtils;
 import com.logan.utils.LogUtils;
 import com.logan.utils.PhotoUtils;
@@ -41,31 +42,42 @@ public class CompressPhotoCtrl {
     public CompletableFuture<Void> asyncWork(String photoPath, float quality) {
         SysConfig.asyncPool.execute(() -> {
             try {
+                String photoPathCopy = photoPath;
 //                System.out.println("asyncWork start working.");
 //                LogUtils.info("Thread name: " + Thread.currentThread().getName());
                 String previewPhotosPath = LocalFileUtils.mkTempDir("previewPhotos");
-                String fileFullName = photoPath.substring(photoPath.lastIndexOf(File.separator) + 1);
+                String fileFullName = photoPathCopy.substring(photoPathCopy.lastIndexOf(File.separator) + 1);
                 String fileFormat = fileFullName.substring(fileFullName.lastIndexOf(".") + 1);
                 String fileFullNameNew = PhotoUtils.getCompressName(fileFullName);
                 // 增加识别的后缀，已识别同一张图片被用户选择两次的图片
                 String filePathFullNameCompress = previewPhotosPath + fileFullNameNew;
 
+                if (fileFormat.equalsIgnoreCase("heic")) {
+                    String fileFullNameNewConvert = PhotoUtils.getHEICConvertName(fileFullName);
+                    String filePathFullNameCompress2 = previewPhotosPath + fileFullNameNewConvert;
+                    HeicConvertUtils.convert("jpeg", photoPathCopy, filePathFullNameCompress2);
+                    photoPathCopy = filePathFullNameCompress2;
+                }
+
                 // 图片文件小于 200 kB 的不压缩了
                 boolean isNeedScale = true;
                 // 不压缩的图片格式（压缩后文件变得更大了）, 直接 copy 到目标位置
                 if (fileFormat.equalsIgnoreCase("jpg") || fileFormat.equalsIgnoreCase("jpeg")) {
-                    byte[] load = LocalFileUtils.load(photoPath);
+                    byte[] load = LocalFileUtils.load(photoPathCopy);
                     String s = LocalFileUtils.save2Path(load, previewPhotosPath, fileFullNameNew);
 //                    System.out.println("使用   原始图片");
-                } else if (new File(photoPath).length() <= SysConfig.skipCompressPhotoSize) {
+                } else if (new File(photoPathCopy).length() <= SysConfig.skipCompressPhotoSize) {
                     isNeedScale = false;
-                    byte[] load = LocalFileUtils.load(photoPath);
+                    byte[] load = LocalFileUtils.load(photoPathCopy);
                     String s = LocalFileUtils.save2Path(load, previewPhotosPath, fileFullNameNew);
 //                    System.out.println("使用   原始图片2  " + photoPath);
                 } else {
-                    boolean b = PhotoUtils.compressPic(photoPath, filePathFullNameCompress, fileFormat, quality);
+                    boolean b = false;
+                    if (!fileFormat.equalsIgnoreCase("heic")) {
+                        b = PhotoUtils.compressPic(photoPathCopy, filePathFullNameCompress, fileFormat, quality);
+                    }
                     if (!b) {
-                        byte[] load = LocalFileUtils.load(photoPath);
+                        byte[] load = LocalFileUtils.load(photoPathCopy);
                         String s = LocalFileUtils.save2Path(load, previewPhotosPath, fileFullNameNew);
                         LogUtils.info("compress exception, copy original file to: " + s);
                     }

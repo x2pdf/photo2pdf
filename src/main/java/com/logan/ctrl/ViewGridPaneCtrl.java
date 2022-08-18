@@ -509,40 +509,9 @@ public class ViewGridPaneCtrl {
         ArrayList<PhotoFileInfo> photoFileInfos = new ArrayList<>();
         // 1. 收集每一张图片的信息
         for (String path : photosPath) {
-            try {
-
-                BasicFileAttributes basicFileAttributes = Files.readAttributes(Paths.get(path), BasicFileAttributes.class);
-                FileTime fileTime = getMostOld(basicFileAttributes);
-
-                long timestamp = fileTime.toMillis();
-                LocalDateTime createTime = Instant.ofEpochMilli(timestamp).atZone(ZoneOffset.ofHours(8)).toLocalDateTime();
-                String fileFullName = path.substring(path.lastIndexOf(File.separator) + 1);
-                String fileFullPath = path.substring(0, path.lastIndexOf(File.separator) + 1);
-                String fileName = fileFullName.substring(0, fileFullName.lastIndexOf("."));
-                String fileFormat = fileFullName.substring(fileFullName.lastIndexOf(".") + 1);
-
-                PhotoFileInfo photoFileInfo = new PhotoFileInfo();
-                photoFileInfo.setAbsolutePath(path);
-                photoFileInfo.setFormat(fileFormat);
-                photoFileInfo.setName(fileName);
-                photoFileInfo.setCreateTime(createTime);
-                photoFileInfos.add(photoFileInfo);
-
-                // 如果图片是在压缩路径中的情况，找回该压缩图片对应的原始图片的创建信息
-                if (fileFullPath.endsWith("photo2pdf" + File.separator + "previewPhotos" + File.separator)) {
-                    String originalPhoto = CacheData.getOriginalPhoto2compressPhotoMap().get(path);
-                    if (originalPhoto != null) {
-                        FileTime fileTimeOriginal = Files.readAttributes(Paths.get(originalPhoto), BasicFileAttributes.class).creationTime();
-                        long timestampOriginal = fileTimeOriginal.toMillis();
-                        LocalDateTime createTimeOriginal = Instant.ofEpochMilli(timestampOriginal).atZone(ZoneOffset.ofHours(8)).toLocalDateTime();
-                        photoFileInfo.setCreateTime(createTimeOriginal);
-                    }
-                }
-
-                CacheData.getPhotosFileInfoMap().put(path, photoFileInfo);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            PhotoFileInfo photoFileInfo = getPhotoFileInfo(path);
+            photoFileInfos.add(photoFileInfo);
+            CacheData.getPhotosFileInfoMap().put(path, photoFileInfo);
         }
 
         // 2. 按照收集到的信息对图片进行排序
@@ -550,6 +519,49 @@ public class ViewGridPaneCtrl {
 
         // 3. 返回结果
         return (ArrayList) res;
+    }
+
+
+    public static PhotoFileInfo getPhotoFileInfo(String path) {
+        try {
+            PhotoFileInfo photoFileInfo1 = CacheData.getPhotosFileInfoMap().get(path);
+            if (CacheData.getPhotosFileInfoMap().get(path) != null) {
+                return photoFileInfo1;
+            }
+
+            BasicFileAttributes basicFileAttributes = Files.readAttributes(Paths.get(path), BasicFileAttributes.class);
+            FileTime fileTime = getMostOld(basicFileAttributes);
+
+            long timestamp = fileTime.toMillis();
+            LocalDateTime createTime = Instant.ofEpochMilli(timestamp).atZone(ZoneOffset.ofHours(8)).toLocalDateTime();
+            String fileFullName = path.substring(path.lastIndexOf(File.separator) + 1);
+            String fileFullPath = path.substring(0, path.lastIndexOf(File.separator) + 1);
+            String fileName = fileFullName.substring(0, fileFullName.lastIndexOf("."));
+            String fileFormat = fileFullName.substring(fileFullName.lastIndexOf(".") + 1);
+
+            PhotoFileInfo photoFileInfo = new PhotoFileInfo();
+            photoFileInfo.setAbsolutePath(path);
+            photoFileInfo.setFormat(fileFormat);
+            photoFileInfo.setName(fileName);
+            photoFileInfo.setCreateTime(createTime);
+
+            // 如果图片是在压缩路径中的情况，找回该压缩图片对应的原始图片的创建信息
+            if (fileFullPath.endsWith("photo2pdf" + File.separator + "previewPhotos" + File.separator)) {
+                String originalPhoto = CacheData.getCompressPhoto2OriginalPhotoMap().get(path);
+                if (originalPhoto != null) {
+                    FileTime fileTimeOriginal = Files.readAttributes(Paths.get(originalPhoto), BasicFileAttributes.class).creationTime();
+                    long timestampOriginal = fileTimeOriginal.toMillis();
+                    LocalDateTime createTimeOriginal = Instant.ofEpochMilli(timestampOriginal).atZone(ZoneOffset.ofHours(8)).toLocalDateTime();
+                    photoFileInfo.setCreateTime(createTimeOriginal);
+                }
+
+            }
+            return photoFileInfo;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
 

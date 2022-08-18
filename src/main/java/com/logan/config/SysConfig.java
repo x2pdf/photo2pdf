@@ -52,6 +52,10 @@ public class SysConfig implements Serializable {
     public static String HISTORY_CACHE_PATH = APP_CACHE_PATH + "history" + File.separator;
     // 语言文件的缓存路径
     public static String LANG_CACHE_PATH = APP_CACHE_PATH + "language" + File.separator;
+    // heic convert js 文件的缓存路径
+    public static String HEIC_CONVERT_JS_ZIP = APP_CACHE_PATH + "heic" + File.separator;
+    // heic convert js node 工程的缓存路径
+    public static String HEIC_CONVERT_JS_NODE = APP_CACHE_PATH + "heic" + File.separator + "heic-convert-js" + File.separator;
     // 语言map，映射语言使用
     public static HashMap<String, String> LANG_MAP = new HashMap<>();
 
@@ -90,7 +94,8 @@ public class SysConfig implements Serializable {
     public static int genePdfByMergePageUnit = 20;
     // 图片文件小于 200 kB 的不压缩了
     public static int skipCompressPhotoSize = 200000;
-
+    // nodejs程序根路径
+    public static String NODEJS_PATH = "";
 
     private SysConfig() {
         LogUtils.info("APP_CACHE_PATH: " + APP_CACHE_PATH);

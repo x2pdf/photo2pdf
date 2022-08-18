@@ -211,8 +211,8 @@ public class PGPUtils {
             String decryptContent = pgpUtils.decryptRequest(privateContent, privateKey2, publicKey);
             return decryptContent;
         } catch (Exception e) {
-            e.printStackTrace();
-            LogUtils.error("decode res: Invalid key, " + e.getMessage());
+//            e.printStackTrace();
+            LogUtils.error("decode res: Invalid key, " + privateContent + ", info:" + e.getMessage());
             return null;
         }
     }

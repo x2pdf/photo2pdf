@@ -42,6 +42,9 @@ public class CacheData implements Serializable {
     // 标识用户是否要进行点击图片进行移除图片的标记
     public static boolean isClick2RemovePhoto = false;
 
+    public static AtomicInteger convertPhotoAmount = new AtomicInteger(0);
+    private static HashMap<String, String> heic2convertPhotoMap = new HashMap<>();
+
 
     //  用户选择图片的顺序的绝对路径
     private static ArrayList<String> photosPathUserSelectOrder = new ArrayList<>();
@@ -85,6 +88,7 @@ public class CacheData implements Serializable {
 
     // ===============Experimental cache data==================
     public static ArrayList<String> experimentalPhotos = new ArrayList<>();
+    public static float compressPDFPhotoRatio = 0.7f;
     public static String toFormat = "jpg";
     public static float compressRatio = 0.7f;
     public static float scale = 0.7f;
@@ -344,6 +348,22 @@ public class CacheData implements Serializable {
     }
     // =============================================================
 
+
+    public static float getCompressPDFPhotoRatio() {
+        return compressPDFPhotoRatio;
+    }
+
+    public static void setCompressPDFPhotoRatio(float compressPDFPhotoRatio) {
+        CacheData.compressPDFPhotoRatio = compressPDFPhotoRatio;
+    }
+
+    public static HashMap<String, String> getHeic2convertPhotoMap() {
+        return heic2convertPhotoMap;
+    }
+
+    public static void setHeic2convertPhotoMap(HashMap<String, String> heic2convertPhotoMap) {
+        CacheData.heic2convertPhotoMap = heic2convertPhotoMap;
+    }
 
     public static ArrayList<String> getExperimentalPhotos() {
         return experimentalPhotos;

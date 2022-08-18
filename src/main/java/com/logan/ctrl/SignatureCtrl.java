@@ -163,6 +163,13 @@ public class SignatureCtrl {
                 byte[] load = LocalFileUtils.load(absPath);
                 return new String(load);
             }
+            // mac系统可能会清除缓存路径的数据，多做一份备份使用
+            String KEY_CACHE_PATH2 = GeneParamConfig.getPdfSavePath() + "key" + File.separator;
+            String absPath2 = KEY_CACHE_PATH2 + "key.txt";
+            if (new File(absPath2).exists()) {
+                byte[] load = LocalFileUtils.load(absPath2);
+                return new String(load);
+            }
         } catch (IOException e) {
             LogUtils.error("getKeyIfHave error: " + e.getMessage());
             e.printStackTrace();
