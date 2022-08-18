@@ -551,7 +551,7 @@ public class HelpCtrl {
         AnchorPane.setRightAnchor(experimentalFeatureVBox, 30.0);
 
 
-        Text version = new Text("photo2pdf version 22.01");
+        Text version = new Text("photo2pdf version 23.01");
         Text allRight = new Text("All Rights Reserved.");
         VBox vBox = new VBox(productIntroductionButton, operationManualButton, version, allRight);
         vBox.setAlignment(Pos.CENTER);
