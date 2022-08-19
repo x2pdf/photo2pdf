@@ -48,6 +48,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) {
         try {
+            LogUtils.info("***** statement *****\n" + statement);
             CacheData.isAppRunning = true;
             initConfig();
             initStage(stage);

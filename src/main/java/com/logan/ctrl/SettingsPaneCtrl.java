@@ -3,6 +3,7 @@ package com.logan.ctrl;
 import com.logan.config.CacheData;
 import com.logan.config.GeneParamConfig;
 import com.logan.config.SysConfig;
+import com.logan.hbox.HBoxUtil;
 import com.logan.utils.LocalFileUtils;
 import com.logan.utils.LogUtils;
 import com.logan.utils.SingleRowAnchorPaneUtils;
@@ -33,6 +34,12 @@ public class SettingsPaneCtrl {
         text.setStyle("-fx-font-weight:bold");
         Line line = new Line(0, 0, 640, 0);
         VBox title = new VBox(line, text);
+        // business order
+//        String[] businessSeqArr = {"Title", "PDFSavePath", "Preview", "PDFCover", "PDFSummary",
+//                "PhotoMark", "PDFLayout", "PictureFillPage", "PhotoSortBy",
+//                "CompressPDFPhoto", "EnterKey"};
+//        HBox hBox = HBoxUtil.getHBox(businessSeqArr, stage);
+//        return hBox;
 
         // =============================  PDF Save Path  ===================================
         AnchorPane pathAnchorPane = SingleRowAnchorPaneUtils.getTextTextFieldButton(SysConfig.getLang("PDFSavePath") + ":",
@@ -454,7 +461,9 @@ public class SettingsPaneCtrl {
 
         HBox hBoxConfig = new HBox(vb);
         return hBoxConfig;
+
     }
+
 
     private String getKeyText() {
         String keyText = "";
