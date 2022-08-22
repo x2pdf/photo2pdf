@@ -1,5 +1,6 @@
 package com.logan.hbox;
 
+import com.logan.config.CacheData;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -29,6 +30,7 @@ public class HBoxUtil {
                     BaseHBox hBox = subType.newInstance();
                     if (hBox.getHBoxCode().equals(businessTypeCode)) {
                         hBoxes.add(hBox);
+                        CacheData.hboxMap.put(businessTypeCode,hBox);
                     }
                 }
             }

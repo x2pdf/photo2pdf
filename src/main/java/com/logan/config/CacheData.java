@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.logan.ctrl.StatusBarCtrl;
 import com.logan.ctrl.ViewGridPaneCtrl;
+import com.logan.hbox.BaseHBox;
 import com.logan.model.PhotoFileInfo;
 import com.logan.utils.LocalFileUtils;
 import com.logan.utils.LogUtils;
@@ -84,6 +85,9 @@ public class CacheData implements Serializable {
     public static HBox statusHBox;
     // 状态栏中显示当前App的状态
     public static String appStatus = SysConfig.DEFAULT;
+
+    // 所有已经初始化的 BaseHBox
+    public static HashMap<String, BaseHBox> hboxMap = new HashMap<>();
 
 
     // ===============Experimental cache data==================
