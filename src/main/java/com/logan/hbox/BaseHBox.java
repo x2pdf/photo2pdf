@@ -2,12 +2,7 @@ package com.logan.hbox;
 
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import org.reflections.Reflections;
-
-import java.util.ArrayList;
-import java.util.Set;
 
 /**
  * author: Logan.qin
@@ -25,4 +20,11 @@ public abstract class BaseHBox extends HBox {
     public abstract void setAction(Stage stage);
 
 
+    public AnchorPane getAnchorPane() {
+        return anchorPane;
+    }
+
+    public void setAnchorPane(AnchorPane anchorPane) {
+        this.anchorPane = anchorPane;
+    }
 }

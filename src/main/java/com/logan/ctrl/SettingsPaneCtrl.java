@@ -35,12 +35,13 @@ public class SettingsPaneCtrl {
         Line line = new Line(0, 0, 640, 0);
         VBox title = new VBox(line, text);
         // business order
-//        String[] businessSeqArr = {"Title", "PDFSavePath", "Preview", "PDFCover", "PDFSummary",
-//                "PhotoMark", "PDFLayout", "PictureFillPage", "PhotoSortBy",
-//                "CompressPDFPhoto", "EnterKey"};
-//        HBox hBox = HBoxUtil.getHBox(businessSeqArr, stage);
-//        return hBox;
-
+        String[] businessSeqArr = {"Title", "PDFSavePath", "Preview", "PDFCover", "PDFSummary",
+                "PhotoMark", "PDFLayout", "PictureFillPage", "PhotoSortBy",
+                "CompressPDFPhoto", "EnterKey"};
+        HBox hBox = HBoxUtil.getHBox(businessSeqArr, stage);
+        return hBox;
+    }
+/*
         // =============================  PDF Save Path  ===================================
         AnchorPane pathAnchorPane = SingleRowAnchorPaneUtils.getTextTextFieldButton(SysConfig.getLang("PDFSavePath") + ":",
                 GeneParamConfig.getPdfSavePath(), SysConfig.getLang("ChangePath"));
@@ -465,6 +466,7 @@ public class SettingsPaneCtrl {
     }
 
 
+
     private String getKeyText() {
         String keyText = "";
         SignatureCtrl signatureCtrl = new SignatureCtrl();
@@ -488,5 +490,7 @@ public class SettingsPaneCtrl {
                 + "All Rights Reserved.\n"
                 ;
     }
+
+   */
 
 }

@@ -37,6 +37,60 @@ public class FuncPaneCtrl {
 
         Button selectButton = new Button(SysConfig.getLang("Step1Select"));
         styleButton(selectButton);
+        step1SelectOnAction(selectButton);
+
+        Button geneButton = new Button(SysConfig.getLang("Step2Generate"));
+        styleButton(geneButton);
+        step2GenerateOnAction(geneButton);
+
+        Button addMergePdfButton = new Button(SysConfig.getLang("SelectPDF"));
+        styleButton(addMergePdfButton);
+        selectPDFOnAction(addMergePdfButton);
+
+        Button mergeButton = new Button(SysConfig.getLang("MergePDF"));
+        styleButton(mergeButton);
+        mergePDFOnAction(mergeButton);
+
+        Button encryptButton = new Button(SysConfig.getLang("EncryptPDF"));
+        styleButton(encryptButton);
+        encryptPDFOnAction(encryptButton);
+
+        Button extractButton = new Button(SysConfig.getLang("ExtractPhoto"));
+        styleButton(extractButton);
+        extractPhotoOnAction(extractButton);
+
+        Text gene = new Text(SysConfig.getLang("Gene"));
+        HBox genePdfHBox = new HBox(selectButton, geneButton);
+        genePdfHBox.setSpacing(4);
+        VBox genePdfVBox = new VBox(gene, genePdfHBox);
+        styleVBox(genePdfVBox);
+
+        Text merge = new Text(SysConfig.getLang("Merge"));
+        HBox mergePdfHBox = new HBox(addMergePdfButton, mergeButton);
+        mergePdfHBox.setSpacing(4);
+        VBox mergePdfVBox = new VBox(merge, mergePdfHBox);
+        styleVBox(mergePdfVBox);
+
+        Text other = new Text(SysConfig.getLang("Others"));
+        HBox otherPdfHBox = new HBox(encryptButton, extractButton);
+        otherPdfHBox.setSpacing(4);
+        VBox otherPdfVBox = new VBox(other, otherPdfHBox);
+        styleVBox(otherPdfVBox);
+
+        HBox buttonHBox = new HBox(genePdfVBox, mergePdfVBox, otherPdfVBox);
+
+        buttonHBox.setSpacing(12);
+
+        VBox vb = new VBox();
+        vb.getChildren().addAll(title, buttonHBox);
+        vb.setSpacing(4);
+
+        HBox hBoxConfig = new HBox(vb);
+        return hBoxConfig;
+    }
+
+
+    private void step1SelectOnAction(Button selectButton) {
         selectButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -87,9 +141,10 @@ public class FuncPaneCtrl {
                 LogUtils.info("select photos end");
             }
         });
+    }
 
-        Button geneButton = new Button(SysConfig.getLang("Step2Generate"));
-        styleButton(geneButton);
+
+    private void step2GenerateOnAction(Button geneButton) {
         geneButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -143,9 +198,9 @@ public class FuncPaneCtrl {
 
         });
 
+    }
 
-        Button addMergePdfButton = new Button(SysConfig.getLang("SelectPDF"));
-        styleButton(addMergePdfButton);
+    private void selectPDFOnAction(Button addMergePdfButton) {
         addMergePdfButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -163,9 +218,9 @@ public class FuncPaneCtrl {
                 CacheData.gridPane = viewGridPaneCtrl.pdfListPane(CacheData.gridPane, pdfs);
             }
         });
+    }
 
-        Button mergeButton = new Button(SysConfig.getLang("MergePDF"));
-        styleButton(mergeButton);
+    private void mergePDFOnAction(Button mergeButton) {
         mergeButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -192,10 +247,10 @@ public class FuncPaneCtrl {
                 AlertUtils.openExplorer(GeneParamConfig.getPdfSavePath());
             }
         });
+    }
 
 
-        Button encryptButton = new Button(SysConfig.getLang("EncryptPDF"));
-        styleButton(encryptButton);
+    private void encryptPDFOnAction(Button encryptButton) {
         encryptButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -226,10 +281,9 @@ public class FuncPaneCtrl {
                 AlertUtils.openExplorer(savePath);
             }
         });
+    }
 
-
-        Button extractButton = new Button(SysConfig.getLang("ExtractPhoto"));
-        styleButton(extractButton);
+    private void extractPhotoOnAction(Button extractButton) {
         extractButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -300,36 +354,7 @@ public class FuncPaneCtrl {
             }
         });
 
-        Text gene = new Text(SysConfig.getLang("Gene"));
-        HBox genePdfHBox = new HBox(selectButton, geneButton);
-        genePdfHBox.setSpacing(4);
-        VBox genePdfVBox = new VBox(gene, genePdfHBox);
-        styleVBox(genePdfVBox);
-
-        Text merge = new Text(SysConfig.getLang("Merge"));
-        HBox mergePdfHBox = new HBox(addMergePdfButton, mergeButton);
-        mergePdfHBox.setSpacing(4);
-        VBox mergePdfVBox = new VBox(merge, mergePdfHBox);
-        styleVBox(mergePdfVBox);
-
-        Text other = new Text(SysConfig.getLang("Others"));
-        HBox otherPdfHBox = new HBox(encryptButton, extractButton);
-        otherPdfHBox.setSpacing(4);
-        VBox otherPdfVBox = new VBox(other, otherPdfHBox);
-        styleVBox(otherPdfVBox);
-
-        HBox buttonHBox = new HBox(genePdfVBox, mergePdfVBox, otherPdfVBox);
-
-        buttonHBox.setSpacing(12);
-
-        VBox vb = new VBox();
-        vb.getChildren().addAll(title, buttonHBox);
-        vb.setSpacing(4);
-
-        HBox hBoxConfig = new HBox(vb);
-        return hBoxConfig;
     }
-
 
     private void styleButton(Button button) {
         button.setMinWidth(100);
