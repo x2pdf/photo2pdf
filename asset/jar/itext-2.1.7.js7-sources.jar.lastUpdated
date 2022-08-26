@@ -1,0 +1,4 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Mon Aug 15 17:52:39 CST 2022
+http\://192.168.1.59\:18081/nexus/content/repositories/thirdparty/.error=
+http\://192.168.1.59\:18081/nexus/content/repositories/thirdparty/.lastUpdated=1660557159228
