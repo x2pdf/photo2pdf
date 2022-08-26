@@ -52,10 +52,10 @@ public class CompressPhotoCtrl {
                 // 增加识别的后缀，已识别同一张图片被用户选择两次的图片
                 String filePathFullNameCompress = previewPhotosPath + fileFullNameNew;
 
-                if (fileFormat.equalsIgnoreCase("heic")) {
+                if (fileFormat.equalsIgnoreCase("heic") || fileFormat.equalsIgnoreCase("heif")) {
                     String fileFullNameNewConvert = PhotoUtils.getHEICConvertName(fileFullName);
                     String filePathFullNameCompress2 = previewPhotosPath + fileFullNameNewConvert;
-                    HeicConvertUtils.convert("jpeg", photoPathCopy, filePathFullNameCompress2);
+                    HeicConvertUtils.convert(photoPathCopy, filePathFullNameCompress2,"jpeg", "0.7");
                     photoPathCopy = filePathFullNameCompress2;
                 }
 
@@ -73,7 +73,7 @@ public class CompressPhotoCtrl {
 //                    System.out.println("使用   原始图片2  " + photoPath);
                 } else {
                     boolean b = false;
-                    if (!fileFormat.equalsIgnoreCase("heic")) {
+                    if (!fileFormat.equalsIgnoreCase("heic") || !fileFormat.equalsIgnoreCase("heif")) {
                         b = PhotoUtils.compressPic(photoPathCopy, filePathFullNameCompress, fileFormat, quality);
                     }
                     if (!b) {

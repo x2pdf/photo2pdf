@@ -135,7 +135,7 @@ public class HelpCtrl {
         });
 
 
-        // ================================== compress pdf photos =========================================
+        // ================================== compress pdf =========================================
         String ratioCompressPDF = "0.7";
         ArrayList<String> ratioCompressPDFChoices = new ArrayList<>();
         ratioCompressPDFChoices.add("1.0");
@@ -250,7 +250,8 @@ public class HelpCtrl {
             @Override
             public void handle(ActionEvent event) {
                 FileChooserCtrl fileChooserCtrl = new FileChooserCtrl();
-                ArrayList<String> selectPhotos = fileChooserCtrl.selectPhotos4Experiment();
+                ArrayList<String> selectPhotos = fileChooserCtrl.selectPhotos4Experiment(CacheData.getToFormat(),
+                        String.valueOf(GeneParamConfig.getPdfPhotoCompressionQuality()));
                 if (selectPhotos == null || selectPhotos.size() == 0) {
                     LogUtils.info("FormatConversion no select photo");
                     return;
