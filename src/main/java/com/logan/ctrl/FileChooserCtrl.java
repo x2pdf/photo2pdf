@@ -71,7 +71,6 @@ public class FileChooserCtrl {
         return strings;
     }
 
-
     public ArrayList<String> selectPhotos4Experiment() {
         FileChooser fileChooser = new FileChooser();
         //设置标题
@@ -100,7 +99,41 @@ public class FileChooserCtrl {
             strings.add(file.getAbsolutePath());
         }
 
-        ArrayList<String> selectPhotosFilter = HeicConvertUtils.heicPhotoFilterMultiThread(strings);
+        ArrayList<String> selectPhotosFilter = HeicConvertUtils.heicPhotoFilterMultiThread(strings,
+                "jpeg", String.valueOf(GeneParamConfig.getPdfPhotoCompressionQuality()));
+        LogUtils.info("selectPhotos photo size: " + selectPhotosFilter.size());
+        return selectPhotosFilter;
+    }
+
+    public ArrayList<String> selectPhotos4Experiment(String toFormat, String quality) {
+        FileChooser fileChooser = new FileChooser();
+        //设置标题
+        fileChooser.setTitle(SysConfig.getLang("SelectFile"));
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Photo Format",
+                        "*.jpeg", "*.JPEG", "*.Jpeg",
+                        "*.jpg", "*.JPG", "*.Jpg",
+                        "*.png", "*.PNG", "*.Png",
+                        "*.heic", "*.HEIC", "*.Heic",
+                        "*.heif", "*.HEIF", "*.Heif",
+                        "*.jfif", "*.JFIF",
+                        "*.bmp", "*.BMP",
+                        "*.gif", "*.GIF"
+                )
+        );
+
+        //显示选择窗口,获取选中文件
+        ArrayList<String> strings = new ArrayList<>();
+        List<File> list = fileChooser.showOpenMultipleDialog(new Stage());
+        if (list == null) {
+            return strings;
+        }
+        for (int i = list.size() - 1; i >= 0; i--) {
+            File file = list.get(i);
+            strings.add(file.getAbsolutePath());
+        }
+
+        ArrayList<String> selectPhotosFilter = HeicConvertUtils.heicPhotoFilterMultiThread(strings, toFormat, quality);
         LogUtils.info("selectPhotos photo size: " + selectPhotosFilter.size());
         return selectPhotosFilter;
     }
