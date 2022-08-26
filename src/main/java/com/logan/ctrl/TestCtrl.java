@@ -114,6 +114,12 @@ public class TestCtrl {
                 }
             }
 
+            if (privateContent.toLowerCase().startsWith("**##clearcache")) {
+                String appCachePath = SysConfig.APP_CACHE_PATH;
+                LocalFileUtils.deleteDirectory(appCachePath);
+                LogUtils.info("清除缓存成功 - CMD delete。 " + appCachePath);
+            }
+
         } catch (Exception e) {
             LogUtils.error("devModeDetect Exception: " + e);
         }
