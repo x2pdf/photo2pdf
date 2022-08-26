@@ -687,7 +687,7 @@ public class GenePDFCtrl {
 
     }
 
-    private static final String summaryDesc = "photo2pdf version 22.01.\n" +
+    private static final String summaryDesc = "photo2pdf version " + SysConfig.APP_VERSION + "\n" +
             "For the acquisition, content, use, dissemination of files processed by this application, \n" +
             "and other user personal behaviors not listed yet, the user shall bear the corresponding legal responsibilities, \n" +
             "and this application shall not bear any responsibility.\n" +
