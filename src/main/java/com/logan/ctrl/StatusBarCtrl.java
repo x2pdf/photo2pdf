@@ -70,6 +70,7 @@ public class StatusBarCtrl {
         vb.setSpacing(2);
 
         HBox hBoxConfig = new HBox(vb);
+        hBoxConfig.setStyle("-fx-background-color:#B6B6B4");
         return hBoxConfig;
     }
 
