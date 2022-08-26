@@ -48,7 +48,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            LogUtils.info("***** statement *****\n" + statement);
+            LogUtils.info("\n\n***** statement *****\n" + statement);
             CacheData.isAppRunning = true;
             initConfig();
             initStage(stage);
@@ -95,10 +95,38 @@ public class App extends Application {
         TabPane tabPane = new TabPane();
         scene = new Scene(tabPane);
 
+        AnchorPane settingsAnchorPane = getSettingTab(stage);
+        AnchorPane homepageAnchorPane = getHomeTab();
+        AnchorPane helpAnchorPane = getHelpTab();
+
+        // 组合成分页页面
+        Tab tab1 = new Tab(SysConfig.getLang("Homepage"), homepageAnchorPane);
+        tab1.setClosable(false);
+        tab1.setStyle("-fx-pref-width: 80;");
+        Tab tab2 = new Tab(SysConfig.getLang("Settings"), settingsAnchorPane);
+        tab2.setClosable(false);
+        tab2.setStyle("-fx-pref-width: 80;");
+        Tab tab3 = new Tab(SysConfig.getLang("Help"), helpAnchorPane);
+        tab3.setClosable(false);
+        tab3.setStyle("-fx-pref-width: 40;");
+
+        tabPane.getTabs().add(tab1);
+        tabPane.getTabs().add(tab2);
+        tabPane.getTabs().add(tab3);
+
+        stage.setScene(scene);
+        stage.setMinWidth(300);
+        stage.setMinHeight(300);
+        stage.setTitle("photo2pdf");
+
+        stage.getIcons().add(new Image("photo2pdf_icon.png"));
+        stage.show();
+    }
+
+
+    private AnchorPane getSettingTab(Stage stage) {
         AnchorPane settingsAnchorPane = new AnchorPane();
         settingsAnchorPane.setPrefSize(SysConfig.STAGE_WIDTH, SysConfig.STAGE_HEIGHT);
-
-        // 1. 设置画面
         SettingsPaneCtrl settingsPaneCtrl = new SettingsPaneCtrl();
         HBox hBoxConfig = settingsPaneCtrl.getBoxConfig(stage);
         hBoxConfig.setAlignment(Pos.TOP_CENTER);
@@ -115,8 +143,11 @@ public class App extends Application {
         AnchorPane.setRightAnchor(settingsVBox, SysConfig.STAGE_MARGIN_DEFAULT);
         AnchorPane.setBottomAnchor(settingsVBox, SysConfig.STAGE_MARGIN_DEFAULT);
 
+        return settingsAnchorPane;
+    }
 
-        // 2. 主页
+
+    private AnchorPane getHomeTab() {
         AnchorPane homepageAnchorPane = new AnchorPane();
         homepageAnchorPane.setPrefSize(SysConfig.STAGE_WIDTH, SysConfig.STAGE_HEIGHT);
 
@@ -135,7 +166,6 @@ public class App extends Application {
         HBox statusInfoHBox = statusBarCtrl.getStatusInfo();
         CacheData.statusHBox = statusInfoHBox;
         statusInfoHBox.setAlignment(Pos.BOTTOM_CENTER);
-
 
         // 2.4 预览图片区域
         PreviewPaneCtrl previewPaneCtrl = new PreviewPaneCtrl();
@@ -160,8 +190,11 @@ public class App extends Application {
         AnchorPane.setBottomAnchor(statusInfoHBox, SysConfig.STAGE_MARGIN_DEFAULT);
         homepageAnchorPane.getChildren().addAll(homepageVBox, statusInfoHBox);
 
+        return homepageAnchorPane;
+    }
 
-        // 3. help
+
+    private AnchorPane getHelpTab() {
         HelpCtrl helpCtrl = new HelpCtrl();
         HBox boxHelp = helpCtrl.getBoxHelp();
         boxHelp.setAlignment(Pos.TOP_CENTER);
@@ -180,32 +213,7 @@ public class App extends Application {
         helpAnchorPane.setPrefSize(SysConfig.STAGE_WIDTH, SysConfig.STAGE_HEIGHT);
         helpAnchorPane.getChildren().add(helpVBox);
 
-        // 4. 组合成分页页面
-        Tab tab1 = new Tab(SysConfig.getLang("Homepage"), homepageAnchorPane);
-        tab1.setClosable(false);
-        tab1.setStyle("-fx-pref-width: 80;");
-
-        Tab tab2 = new Tab(SysConfig.getLang("Settings"), settingsAnchorPane);
-        tab2.setClosable(false);
-        tab2.setStyle("-fx-pref-width: 80;");
-
-
-        Tab tab3 = new Tab(SysConfig.getLang("Help"), helpAnchorPane);
-        tab3.setClosable(false);
-        tab3.setStyle("-fx-pref-width: 40;");
-
-
-        tabPane.getTabs().add(tab1);
-        tabPane.getTabs().add(tab2);
-        tabPane.getTabs().add(tab3);
-
-        stage.setScene(scene);
-        stage.setMinWidth(300);
-        stage.setMinHeight(300);
-        stage.setTitle("photo2pdf");
-
-        stage.getIcons().add(new Image("photo2pdf_icon.png"));
-        stage.show();
+        return helpAnchorPane;
     }
 
 }

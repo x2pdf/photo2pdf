@@ -25,7 +25,7 @@ public class HBoxUtil {
             // 找到做对应业务的实例化对象
             ArrayList<BaseHBox> hBoxes = new ArrayList<>();
             for (String businessTypeCode : businessSeqArr) {
-                System.out.println("businessTypeCode: " + businessTypeCode);
+//                System.out.println("businessTypeCode: " + businessTypeCode);
                 for (Class<? extends BaseHBox> subType : subTypes) {
                     BaseHBox hBox = subType.newInstance();
                     if (hBox.getHBoxCode().equals(businessTypeCode)) {
