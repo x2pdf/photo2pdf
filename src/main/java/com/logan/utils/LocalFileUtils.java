@@ -209,6 +209,12 @@ public class LocalFileUtils {
         return flag;
     }
 
+    /**
+     * 删除给定文件夹以及该文件下所有的内容（文件和文件夹）
+     *
+     * @param sPath
+     * @return
+     */
     public static boolean deleteDirectory(String sPath) {
         //如果sPath不以文件分隔符结尾，自动添加文件分隔符
         if (!sPath.endsWith(File.separator)) {
@@ -226,11 +232,11 @@ public class LocalFileUtils {
             //删除子文件
             if (files[i].isFile()) {
                 flag = deleteFile(files[i].getAbsolutePath());
-                if (!flag) break;
+//                if (!flag) break;
             } //删除子目录
             else {
                 flag = deleteDirectory(files[i].getAbsolutePath());
-                if (!flag) break;
+//                if (!flag) break;
             }
         }
         if (!flag) return false;
