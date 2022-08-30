@@ -40,6 +40,13 @@ public class AlertUtils {
         }
     }
 
+    public static void msg(String msg) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Info");
+        alert.setContentText(msg);
+        Optional<ButtonType> buttonType = alert.showAndWait();
+    }
+
 
     public static void error(String msg) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
