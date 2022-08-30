@@ -37,3 +37,10 @@ jpackage -n photo2pdf --app-image ./photo2pdf --vendor photo2pdf --app-version 2
 编译生成的安装包的保存位置为：
 photo2pdf/out/artifacts/photo2pdf/bundles/target/build-link-package/
 <br>然后如同往常安装 windows 软件一样安装 photo2pdf-22.01.exe 即可使用！
+
+### 开发指令
+在首页--封面设置--描述 输入以下命令，将会触发开发相关的行为
+**##devmode=true  -- 开启开发模式，将会在【设置】页看到一些日志信息
+**##devmode=false  -- 关闭开发模式，将会关闭在【设置】页看到一些日志信息画面
+**##threadpoolcore=8  -- 手动配置用于处理图片的线程池的线程数量，这里设置为8
+**##clearcache  -- 手动清理程序产生的所有缓存文件(包括key)
