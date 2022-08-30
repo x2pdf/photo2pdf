@@ -1,6 +1,7 @@
 package com.logan.ctrl;
 
 import com.logan.config.CacheData;
+import com.logan.config.Format;
 import com.logan.config.GeneParamConfig;
 import com.logan.config.SysConfig;
 import com.logan.utils.HeicConvertUtils;
@@ -52,17 +53,17 @@ public class CompressPhotoCtrl {
                 // 增加识别的后缀，已识别同一张图片被用户选择两次的图片
                 String filePathFullNameCompress = previewPhotosPath + fileFullNameNew;
 
-                if (fileFormat.equalsIgnoreCase("heic") || fileFormat.equalsIgnoreCase("heif")) {
+                if (fileFormat.equalsIgnoreCase(Format.heic.getValue()) || fileFormat.equalsIgnoreCase(Format.heif.getValue())) {
                     String fileFullNameNewConvert = PhotoUtils.getHEICConvertName(fileFullName);
                     String filePathFullNameCompress2 = previewPhotosPath + fileFullNameNewConvert;
-                    HeicConvertUtils.convert(photoPathCopy, filePathFullNameCompress2,"jpeg", "0.7");
+                    HeicConvertUtils.convert(photoPathCopy, filePathFullNameCompress2,Format.jpeg.getValue(), "0.7");
                     photoPathCopy = filePathFullNameCompress2;
                 }
 
                 // 图片文件小于 200 kB 的不压缩了
                 boolean isNeedScale = true;
                 // 不压缩的图片格式（压缩后文件变得更大了）, 直接 copy 到目标位置
-                if (fileFormat.equalsIgnoreCase("jpg") || fileFormat.equalsIgnoreCase("jpeg")) {
+                if (fileFormat.equalsIgnoreCase(Format.jpg.getValue()) || fileFormat.equalsIgnoreCase(Format.jpeg.getValue())) {
                     byte[] load = LocalFileUtils.load(photoPathCopy);
                     String s = LocalFileUtils.save2Path(load, previewPhotosPath, fileFullNameNew);
 //                    System.out.println("使用   原始图片");
@@ -73,7 +74,7 @@ public class CompressPhotoCtrl {
 //                    System.out.println("使用   原始图片2  " + photoPath);
                 } else {
                     boolean b = false;
-                    if (!fileFormat.equalsIgnoreCase("heic") || !fileFormat.equalsIgnoreCase("heif")) {
+                    if (!fileFormat.equalsIgnoreCase(Format.heic.getValue()) || !fileFormat.equalsIgnoreCase(Format.heif.getValue())) {
                         b = PhotoUtils.compressPic(photoPathCopy, filePathFullNameCompress, fileFormat, quality);
                     }
                     if (!b) {
