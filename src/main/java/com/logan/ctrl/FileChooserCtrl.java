@@ -3,7 +3,7 @@ package com.logan.ctrl;
 import com.logan.config.CacheData;
 import com.logan.config.GeneParamConfig;
 import com.logan.config.SysConfig;
-import com.logan.utils.HeicConvertUtils;
+import com.logan.utils.HeifConvertUtils;
 import com.logan.utils.LogUtils;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
@@ -99,7 +99,7 @@ public class FileChooserCtrl {
             strings.add(file.getAbsolutePath());
         }
 
-        ArrayList<String> selectPhotosFilter = HeicConvertUtils.heicPhotoFilterMultiThread(strings,
+        ArrayList<String> selectPhotosFilter = HeifConvertUtils.asyncConvert(strings,
                 "jpeg", String.valueOf(GeneParamConfig.getPdfPhotoCompressionQuality()));
         LogUtils.info("selectPhotos photo size: " + selectPhotosFilter.size());
         return selectPhotosFilter;
@@ -133,7 +133,7 @@ public class FileChooserCtrl {
             strings.add(file.getAbsolutePath());
         }
 
-        ArrayList<String> selectPhotosFilter = HeicConvertUtils.heicPhotoFilterMultiThread(strings, toFormat, quality);
+        ArrayList<String> selectPhotosFilter = HeifConvertUtils.asyncConvert(strings, toFormat, quality);
         LogUtils.info("selectPhotos photo size: " + selectPhotosFilter.size());
         return selectPhotosFilter;
     }
