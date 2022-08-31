@@ -104,7 +104,7 @@ public class FuncPaneCtrl {
                     return;
                 }
                 // 过滤并处理其中的 heic 图片
-                ArrayList<String> selectPhotosFilter = HeicConvertUtils.heicPhotoFilterMultiThread(selectPhotos,
+                ArrayList<String> selectPhotosFilter = HeifConvertUtils.asyncConvert(selectPhotos,
                         "jpeg", String.valueOf(GeneParamConfig.getPdfPhotoCompressionQuality()));
 
                 // 2. 将选择的图片同步到其他缓存的list

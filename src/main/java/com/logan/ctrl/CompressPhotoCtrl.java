@@ -4,7 +4,7 @@ import com.logan.config.CacheData;
 import com.logan.config.Format;
 import com.logan.config.GeneParamConfig;
 import com.logan.config.SysConfig;
-import com.logan.utils.HeicConvertUtils;
+import com.logan.utils.HeifConvertUtils;
 import com.logan.utils.LocalFileUtils;
 import com.logan.utils.LogUtils;
 import com.logan.utils.PhotoUtils;
@@ -56,7 +56,7 @@ public class CompressPhotoCtrl {
                 if (fileFormat.equalsIgnoreCase(Format.heic.getValue()) || fileFormat.equalsIgnoreCase(Format.heif.getValue())) {
                     String fileFullNameNewConvert = PhotoUtils.getHEICConvertName(fileFullName);
                     String filePathFullNameCompress2 = previewPhotosPath + fileFullNameNewConvert;
-                    HeicConvertUtils.convert(photoPathCopy, filePathFullNameCompress2,Format.jpeg.getValue(), "0.7");
+                    HeifConvertUtils.convert(photoPathCopy, filePathFullNameCompress2,Format.jpeg.getValue(), "0.7");
                     photoPathCopy = filePathFullNameCompress2;
                 }
 
