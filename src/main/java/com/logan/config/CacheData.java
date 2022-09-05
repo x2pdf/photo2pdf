@@ -186,7 +186,6 @@ public class CacheData implements Serializable {
         // 将排序好的照片，同步到其他所有List中
         CacheData.getPhotosPath().clear();
         CacheData.setPhotosPath(sortPhotos);
-
         // 因为后面有移除list元素的操作，浅拷贝会导致移除元素时异常
         ArrayList<String> copyList = copyList(sortPhotos);
         CacheData.getPhotosPreviewPath().clear();

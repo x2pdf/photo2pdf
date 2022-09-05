@@ -280,11 +280,12 @@ public class GenePDFCtrl {
                 // 设定不使用压缩图片
                 photosGenePath = CacheData.getPhotosPath();
             }
-            for (String path : CacheData.getPhotosPathUserSelectOrder()) {
-                String fileFullName = path.substring(path.lastIndexOf(File.separator) + 1);
-                for (String pathGene : photosGenePath) {
-                    String fileFullNameGene = path.substring(path.lastIndexOf(File.separator) + 1);
-                    if (fileFullName.equals(fileFullNameGene)) {
+            // 在预览页面中查找选择的顺序的列表中的图片
+            for (String pathGene : photosGenePath) {
+                String fileFullNameGene = pathGene.substring(pathGene.lastIndexOf(File.separator) + 1, pathGene.lastIndexOf("."));
+                for (String path : CacheData.getPhotosPathUserSelectOrder()) {
+                    String fileFullName = path.substring(path.lastIndexOf(File.separator) + 1, path.lastIndexOf("."));
+                    if (fileFullNameGene.contains(fileFullName)) {
                         strings.add(pathGene);
                     }
                 }
