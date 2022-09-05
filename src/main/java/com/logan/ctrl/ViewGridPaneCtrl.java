@@ -584,7 +584,7 @@ public class ViewGridPaneCtrl {
                     .sorted(Comparator.comparing(PhotoFileInfo::getName))
                     .map(PhotoFileInfo::getAbsolutePath).collect(Collectors.toList());
         } else {
-            res = CacheData.getPhotosPathUserSelectOrder();
+            res = CacheData.copyList(CacheData.getPhotosPathUserSelectOrder());
         }
 
         return res;
