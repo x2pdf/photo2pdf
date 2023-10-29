@@ -31,6 +31,8 @@ import javafx.stage.WindowEvent;
 -Dprism.maxvram=500m
 -Dprism.order=sw
 -Djavafx.animation.fullspeed=true
+
+Tag 23.01
  */
 public class App extends Application {
     private final static String statement =
