@@ -63,7 +63,7 @@ public class FileChooserCtrl {
         for (int i = list.size() - 1; i >= 0; i--) {
             File file = list.get(i);
             // 添加用户选择的数据，需要顺序
-            CacheData.getPhotosPathUserSelectOrder().add(file.getAbsolutePath());
+//            CacheData.getPhotosPathUserSelectOrder().add(file.getAbsolutePath());
             strings.add(file.getAbsolutePath());
         }
 
