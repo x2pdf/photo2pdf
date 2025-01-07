@@ -33,7 +33,7 @@ import javafx.stage.WindowEvent;
 -Djavafx.animation.fullspeed=true
 
 Tag 25.01
-
+Tag 25.02
  */
 public class App extends Application {
     private final static String statement =
