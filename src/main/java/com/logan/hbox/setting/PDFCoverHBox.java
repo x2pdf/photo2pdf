@@ -2,7 +2,6 @@ package com.logan.hbox.setting;
 
 import com.logan.config.GeneParamConfig;
 import com.logan.config.SysConfig;
-import com.logan.ctrl.SignatureCtrl;
 import com.logan.hbox.BaseHBox;
 import com.logan.utils.LogUtils;
 import com.logan.utils.SingleRowAnchorPaneUtils;
@@ -37,10 +36,6 @@ public class PDFCoverHBox extends BaseHBox {
     public void setAction(Stage stage) {
         ChoiceBox coverChoiceBox = SingleRowAnchorPaneUtils.getChoiceBox(anchorPane);
         coverChoiceBox.setOnAction((event) -> {
-            if (!new SignatureCtrl().checkFunction("PDFCover")) {
-                SingleRowAnchorPaneUtils.getChoiceBox(anchorPane).setValue("Yes");
-                return;
-            }
             int selectedIndex = coverChoiceBox.getSelectionModel().getSelectedIndex();
             if (selectedIndex == 0) {
                 SingleRowAnchorPaneUtils.getText2AndUpdate(anchorPane, "Yes");

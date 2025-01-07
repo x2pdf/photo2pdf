@@ -3,7 +3,6 @@ package com.logan.hbox.setting;
 import com.logan.config.CacheData;
 import com.logan.config.GeneParamConfig;
 import com.logan.config.SysConfig;
-import com.logan.ctrl.SignatureCtrl;
 import com.logan.hbox.BaseHBox;
 import com.logan.utils.LogUtils;
 import com.logan.utils.SingleRowAnchorPaneUtils;
@@ -42,10 +41,6 @@ public class PDFLayoutHBox extends BaseHBox {
     public void setAction(Stage stage) {
         ChoiceBox layoutChoiceBox = SingleRowAnchorPaneUtils.getChoiceBox(anchorPane);
         layoutChoiceBox.setOnAction((event) -> {
-            if (!new SignatureCtrl().checkFunction("PDFLayout")) {
-                SingleRowAnchorPaneUtils.getChoiceBox(anchorPane).setValue("4 X 2");
-                return;
-            }
             int selectedIndex = layoutChoiceBox.getSelectionModel().getSelectedIndex();
             GeneParamConfig geneParamConfig = GeneParamConfig.instance();
             if (selectedIndex == 0) {

@@ -33,7 +33,7 @@ public class SysConfig implements Serializable {
     // 程序名称
     public static String APP_NAME = "photo2pdf";
     // 应用版本号
-    public static String APP_VERSION = "23.01";
+    public static String APP_VERSION = "25.01";
     // 应用语言,默认cn
     public static String LANG = "cn";
     // 是否处于开发模式

@@ -37,7 +37,7 @@ public class SettingsPaneCtrl {
         // business order
         String[] businessSeqArr = {"Title", "PDFSavePath", "Preview", "PDFCover", "PDFSummary",
                 "PhotoMark", "PDFLayout", "PictureFillPage", "PhotoSortBy",
-                "CompressPDFPhoto", "EnterKey"};
+                "CompressPDFPhoto"};
         HBox hBox = HBoxUtil.getHBox(businessSeqArr, stage);
         return hBox;
     }

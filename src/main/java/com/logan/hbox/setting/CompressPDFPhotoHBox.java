@@ -2,7 +2,6 @@ package com.logan.hbox.setting;
 
 import com.logan.config.GeneParamConfig;
 import com.logan.config.SysConfig;
-import com.logan.ctrl.SignatureCtrl;
 import com.logan.hbox.BaseHBox;
 import com.logan.utils.LogUtils;
 import com.logan.utils.SingleRowAnchorPaneUtils;
@@ -45,10 +44,6 @@ public class CompressPDFPhotoHBox extends BaseHBox {
     public void setAction(Stage stage) {
         ChoiceBox compressChoiceBox = SingleRowAnchorPaneUtils.getChoiceBox(anchorPane);
         compressChoiceBox.setOnAction((event) -> {
-            if (!new SignatureCtrl().checkFunction("PDFSummary")) {
-                SingleRowAnchorPaneUtils.getChoiceBox(anchorPane).setValue("0.7");
-                return;
-            }
             int selectedIndex = compressChoiceBox.getSelectionModel().getSelectedIndex();
             if (selectedIndex == 0) {
                 SingleRowAnchorPaneUtils.getText2AndUpdate(anchorPane, SysConfig.getLang("OriginalPicture"));

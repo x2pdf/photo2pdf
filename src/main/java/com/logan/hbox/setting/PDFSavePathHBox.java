@@ -3,7 +3,6 @@ package com.logan.hbox.setting;
 import com.logan.config.GeneParamConfig;
 import com.logan.config.SysConfig;
 import com.logan.ctrl.FileChooserCtrl;
-import com.logan.ctrl.SignatureCtrl;
 import com.logan.hbox.BaseHBox;
 import com.logan.utils.LogUtils;
 import com.logan.utils.SingleRowAnchorPaneUtils;
@@ -40,10 +39,6 @@ public class PDFSavePathHBox extends BaseHBox {
         pathButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if (!new SignatureCtrl().checkFunction("PDFSavePath")) {
-                    SingleRowAnchorPaneUtils.getTextFieldAndUpdate(anchorPane, GeneParamConfig.getPdfSavePath());
-                    return;
-                }
                 FileChooserCtrl fileChooserCtrl = new FileChooserCtrl();
                 String savePath = fileChooserCtrl.chooseFilePath(stage);
                 if (savePath != null) {

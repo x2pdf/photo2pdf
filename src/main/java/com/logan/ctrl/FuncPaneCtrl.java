@@ -157,10 +157,6 @@ public class FuncPaneCtrl {
                     alert.setContentText(SysConfig.getLang("NoFileSelected"));
                     alert.showAndWait();
                 } else {
-                    if (!new SignatureCtrl().checkFunction("Step2Generate")) {
-                        return;
-                    }
-
                     CacheData.setAppStatus(SysConfig.GENERATE_FILE);
                     CacheData.refreshStatus();
 
@@ -225,10 +221,6 @@ public class FuncPaneCtrl {
         mergeButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if (!new SignatureCtrl().checkFunction("MergePDF")) {
-                    return;
-                }
-
                 ArrayList<String> pdfs = CacheData.getMergePdfPath();
                 if (pdfs == null || pdfs.size() == 0) {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -255,9 +247,6 @@ public class FuncPaneCtrl {
         encryptButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if (!new SignatureCtrl().checkFunction("EncryptPDF")) {
-                    return;
-                }
                 FileChooserCtrl fileChooserCtrl = new FileChooserCtrl();
                 File pdf = fileChooserCtrl.selectSinglePdf();
                 if (pdf == null || pdf.length() == 0) {
@@ -288,9 +277,6 @@ public class FuncPaneCtrl {
         extractButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if (!new SignatureCtrl().checkFunction("ExtractPhoto")) {
-                    return;
-                }
                 // 选择pdf文件
                 FileChooserCtrl fileChooserCtrl = new FileChooserCtrl();
                 File pdf = fileChooserCtrl.selectSinglePdf();

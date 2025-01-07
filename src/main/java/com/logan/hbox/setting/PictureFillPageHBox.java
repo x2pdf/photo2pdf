@@ -3,13 +3,11 @@ package com.logan.hbox.setting;
 import com.logan.config.CacheData;
 import com.logan.config.GeneParamConfig;
 import com.logan.config.SysConfig;
-import com.logan.ctrl.SignatureCtrl;
 import com.logan.hbox.BaseHBox;
 import com.logan.utils.LogUtils;
 import com.logan.utils.SingleRowAnchorPaneUtils;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -39,10 +37,6 @@ public class PictureFillPageHBox extends BaseHBox {
     public void setAction(Stage stage) {
         ChoiceBox fullCoverChoiceBox = SingleRowAnchorPaneUtils.getChoiceBox(anchorPane);
         fullCoverChoiceBox.setOnAction((event) -> {
-            if (!new SignatureCtrl().checkFunction("PictureFillPage")) {
-                SingleRowAnchorPaneUtils.getChoiceBox(anchorPane).setValue("No");
-                return;
-            }
             int selectedIndex = fullCoverChoiceBox.getSelectionModel().getSelectedIndex();
             if (selectedIndex == 0) {
                 SingleRowAnchorPaneUtils.getText2AndUpdate(anchorPane, "Yes");

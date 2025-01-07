@@ -86,19 +86,6 @@ public class InitSource {
                 assetPath, GeneParamConfig.getPdfSummaryPhoto());
     }
 
-    public void moveAsc() {
-        try {
-            String keyTempPath = LocalFileUtils.mkTempDir("key");
-            LocalFileUtils.save2TempDir(LocalFileUtils.is2Byte(Objects.requireNonNull(getClass().getClassLoader()
-                            .getResourceAsStream("keys/" + "pub.asc"))),
-                    keyTempPath, "pub.asc");
-            LocalFileUtils.save2TempDir(LocalFileUtils.is2Byte(Objects.requireNonNull(getClass().getClassLoader()
-                            .getResourceAsStream("keys/" + "secret2.asc"))),
-                    keyTempPath, "secret2.asc");
-        } catch (Exception e) {
-            LogUtils.error("initSource moveAsc exception. info: " + e);
-        }
-    }
 
     private void initNodeJSEnv() throws IOException {
 

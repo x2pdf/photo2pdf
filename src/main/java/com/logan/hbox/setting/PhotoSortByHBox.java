@@ -3,7 +3,6 @@ package com.logan.hbox.setting;
 import com.logan.config.CacheData;
 import com.logan.config.GeneParamConfig;
 import com.logan.config.SysConfig;
-import com.logan.ctrl.SignatureCtrl;
 import com.logan.hbox.BaseHBox;
 import com.logan.utils.LogUtils;
 import com.logan.utils.SingleRowAnchorPaneUtils;
@@ -41,10 +40,6 @@ public class PhotoSortByHBox extends BaseHBox {
     public void setAction(Stage stage) {
         ChoiceBox sortByChoiceBox = SingleRowAnchorPaneUtils.getChoiceBox(anchorPane);
         sortByChoiceBox.setOnAction((event) -> {
-            if (!new SignatureCtrl().checkFunction("PhotoSortBy")) {
-                SingleRowAnchorPaneUtils.getChoiceBox(anchorPane).setValue("DateASC");
-                return;
-            }
             int selectedIndex = sortByChoiceBox.getSelectionModel().getSelectedIndex();
             if (selectedIndex == 0) {
                 GeneParamConfig.sortPhotosBy = "Date";

@@ -2,7 +2,6 @@ package com.logan.hbox.setting;
 
 import com.logan.config.GeneParamConfig;
 import com.logan.config.SysConfig;
-import com.logan.ctrl.SignatureCtrl;
 import com.logan.hbox.BaseHBox;
 import com.logan.utils.LogUtils;
 import com.logan.utils.SingleRowAnchorPaneUtils;
@@ -36,10 +35,6 @@ public class PDFSummaryHBox extends BaseHBox {
     public void setAction(Stage stage) {
         ChoiceBox summaryChoiceBox = SingleRowAnchorPaneUtils.getChoiceBox(anchorPane);
         summaryChoiceBox.setOnAction((event) -> {
-            if (!new SignatureCtrl().checkFunction("PDFSummary")) {
-                SingleRowAnchorPaneUtils.getChoiceBox(anchorPane).setValue("Yes");
-                return;
-            }
             int selectedIndex = summaryChoiceBox.getSelectionModel().getSelectedIndex();
             if (selectedIndex == 0) {
                 SingleRowAnchorPaneUtils.getText2AndUpdate(anchorPane, "Yes");

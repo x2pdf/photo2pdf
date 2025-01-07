@@ -3,7 +3,6 @@ package com.logan.hbox.setting;
 import com.logan.config.CacheData;
 import com.logan.config.GeneParamConfig;
 import com.logan.config.SysConfig;
-import com.logan.ctrl.SignatureCtrl;
 import com.logan.hbox.BaseHBox;
 import com.logan.utils.LogUtils;
 import com.logan.utils.SingleRowAnchorPaneUtils;
@@ -37,10 +36,6 @@ public class PhotoMarkHBox extends BaseHBox {
     public void setAction(Stage stage) {
         ChoiceBox pdfPhotoMarkChoiceBox = SingleRowAnchorPaneUtils.getChoiceBox(anchorPane);
         pdfPhotoMarkChoiceBox.setOnAction((event) -> {
-            if (!new SignatureCtrl().checkFunction("PhotoMark")) {
-                SingleRowAnchorPaneUtils.getChoiceBox(anchorPane).setValue("No");
-                return;
-            }
             int selectedIndex = pdfPhotoMarkChoiceBox.getSelectionModel().getSelectedIndex();
             if (selectedIndex == 0) {
                 SingleRowAnchorPaneUtils.getText2AndUpdate(anchorPane, "Yes");
