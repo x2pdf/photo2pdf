@@ -3,7 +3,6 @@ package com.logan.hbox.setting;
 import com.logan.config.CacheData;
 import com.logan.config.GeneParamConfig;
 import com.logan.config.SysConfig;
-import com.logan.ctrl.SignatureCtrl;
 import com.logan.ctrl.ViewGridPaneCtrl;
 import com.logan.hbox.BaseHBox;
 import com.logan.utils.LogUtils;
@@ -41,10 +40,6 @@ public class PreviewHBox extends BaseHBox {
     public void setAction(Stage stage) {
         ChoiceBox previewChoiceBox = SingleRowAnchorPaneUtils.getChoiceBox(anchorPane);
         previewChoiceBox.setOnAction((event) -> {
-            if (!new SignatureCtrl().checkFunction("Preview")) {
-                SingleRowAnchorPaneUtils.getChoiceBox(anchorPane).setValue("Yes");
-                return;
-            }
             int selectedIndex = previewChoiceBox.getSelectionModel().getSelectedIndex();
             if (selectedIndex == 0) {
                 SingleRowAnchorPaneUtils.getText2AndUpdate(anchorPane, "Yes");

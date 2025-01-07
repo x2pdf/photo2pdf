@@ -88,7 +88,7 @@ public class HelpCtrl {
         AnchorPane.setRightAnchor(experimentalFeatureVBox, 30.0);
 
 
-        Text version = new Text("photo2pdf version 23.01");
+        Text version = new Text("photo2pdf version 25.01");
         Text allRight = new Text("All Rights Reserved.");
         VBox vBox = new VBox(tipsButton, productIntroductionButton, operationManualButton, version, allRight);
         vBox.setAlignment(Pos.CENTER);
@@ -536,9 +536,6 @@ public class HelpCtrl {
         decryptPDFButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if (!new SignatureCtrl().checkFunction("DecryptPDF")) {
-                    return;
-                }
                 FileChooserCtrl fileChooserCtrl = new FileChooserCtrl();
                 ArrayList<String> pdfs = fileChooserCtrl.selectPDFs();
                 if (pdfs == null || pdfs.size() == 0) {

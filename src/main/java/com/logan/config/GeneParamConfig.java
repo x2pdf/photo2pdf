@@ -35,13 +35,6 @@ public class GeneParamConfig implements Serializable {
     // 用户设定是否需要图片的标注
     private static boolean isNeedPhotoMark = false;
 
-    // 获取key的方法，预期写在 github 的说明当中 todo
-    private static String keyInfoURL = "https://github.com/x2pdf/photo2pdf";
-    // 用户是否有key
-    private static boolean isAppHasKey = false;
-    // 用户的 key 的过期时间（如果有key），格式： yyyy-MM-dd HH:mm:ss
-    private static String appKeyExpireTime = "";
-
 
     // 用户是否正在拖动的pdf
     private static boolean isUserDragPdf = false;
@@ -103,9 +96,6 @@ public class GeneParamConfig implements Serializable {
         map.put("userDragPhoto", userDragPhoto);
         map.put("pdfPhotoCompressionQuality", pdfPhotoCompressionQuality);
         map.put("isNeedPhotoMark", isNeedPhotoMark);
-        map.put("keyInfoURL", keyInfoURL);
-        map.put("isAppHasKey", isAppHasKey);
-        map.put("appKeyExpireTime", appKeyExpireTime);
         map.put("isUserDragPdf", isUserDragPdf);
         map.put("userDragPdf", userDragPdf);
         map.put("pdfSavePath", pdfSavePath);
@@ -126,23 +116,6 @@ public class GeneParamConfig implements Serializable {
     }
 
     //=================================================
-
-    public static String getKeyInfoURL() {
-        return keyInfoURL;
-    }
-
-    public static void setKeyInfoURL(String keyInfoURL) {
-        GeneParamConfig.keyInfoURL = keyInfoURL;
-    }
-
-    public static String getAppKeyExpireTime() {
-        return appKeyExpireTime;
-    }
-
-    public static void setAppKeyExpireTime(String appKeyExpireTime) {
-        GeneParamConfig.appKeyExpireTime = appKeyExpireTime;
-    }
-
     public static boolean isIsUserDragPdf() {
         return isUserDragPdf;
     }
@@ -157,14 +130,6 @@ public class GeneParamConfig implements Serializable {
 
     public static void setUserDragPdf(String userDragPdf) {
         GeneParamConfig.userDragPdf = userDragPdf;
-    }
-
-    public static boolean isIsAppHasKey() {
-        return isAppHasKey;
-    }
-
-    public static void setIsAppHasKey(boolean isAppHasKey) {
-        GeneParamConfig.isAppHasKey = isAppHasKey;
     }
 
     public static boolean isIsNeedPhotoMark() {

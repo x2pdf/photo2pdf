@@ -81,7 +81,6 @@ public class App extends Application {
             SysConfig.instance();
             CacheData.instance();
             GeneParamConfig.instance();
-            new SignatureCtrl().initKeyInfo();
         } catch (Exception e) {
             LogUtils.error("initConfig exception: " + e.toString());
         }
