@@ -1,37 +1,13 @@
 # photo2pdf
 
 * 下载最新稳定版本：
-    1. Windows: https://github.com/x2pdf/photo2pdf/releases/tag/v23.01
-    2. Mac: https://github.com/x2pdf/photo2pdf/releases/tag/v23.02
+    1. Windows: https://github.com/x2pdf/photo2pdf/releases/tag/v25.01
+    2. Mac: https://github.com/x2pdf/photo2pdf/releases/tag/v25.02
 
-* 应用中需要使用到 Key 时请输入以下文本（免费使用，有效期至 2025-12-31）：
-  hEwDLvDgu0VwPQUBAf4zOp+Owpl0AOGpMcyvQL0gT4Hd4GYD360OniTjnfpG9xjo
-  BFcZYjxrbxTuiL2Nf4E/gcPTKQuABj1PQxjuS9r/0sBrAav31bUJyUJKJyPqB+QZ
-  /2Iv/j3kYR+4SGF688f//mvct60C1khSMscRedlKf0K2ly2keMOb9bE71qJ2sZFw
-  aE5I10cQiGyS/RtWj/g50jA795yr9nxNYkopat6xx5QwilPg2cRvZuAtnAbt5ILB
-  zGBV2S1Cq5fwWW6Rtq8b8Qzrhxj+RtfDlQdEt1ILSE38WFtDV1KLS1tHu2l/469d
-  gzmF06GN1lMo1csi4/4mLhxXaaNGbmEFoWKU9TPkimGEwIWEZvMIqNF2Xg3fjXmX
-  wGdKJ+SQlIFctN3W6hRBokuwueKzbFzxFpFE24mVn4sF0pu5NiWb5hSp4bUOWcYE
-  8tQFcOfxg/Nsc3Bbgx+l6XGU390KBh12iX7AB4M6XXFHHpAPrK/PsC6f3ak=
-  =xGMw
-
-  
 * Download the latest stable version:
-    1. Windows: https://github.com/x2pdf/photo2pdf/releases/tag/v23.01
-    2. Mac: https://github.com/x2pdf/photo2pdf/releases/tag/v23.02
-
-* Please enter the following text when you need to use the Key in the application (free, valid until 2025-12-31):
-  hEwDLvDgu0VwPQUBAf4zOp+Owpl0AOGpMcyvQL0gT4Hd4GYD360OniTjnfpG9xjo
-  BFcZYjxrbxTuiL2Nf4E/gcPTKQuABj1PQxjuS9r/0sBrAav31bUJyUJKJyPqB+QZ
-  /2Iv/j3kYR+4SGF688f//mvct60C1khSMscRedlKf0K2ly2keMOb9bE71qJ2sZFw
-  aE5I10cQiGyS/RtWj/g50jA795yr9nxNYkopat6xx5QwilPg2cRvZuAtnAbt5ILB
-  zGBV2S1Cq5fwWW6Rtq8b8Qzrhxj+RtfDlQdEt1ILSE38WFtDV1KLS1tHu2l/469d
-  gzmF06GN1lMo1csi4/4mLhxXaaNGbmEFoWKU9TPkimGEwIWEZvMIqNF2Xg3fjXmX
-  wGdKJ+SQlIFctN3W6hRBokuwueKzbFzxFpFE24mVn4sF0pu5NiWb5hSp4bUOWcYE
-  8tQFcOfxg/Nsc3Bbgx+l6XGU390KBh12iX7AB4M6XXFHHpAPrK/PsC6f3ak=
-  =xGMw
-
-
+    1. Windows: https://github.com/x2pdf/photo2pdf/releases/tag/v25.01
+    2. Mac: https://github.com/x2pdf/photo2pdf/releases/tag/v25.02
+    
 ## 愿景
 
 将精彩美好的图片归一为PDF，以便您随想随用。
