@@ -32,8 +32,8 @@ import javafx.stage.WindowEvent;
 -Dprism.order=sw
 -Djavafx.animation.fullspeed=true
 
-Tag 23.01
-Tag 23.02
+Tag 25.01
+
  */
 public class App extends Application {
     private final static String statement =
