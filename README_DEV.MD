@@ -2,7 +2,7 @@
 
 ## 环境
 * 运行和构建项目环境 -- JDK8, maven3.8.4, intellij idea 2020.3
-* 构建可安装 .exe 文件时需要的环境 -- JDK17
+* 构建可安装 .exe 文件时需要的环境 -- JDK17(支持jpackage的Java版本应该都可以)
 
 ## intellij idea 构建项目的配置
 ![avatar](asset/markdown/artifact-structure.png)
@@ -15,6 +15,7 @@
 
 <br>2. 如果本项目是在 Mac 上构建，那么此时在 photo2pdf/out/artifacts/photo2pdf/bundles 目录下已经有可以直接在Mac安装使用的 photo2pdf-22.01.dmg 安装包了。
 
+<br>3.以下步骤中的命令的版本号（例如22.01）之类的名称，请根据你的实际情况适当修改为你需要的名称。
 
 ## 构建项目为 exe 可执行文件
 * Step1:
