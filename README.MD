@@ -19,21 +19,29 @@
 ![avatar](asset/gene.png)
 
 1.化繁为简——种种美好回忆和精彩，归一化的为您呈现
+
+---
 <br/><br/><br/>
 
 ![avatar](asset/merge.png)
 
 2.连结，在一起——种种美好，一份又一份，归一再归一
+
+---
 <br/><br/><br/>
 
 ![avatar](asset/encrypt.png)
 
 3.隐私，您的自由——您的密码您知道，您的隐私您掌控
+
+---
 <br/><br/><br/>
 
 ![avatar](asset/transform.png)
 
 4.来去，自如——多种格式自由变换，美好画面始终如一
+
+---
 <br/><br/><br/>
 
 
