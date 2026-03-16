@@ -1,0 +1,11 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Mon Mar 16 11:05:18 CST 2026
+http\://maven.aliyun.com/nexus/content/groups/public/.lastUpdated=1643036121837
+http\://0.0.0.0/.error=Could not transfer artifact com.lowagie\:itext\:pom\:2.1.7.js7 from/to maven-default-http-blocker (http\://0.0.0.0/)\: Blocked mirror for repositories\: [jaspersoft-third-party (http\://jaspersoft.jfrog.io/jaspersoft/third-party-ce-artifacts/, default, releases+snapshots), jr-ce-releases (http\://jaspersoft.jfrog.io/jaspersoft/jr-ce-releases, default, releases+snapshots)]
+http\://maven.aliyun.com/nexus/content/groups/public/.error=
+http\://jaspersoft.jfrog.io/jaspersoft/third-party-ce-artifacts/.lastUpdated=1630127811153
+@default-maven-default-http-blocker-http\://0.0.0.0/.lastUpdated=1773630318487
+https\://repo.maven.apache.org/maven2/.lastUpdated=1661518537903
+https\://repo.maven.apache.org/maven2/.error=
+http\://maven.aliyun.com/nexus/content/repositories/central/.lastUpdated=1773624567023
+http\://maven.aliyun.com/nexus/content/repositories/central/.error=
