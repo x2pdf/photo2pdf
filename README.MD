@@ -1,12 +1,9 @@
 # photo2pdf
 
-* 下载最新稳定版本：
-    1. Windows: https://github.com/x2pdf/photo2pdf/releases/tag/v25.01
-    2. Mac: https://github.com/x2pdf/photo2pdf/releases/tag/v25.02
+* 下载最新稳定版本，Windows / Mac: https://github.com/x2pdf/photo2pdf/releases/tag/v26.01
 
-* Download the latest stable version:
-    1. Windows: https://github.com/x2pdf/photo2pdf/releases/tag/v25.01
-    2. Mac: https://github.com/x2pdf/photo2pdf/releases/tag/v25.02
+* Download the latest stable version，Windows / Mac: https://github.com/x2pdf/photo2pdf/releases/tag/v26.01
+
     
 ## 愿景
 
