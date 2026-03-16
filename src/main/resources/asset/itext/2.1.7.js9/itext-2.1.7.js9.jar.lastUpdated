@@ -1,0 +1,5 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Wed Nov 17 23:57:02 CST 2021
+@default-central-https\://repo.maven.apache.org/maven2/.lastUpdated=1637164619283
+https\://repo.maven.apache.org/maven2/.error=Could not transfer artifact com.lowagie\:itext\:jar\:2.1.7.js9 from/to central (https\://repo.maven.apache.org/maven2)\: transfer failed for https\://repo.maven.apache.org/maven2/com/lowagie/itext/2.1.7.js9/itext-2.1.7.js9.jar
+https\://jaspersoft.jfrog.io/jaspersoft/third-party-ce-artifacts/.lastUpdated=1637164622908

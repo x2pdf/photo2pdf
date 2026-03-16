@@ -3,6 +3,9 @@
 ## 环境
 * 运行和构建项目环境 -- JDK8, maven3.8.4, intellij idea 2020.3
 * 构建可安装 .exe 文件时需要的环境 -- JDK17(支持jpackage的Java版本应该都可以)
+* lib 依赖：由于使用到了com.lowagie的itext兼容版本lib，这在maven仓库上一般是找不到这个依赖包的，
+所以需要你将 /resources/asset/itext/ 下的依赖包放到你的本地的maven仓库中，
+具体文件路径： /.../.../YourmavenRepo/com/lowagie/itext/2.1.7.js7 或者 /.../.../YourmavenRepo/com/lowagie/itext/2.1.7.js9
 
 ## intellij idea 构建项目的配置
 ![avatar](asset/markdown/artifact-structure.png)
