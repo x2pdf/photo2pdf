@@ -3,6 +3,7 @@ package com.logan.ctrl;
 import com.logan.config.CacheData;
 import com.logan.config.GeneParamConfig;
 import com.logan.config.SysConfig;
+import com.logan.ctrl.gene.TextToImagePopupWindow;
 import com.logan.utils.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -71,6 +72,16 @@ public class HelpCtrl {
             }
         });
 
+        Button textToImgButton = new Button(SysConfig.getLang("TextToImg"));
+        textToImgButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                TextToImagePopupWindow.openTextToImgWindow();
+            }
+        });
+        HBox textToImgButtonWrapper = new HBox(textToImgButton);
+        textToImgButtonWrapper.setAlignment(Pos.CENTER_LEFT);
+
         VBox formatConversionVBox = new VBox(compressPDFPhotoAnchorPane,
                 formatConversionAnchorPane, compressPhotoAnchorPane, scalingAnchorPane, customScalingAnchorPane);
         formatConversionVBox.setSpacing(4);
@@ -88,7 +99,7 @@ public class HelpCtrl {
         AnchorPane.setRightAnchor(experimentalFeatureVBox, 30.0);
 
 
-        Text version = new Text("photo2pdf version 25.01");
+        Text version = new Text("photo2pdf version " + SysConfig.APP_VERSION);
         Text allRight = new Text("All Rights Reserved.");
         VBox vBox = new VBox(tipsButton, productIntroductionButton, operationManualButton, version, allRight);
         vBox.setAlignment(Pos.CENTER);
@@ -100,7 +111,7 @@ public class HelpCtrl {
         AnchorPane.setRightAnchor(vBox, 2.0);
 
         VBox vb = new VBox();
-        vb.getChildren().addAll(title, langAnchorPane, decryptPDFAnchorPane, experimentalPane, statementPane);
+        vb.getChildren().addAll(title, langAnchorPane, decryptPDFAnchorPane, textToImgButtonWrapper, experimentalPane, statementPane);
         vb.setSpacing(2);
         HBox hBox = new HBox(vb);
         return hBox;

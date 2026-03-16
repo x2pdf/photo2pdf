@@ -81,6 +81,48 @@ public class SingleRowAnchorPaneUtils {
         return anchorPane;
     }
 
+
+    public static AnchorPane getText2ImgTextTextField(String text, String textField) {
+        Text label = new Text(text);
+        label.setWrappingWidth(130);
+        label.setTextAlignment(TextAlignment.RIGHT);
+
+
+        HBox labelBox = new HBox(label);
+        labelBox.setAlignment(Pos.CENTER_RIGHT);
+        labelBox.setStyle("-fx-background-color: #d3d7d4");
+
+        TextField field = new TextField(textField);
+        field.setMinWidth(700);
+        field.setMaxWidth(Double.MAX_VALUE);
+
+        HBox box = new HBox(labelBox, field);
+        box.setAlignment(Pos.CENTER);
+        box.setMaxWidth(Double.MAX_VALUE);
+        box.setSpacing(5);
+
+        AnchorPane anchorPane = new AnchorPane(box);
+        return anchorPane;
+    }
+
+    public static AnchorPane getText2ImgTextTextArea(String text, String textArea) {
+        Text label = new Text(text);
+        label.setWrappingWidth(130);
+        label.setTextAlignment(TextAlignment.RIGHT);
+        HBox labelBox = new HBox(label);
+        labelBox.setStyle("-fx-background-color: #d3d7d4");
+
+        TextArea field = new TextArea(textArea);
+        field.setMinWidth(700);
+        field.setMaxWidth(Double.MAX_VALUE);
+
+        HBox box = new HBox(labelBox, field);
+        box.setSpacing(5);
+        AnchorPane anchorPane = new AnchorPane(box);
+        return anchorPane;
+    }
+
+
     public static AnchorPane getTextTextAreaButton(String text, String textArea, String buttonText) {
         Text label = new Text(text);
         label.setWrappingWidth(130);
@@ -285,8 +327,8 @@ public class SingleRowAnchorPaneUtils {
                 HBox hBox = (HBox) child;
                 for (Node hBoxChild : hBox.getChildren()) {
                     if (hBoxChild instanceof TextArea) {
-                        TextArea textField = (TextArea) hBoxChild;
-                        return textField;
+                        TextArea textArea = (TextArea)hBoxChild;
+                        return textArea;
                     }
                 }
             }
