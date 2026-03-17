@@ -100,8 +100,9 @@ public class HelpCtrl {
 
 
         Text version = new Text("photo2pdf version " + SysConfig.APP_VERSION);
+        Text author = new Text("Author: Logan Cham.");
         Text allRight = new Text("All Rights Reserved.");
-        VBox vBox = new VBox(tipsButton, productIntroductionButton, operationManualButton, version, allRight);
+        VBox vBox = new VBox(tipsButton, productIntroductionButton, operationManualButton, version, author, allRight);
         vBox.setAlignment(Pos.CENTER);
         vBox.setSpacing(4);
 
