@@ -32,6 +32,10 @@ public class T2ImageTitleFontSizeHBox extends BaseHBox {
         choices.add("66");
         choices.add("70");
         choices.add("76");
+        choices.add("80");
+        choices.add("86");
+        choices.add("90");
+        choices.add("96");
 
         anchorPane = SingleRowAnchorPaneUtils.getTextTextChoiceBox(SysConfig.getLang("TextToImgTitleFontSize") + ":",
                 SysConfig.getLang("Recommend"), "50", choices);
@@ -79,7 +83,19 @@ public class T2ImageTitleFontSizeHBox extends BaseHBox {
             } else if (selectedIndex == 11) {
                 SingleRowAnchorPaneUtils.getText2AndUpdate(anchorPane, "76");
                 TextToImageConfig.titleFontSize = 76;
-            }else {
+            } else if (selectedIndex == 12) {
+                SingleRowAnchorPaneUtils.getText2AndUpdate(anchorPane, "80");
+                TextToImageConfig.titleFontSize = 80;
+            } else if (selectedIndex == 13) {
+                SingleRowAnchorPaneUtils.getText2AndUpdate(anchorPane, "86");
+                TextToImageConfig.titleFontSize = 86;
+            } else if (selectedIndex == 14) {
+                SingleRowAnchorPaneUtils.getText2AndUpdate(anchorPane, "90");
+                TextToImageConfig.titleFontSize = 90;
+            } else if (selectedIndex == 15) {
+                SingleRowAnchorPaneUtils.getText2AndUpdate(anchorPane, "96");
+                TextToImageConfig.titleFontSize = 96;
+            } else {
                 // default
                 SingleRowAnchorPaneUtils.getText2AndUpdate(anchorPane, "50");
                 TextToImageConfig.titleFontSize = 50;
