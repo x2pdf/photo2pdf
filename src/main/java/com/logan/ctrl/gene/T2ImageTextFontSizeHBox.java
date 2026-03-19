@@ -30,6 +30,12 @@ public class T2ImageTextFontSizeHBox extends BaseHBox {
         choices.add("56");
         choices.add("60");
         choices.add("66");
+        choices.add("70");
+        choices.add("76");
+        choices.add("80");
+        choices.add("86");
+        choices.add("90");
+        choices.add("96");
 
         anchorPane = SingleRowAnchorPaneUtils.getTextTextChoiceBox(SysConfig.getLang("TextToImgTextFontSize") + ":",
                 SysConfig.getLang("Recommend"), "40", choices);
@@ -71,6 +77,24 @@ public class T2ImageTextFontSizeHBox extends BaseHBox {
             } else if (selectedIndex == 9) {
                 SingleRowAnchorPaneUtils.getText2AndUpdate(anchorPane, "66");
                 TextToImageConfig.textFontSize = 66;
+            } else if (selectedIndex == 10) {
+                SingleRowAnchorPaneUtils.getText2AndUpdate(anchorPane, "70");
+                TextToImageConfig.textFontSize = 70;
+            } else if (selectedIndex == 11) {
+                SingleRowAnchorPaneUtils.getText2AndUpdate(anchorPane, "76");
+                TextToImageConfig.textFontSize = 76;
+            } else if (selectedIndex == 12) {
+                SingleRowAnchorPaneUtils.getText2AndUpdate(anchorPane, "80");
+                TextToImageConfig.textFontSize = 80;
+            } else if (selectedIndex == 13) {
+                SingleRowAnchorPaneUtils.getText2AndUpdate(anchorPane, "86");
+                TextToImageConfig.textFontSize = 86;
+            } else if (selectedIndex == 14) {
+                SingleRowAnchorPaneUtils.getText2AndUpdate(anchorPane, "90");
+                TextToImageConfig.textFontSize = 90;
+            } else if (selectedIndex == 15) {
+                SingleRowAnchorPaneUtils.getText2AndUpdate(anchorPane, "96");
+                TextToImageConfig.textFontSize = 96;
             } else {
                 // default
                 SingleRowAnchorPaneUtils.getText2AndUpdate(anchorPane, "40");
