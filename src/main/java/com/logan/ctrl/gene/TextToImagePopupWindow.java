@@ -52,6 +52,7 @@ public class TextToImagePopupWindow {
             public void handle(ActionEvent event) {
                 byte[] image = new byte[0];
                 try {
+                    // 生成PNG格式的图片
                     image = ImageTextRenderer.renderTextImage(
                             TextToImageDataDTO.title, TextToImageDataDTO.text,
                             TextToImageDataDTO.subTitle, TextToImageDataDTO.subTitleNote,
@@ -59,7 +60,7 @@ public class TextToImagePopupWindow {
                             20,
                             TextToImageConfig.titleFontSize, TextToImageConfig.textFontSize,
                             TextToImageConfig.subTitleFontSize, TextToImageConfig.subTitleNoteFontSize,
-                            2160, 0.8f);
+                            2160);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -69,7 +70,7 @@ public class TextToImagePopupWindow {
                 if (!file.exists()) {
                     file.mkdirs();
                 }
-                boolean success = ImageTextRenderer.saveImage(image, "textToImage_" + TimeUtils.getNow_yyyy_MM_dd_HH_mm_ss() + ".jpeg", savePath);
+                boolean success = ImageTextRenderer.saveImage(image, "textToImage_" + TimeUtils.getNow_yyyy_MM_dd_HH_mm_ss() + ".png", savePath);
                 if (success) {
                     AlertUtils.openExplorer(savePath);
                 } else {

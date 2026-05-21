@@ -51,8 +51,7 @@ public class ImageTextRenderer {
             Integer textFontSize,       // default 20
             Integer subTitleFontSize,   // default 12
             Integer subTitleNoteFontSize,// default 10
-            Integer width,              // default 1080
-            Float photoQuality          // default 1.0f
+            Integer width              // default 1080
     ) throws IOException {
 
         // --- Defaults & sanitize inputs ---
@@ -64,7 +63,6 @@ public class ImageTextRenderer {
         int stSize = (subTitleFontSize == null || subTitleFontSize <= 0) ? 12 : subTitleFontSize;
         int stnSize = (subTitleNoteFontSize == null || subTitleNoteFontSize <= 0) ? 10 : subTitleNoteFontSize;
         int imgWidth = (width == null || width <= 0) ? 1080 : width;
-        float quality = (photoQuality == null) ? 1.0f : Math.max(0f, Math.min(1f, photoQuality));
 
         // Parse colors "r,g,b"
         Color bgColor = parseColor(photoBackGroundColor, new Color(220, 220, 220));
@@ -300,31 +298,16 @@ public class ImageTextRenderer {
         // dispose
         g.dispose();
 
-        // --- Write JPEG to byte[] with specified quality ---
+        // --- Write PNG to byte[] (Lossless compression) ---
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        ImageWriter jpgWriter = null;
-        Iterator<ImageWriter> writers = ImageIO.getImageWritersByFormatName("jpg");
-        if (writers.hasNext()) jpgWriter = writers.next();
+        // Use ImageIO.write directly for PNG.
+        // PNG is lossless, so no quality parameter is needed.
+        // The third argument "png" specifies the format.
+        boolean written = ImageIO.write(out, "png", baos);
 
-        if (jpgWriter == null) {
-            // fallback: write PNG bytes instead (shouldn't normally happen)
-            ImageIO.write(out, "png", baos);
-            return baos.toByteArray();
+        if (!written) {
+            throw new IOException("Failed to write PNG image.");
         }
-
-        ImageWriteParam jpgWriteParam = jpgWriter.getDefaultWriteParam();
-        if (jpgWriteParam.canWriteCompressed()) {
-            jpgWriteParam.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
-            jpgWriteParam.setCompressionQuality(quality);
-        }
-
-        ImageOutputStream ios = ImageIO.createImageOutputStream(baos);
-        jpgWriter.setOutput(ios);
-        IIOImage outputImage = new IIOImage(out, null, null);
-        jpgWriter.write(null, outputImage, jpgWriteParam);
-        ios.close();
-        jpgWriter.dispose();
-
         return baos.toByteArray();
     }
 
