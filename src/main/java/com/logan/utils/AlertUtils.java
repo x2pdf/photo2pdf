@@ -115,16 +115,14 @@ public class AlertUtils {
                     Alert alert = new Alert(Alert.AlertType.WARNING);
                     alert.setTitle(SysConfig.getLang("Waring"));
                     alert.setContentText(SysConfig.getLang("PasswordNotEqual"));
-                    Optional<ButtonType> buttonType = alert.showAndWait();
-                    LogUtils.info("Password length must be greater than 8 digits!");
                     continue;
                 }
-                if (password.length() < 8) {
+                if (password.length() <= 16) {
                     Alert alert = new Alert(Alert.AlertType.WARNING);
                     alert.setTitle(SysConfig.getLang("Waring"));
                     alert.setContentText(SysConfig.getLang("PasswordWarning"));
                     Optional<ButtonType> buttonType = alert.showAndWait();
-                    LogUtils.info("Password length must be greater than 8 digits!");
+                    LogUtils.info("Password length must be greater than 16 digits!");
                     continue;
                 }
 
