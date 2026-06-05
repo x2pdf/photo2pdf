@@ -93,10 +93,12 @@ public class HelpCtrl {
         Text spaceGap = new Text(SysConfig.getLang(""));
         HBox funcButtonBox1 = new HBox(10);
         funcButtonBox1.setAlignment(Pos.CENTER_LEFT);
-        funcButtonBox1.getChildren().addAll(textToImgButton);
+        zipFuncButton.setPrefWidth(120);
+        funcButtonBox1.getChildren().addAll(zipFuncButton);
         HBox funcButtonBox2 = new HBox(10);
         funcButtonBox2.setAlignment(Pos.CENTER_LEFT);
-        funcButtonBox2.getChildren().addAll(zipFuncButton);
+        textToImgButton.setPrefWidth(120);
+        funcButtonBox2.getChildren().addAll(textToImgButton);
 
 
         VBox formatConversionVBox = new VBox(compressPDFPhotoAnchorPane,
