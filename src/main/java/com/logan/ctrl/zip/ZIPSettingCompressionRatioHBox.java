@@ -20,14 +20,14 @@ public class ZIPSettingCompressionRatioHBox extends BaseHBox {
     @Override
     public AnchorPane initPane() {
         ArrayList<String> choices = new ArrayList<>();
-        choices.add("NO_COMPRESSION");
-        choices.add("FAST");
-        choices.add("NORMAL");
-        choices.add("MAXIMUM");
-        choices.add("ULTRA");
+        choices.add(SysConfig.getLang("NO_COMPRESSION"));
+        choices.add(SysConfig.getLang("FAST"));
+        choices.add(SysConfig.getLang("NORMAL"));
+        choices.add(SysConfig.getLang("MAXIMUM"));
+        choices.add(SysConfig.getLang("ULTRA"));
 
         anchorPane = SingleRowAnchorPaneUtils.getTextTextChoiceBox(SysConfig.getLang("CompressionLevel") + ":",
-                SysConfig.getLang("Recommend"), "NORMAL", choices);
+                SysConfig.getLang("Recommend"), SysConfig.getLang("NORMAL"), choices);
         return anchorPane;
     }
 
@@ -37,23 +37,23 @@ public class ZIPSettingCompressionRatioHBox extends BaseHBox {
         compressChoiceBox.setOnAction((event) -> {
             int selectedIndex = compressChoiceBox.getSelectionModel().getSelectedIndex();
             if (selectedIndex == 0) {
-                SingleRowAnchorPaneUtils.getText2AndUpdate(anchorPane, "NO_COMPRESSION");
+                SingleRowAnchorPaneUtils.getText2AndUpdate(anchorPane, SysConfig.getLang("NO_COMPRESSION"));
                 ZIPConfig.setCompressionLevel("NO_COMPRESSION");
             } else if (selectedIndex == 1) {
-                SingleRowAnchorPaneUtils.getText2AndUpdate(anchorPane, "FAST");
+                SingleRowAnchorPaneUtils.getText2AndUpdate(anchorPane, SysConfig.getLang("FAST"));
                 ZIPConfig.setCompressionLevel("FAST");
             } else if (selectedIndex == 2) {
-                SingleRowAnchorPaneUtils.getText2AndUpdate(anchorPane, "NORMAL");
+                SingleRowAnchorPaneUtils.getText2AndUpdate(anchorPane, SysConfig.getLang("NORMAL"));
                 ZIPConfig.setCompressionLevel("NORMAL");
             } else if (selectedIndex == 3) {
-                SingleRowAnchorPaneUtils.getText2AndUpdate(anchorPane, "MAXIMUM");
+                SingleRowAnchorPaneUtils.getText2AndUpdate(anchorPane, SysConfig.getLang("MAXIMUM"));
                 ZIPConfig.setCompressionLevel("MAXIMUM");
             } else if (selectedIndex == 4) {
-                SingleRowAnchorPaneUtils.getText2AndUpdate(anchorPane, "ULTRA");
+                SingleRowAnchorPaneUtils.getText2AndUpdate(anchorPane, SysConfig.getLang("ULTRA"));
                 ZIPConfig.setCompressionLevel("ULTRA");
             } else {
                 // default:NO_COMPRESSION
-                SingleRowAnchorPaneUtils.getText2AndUpdate(anchorPane, "NO_COMPRESSION");
+                SingleRowAnchorPaneUtils.getText2AndUpdate(anchorPane, SysConfig.getLang("NO_COMPRESSION"));
                 ZIPConfig.setCompressionLevel("NO_COMPRESSION");
             }
 

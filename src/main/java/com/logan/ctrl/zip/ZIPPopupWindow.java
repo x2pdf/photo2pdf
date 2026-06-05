@@ -27,7 +27,6 @@ import java.util.ArrayList;
 public class ZIPPopupWindow {
 
     public static void openZIPFuncWindow() {
-
         // 新建一个 Stage，也就是新的窗口
         Stage popupStage = new Stage();
         popupStage.setTitle(SysConfig.getLang("ZIPnEncryption"));
@@ -44,7 +43,7 @@ public class ZIPPopupWindow {
         // 密码组件
         DoublePasswordInput pwdComponent = new DoublePasswordInput();
 
-        Button zipSelectFilesButton = new Button(SysConfig.getLang("Step1:SelectZIPFiles"));
+        Button zipSelectFilesButton = new Button(SysConfig.getLang("Step1SelectZIPFiles"));
         zipSelectFilesButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -61,7 +60,7 @@ public class ZIPPopupWindow {
         });
 
 
-        Button zipConfirmButton = new Button(SysConfig.getLang("Step2:ConfirmZIP"));
+        Button zipConfirmButton = new Button(SysConfig.getLang("Step2ConfirmZIP"));
         zipConfirmButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -129,6 +128,7 @@ public class ZIPPopupWindow {
 
         popupStage.setOnCloseRequest(event -> {
             ZIPConfig.selectZIPFiles.clear();
+            ZIPConfig.selectZIPFilesPath.clear();
             listView.getItems().clear();
         });
 

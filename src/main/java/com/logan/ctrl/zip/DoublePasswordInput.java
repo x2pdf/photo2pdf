@@ -1,4 +1,5 @@
 package com.logan.ctrl.zip;
+import com.logan.config.SysConfig;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.geometry.Pos;
@@ -11,15 +12,15 @@ import javafx.scene.text.TextAlignment;
 
 public class DoublePasswordInput extends HBox {
 
-    private final int pwdMinLength = 4;
+    private final int pwdMinLength = ZIPConfig.pwdMinLength;
     private final PasswordField pwd1 = new PasswordField();
     private final PasswordField pwd2 = new PasswordField();
 
-    private final Text label = new Text("输入加密密码:");
-    private final CheckBox enableEncryptCheckBox = new CheckBox("启用加密");
+    private final Text label = new Text(SysConfig.getLang("EnterEncryptionPassword") + ":");
+    private final CheckBox enableEncryptCheckBox = new CheckBox(SysConfig.getLang("EnableEncryption"));
 
     // 对外暴露状态
-    private final BooleanProperty encryptionEnabled = new SimpleBooleanProperty(false);
+    private final BooleanProperty encryptionEnabled = new SimpleBooleanProperty(true);
 
     private static final String DEFAULT_BORDER =
             "-fx-border-color: #9aa0a6;" +
@@ -48,9 +49,10 @@ public class DoublePasswordInput extends HBox {
         enableEncryptCheckBox.setPrefWidth(100);
         enableEncryptCheckBox.setMinWidth(100);
         enableEncryptCheckBox.setMaxWidth(100);
+        enableEncryptCheckBox.setSelected(true);
 
-        pwd1.setPromptText("输入密码(>=16位)");
-        pwd2.setPromptText("再次输入密码");
+        pwd1.setPromptText(SysConfig.getLang("EnterZipPassword"));
+        pwd2.setPromptText(SysConfig.getLang("EnterZipPasswordAgain"));
 
         HBox.setHgrow(pwd1, Priority.ALWAYS);
         HBox.setHgrow(pwd2, Priority.ALWAYS);
