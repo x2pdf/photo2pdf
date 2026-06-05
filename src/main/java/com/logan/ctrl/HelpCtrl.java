@@ -80,33 +80,39 @@ public class HelpCtrl {
                 TextToImagePopupWindow.openTextToImgWindow();
             }
         });
-        HBox textToImgButtonWrapper = new HBox(textToImgButton);
-        textToImgButtonWrapper.setAlignment(Pos.CENTER_LEFT);
 
         // ZIP 解压缩和加密
-        Button zIPFuncButton = new Button(SysConfig.getLang("ZIPnEncryption"));
-        zIPFuncButton.setOnAction(new EventHandler<ActionEvent>() {
+        Button zipFuncButton = new Button(SysConfig.getLang("ZIPnEncryption"));
+        zipFuncButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 ZIPPopupWindow.openZIPFuncWindow();
             }
         });
-        HBox zIPFuncButtonButtonWrapper = new HBox(zIPFuncButton);
-        zIPFuncButtonButtonWrapper.setAlignment(Pos.CENTER_LEFT);
+
+        Text spaceGap = new Text(SysConfig.getLang(""));
+        HBox funcButtonBox1 = new HBox(10);
+        funcButtonBox1.setAlignment(Pos.CENTER_LEFT);
+        funcButtonBox1.getChildren().addAll(textToImgButton);
+        HBox funcButtonBox2 = new HBox(10);
+        funcButtonBox2.setAlignment(Pos.CENTER_LEFT);
+        funcButtonBox2.getChildren().addAll(zipFuncButton);
+
 
         VBox formatConversionVBox = new VBox(compressPDFPhotoAnchorPane,
-                formatConversionAnchorPane, compressPhotoAnchorPane, scalingAnchorPane, customScalingAnchorPane);
+                formatConversionAnchorPane, compressPhotoAnchorPane, scalingAnchorPane, customScalingAnchorPane,
+                spaceGap, funcButtonBox1, funcButtonBox2);
         formatConversionVBox.setSpacing(4);
 
         Text experimentalTitle = new Text(SysConfig.getLang("ExperimentalFeature"));
         experimentalTitle.setStyle("-fx-font-weight:bold");
         Text space = new Text(SysConfig.getLang(""));
         VBox experimentalFeatureVBox = new VBox(experimentalTitle, space, formatConversionVBox);
-        experimentalFeatureVBox.setSpacing(8);
+        experimentalFeatureVBox.setSpacing(6);
         experimentalFeatureVBox.setStyle("-fx-background-color: #f2eada");  // #d3d7d4
 
         AnchorPane experimentalPane = new AnchorPane(experimentalFeatureVBox);
-        AnchorPane.setTopAnchor(experimentalFeatureVBox, 100.0);
+        AnchorPane.setTopAnchor(experimentalFeatureVBox, 50.0);
         AnchorPane.setLeftAnchor(experimentalFeatureVBox, 30.0);
         AnchorPane.setRightAnchor(experimentalFeatureVBox, 30.0);
 
@@ -119,13 +125,12 @@ public class HelpCtrl {
         vBox.setSpacing(4);
 
         AnchorPane statementPane = new AnchorPane(vBox);
-        AnchorPane.setTopAnchor(vBox, 200.0);
+        AnchorPane.setBottomAnchor(vBox, 10.0);
         AnchorPane.setLeftAnchor(vBox, 2.0);
         AnchorPane.setRightAnchor(vBox, 2.0);
 
         VBox vb = new VBox();
-        vb.getChildren().addAll(title, langAnchorPane, decryptPDFAnchorPane, textToImgButtonWrapper,
-                zIPFuncButtonButtonWrapper, experimentalPane, statementPane);
+        vb.getChildren().addAll(title, langAnchorPane, decryptPDFAnchorPane, experimentalPane, statementPane);
         vb.setSpacing(2);
         HBox hBox = new HBox(vb);
         return hBox;
