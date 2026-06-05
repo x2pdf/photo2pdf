@@ -2,17 +2,19 @@ package com.logan.ctrl.zip;
 
 import com.logan.config.SysConfig;
 import com.logan.utils.AlertUtils;
+import com.logan.utils.LogUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import net.lingala.zip4j.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
@@ -39,6 +41,8 @@ public class ZIPPopupWindow {
         listView.getItems().addAll(ZIPConfig.selectZIPFilesPath);
         BorderPane filesPane = new BorderPane();
         filesPane.setCenter(listView);
+        processListviewDrag(listView);
+        processDeleteListviewItem(listView);
 
         // 密码组件
         DoublePasswordInput pwdComponent = new DoublePasswordInput();
@@ -49,12 +53,22 @@ public class ZIPPopupWindow {
             public void handle(ActionEvent event) {
                 ZipFileChooserUtil zipFileChooserUtil = new ZipFileChooserUtil();
                 ArrayList<File> files = zipFileChooserUtil.selectFiles();
-                // 再次选择文件时，用户没有选择新文件时不用清空处理。有选择文件时才清空已有的数据。
-                if (files.size() > 0){
-                    ZIPConfig.setSelectZIPFiles(files);
-                    ZIPConfig.selectZIPFilesPath = ZipFileChooserUtil.getFilesPath(files);
-                    listView.getItems().clear();
-                    listView.getItems().setAll(ZIPConfig.selectZIPFilesPath);
+                for (File file : files) {
+                    addListviewDragFiles(file);
+                    listView.getItems().add(file.getAbsolutePath());
+                }
+            }
+        });
+
+        Button zipSelectDirButton = new Button(SysConfig.getLang("Step1SelectZIPFiles"));
+        zipSelectDirButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                ZipFileChooserUtil zipFileChooserUtil = new ZipFileChooserUtil();
+                File selectDirectory = zipFileChooserUtil.selectDirectory();
+                if (selectDirectory != null){
+                    addListviewDragDir(selectDirectory);
+                    listView.getItems().add(selectDirectory.getAbsolutePath());
                 }
             }
         });
@@ -67,11 +81,18 @@ public class ZIPPopupWindow {
                 ZipParameters zipParameters = getZipParameters(pwdComponent);
 
                 if (ZIPConfig.selectZIPFilesPath != null && ZIPConfig.selectZIPFilesPath.size() > 0){
-                    ArrayList<File> files = new ArrayList<>();
-                    for (int i = 0; i < ZIPConfig.selectZIPFilesPath.size(); i++) {
-                        String filePath = ZIPConfig.selectZIPFilesPath.get(i);
+                    ArrayList<File> toBeCompressedFiles = new ArrayList<>();
+                    for (int i = 0; i < ZIPConfig.selectZIPFiles.size(); i++) {
+                        String filePath = ZIPConfig.selectZIPFiles.get(i).getAbsolutePath();
                         File file = new File(filePath);
-                        files.add(file);
+                        toBeCompressedFiles.add(file);
+                    }
+
+                    ArrayList<File> toBeCompressedDirs = new ArrayList<>();
+                    for (int i = 0; i < ZIPConfig.selectZIPDirs.size(); i++) {
+                        String filePath = ZIPConfig.selectZIPDirs.get(i).getAbsolutePath();
+                        File file = new File(filePath);
+                        toBeCompressedDirs.add(file);
                     }
 
                     try {
@@ -82,7 +103,12 @@ public class ZIPPopupWindow {
                         ZipFile zipFile = new ZipFile(
                                 zipFileFullPathName,
                                 zipParameters.isEncryptFiles() ? pwdComponent.getPassword().toCharArray() : null);
-                        zipFile.addFiles(files, zipParameters);
+
+                        zipFile.addFiles(toBeCompressedFiles, zipParameters);
+                        for (File toBeCompressedDir : toBeCompressedDirs) {
+                            zipFile.addFolder(toBeCompressedDir, zipParameters);
+                        }
+
                         // zip完成后弹窗提示处理成功。
                         AlertUtils.openExplorer(ZIPConfig.zipSavePath);
                     } catch (ZipException e) {
@@ -95,8 +121,9 @@ public class ZIPPopupWindow {
             }
         });
 
-        HBox selectFilesButtonWrapper = new HBox(zipSelectFilesButton);
+        HBox selectFilesButtonWrapper = new HBox(zipSelectFilesButton, zipSelectDirButton);
         selectFilesButtonWrapper.setAlignment(Pos.CENTER);
+        selectFilesButtonWrapper.setSpacing(4.0);
         HBox confirmButtonWrapper = new HBox(zipConfirmButton);
         confirmButtonWrapper.setAlignment(Pos.CENTER);
 
@@ -150,4 +177,97 @@ public class ZIPPopupWindow {
     }
 
 
+    private static void processListviewDrag(ListView<String> listView){
+        listView.setOnDragOver(event -> {
+            if (event.getGestureSource() != listView && event.getDragboard().hasFiles()) {
+                event.acceptTransferModes(TransferMode.COPY);
+            }
+            event.consume();
+        });
+
+        listView.setOnDragDropped(event -> {
+            Dragboard db = event.getDragboard();
+            if (db.hasFiles()) {
+                for (File file : db.getFiles()) {
+                    // 如果不存在
+                    if (!isListviewContainsFile(file)){
+                        addListviewDragFiles(file);
+                        listView.getItems().add(file.getAbsolutePath());
+                    }
+
+                }
+            }
+            event.setDropCompleted(true);
+            event.consume();
+        });
+    }
+
+    private static void processDeleteListviewItem(ListView<String> listView){
+        listView.setCellFactory(lv -> new ListCell<String>() {
+            private final Label label = new Label();
+            private final Button removeBtn = new Button("✕");
+            private final Region spacer = new Region();
+            private final HBox hBox = new HBox(label, spacer, removeBtn);
+            {
+                HBox.setHgrow(spacer, Priority.ALWAYS);
+                removeBtn.setOnAction(e -> {
+                    String item = getItem();
+                    System.out.println("==item: " + getItem());
+                    deleteSelectFileOrDir(item);
+                    setGraphic(null);
+                    listView.getItems().remove(item);
+                });
+            }
+
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setGraphic(null);
+                } else {
+                    label.setText(item);
+                    setGraphic(hBox);
+                }
+            }
+
+
+        });
+    }
+
+    private static void addListviewDragDir(File file){
+        if(file == null){
+            return;
+        }
+        if (!isListviewContainsFile(file)){
+            ZIPConfig.selectZIPDirs.add(file);
+            ZIPConfig.selectZIPFilesPath.add(file.getAbsolutePath());
+        }
+    }
+
+    private static void addListviewDragFiles(File file){
+        if(file == null){
+            return;
+        }
+        if (!isListviewContainsFile(file)){
+            ZIPConfig.selectZIPFiles.add(file);
+            ZIPConfig.selectZIPFilesPath.add(file.getAbsolutePath());
+        }
+    }
+
+
+    private static boolean isListviewContainsFile(File file){
+        for (File selectZIPFile : ZIPConfig.selectZIPFiles) {
+            if (selectZIPFile.getAbsolutePath().equals(file.getAbsolutePath())){
+                LogUtils.info("文件已经存在listview当中：" + file.getAbsolutePath());
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static void deleteSelectFileOrDir(String item){
+        ZIPConfig.selectZIPFiles.removeIf(file -> item.equals(file.getAbsolutePath()));
+        ZIPConfig.selectZIPDirs.removeIf(file -> item.equals(file.getAbsolutePath()));
+        ZIPConfig.selectZIPFilesPath.removeIf(item::equals);
+    }
 }
