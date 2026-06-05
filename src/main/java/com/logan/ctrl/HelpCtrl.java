@@ -4,6 +4,7 @@ import com.logan.config.CacheData;
 import com.logan.config.GeneParamConfig;
 import com.logan.config.SysConfig;
 import com.logan.ctrl.gene.TextToImagePopupWindow;
+import com.logan.ctrl.zip.ZIPPopupWindow;
 import com.logan.utils.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -82,6 +83,17 @@ public class HelpCtrl {
         HBox textToImgButtonWrapper = new HBox(textToImgButton);
         textToImgButtonWrapper.setAlignment(Pos.CENTER_LEFT);
 
+        // ZIP 解压缩和加密
+        Button zIPFuncButton = new Button(SysConfig.getLang("ZIPFunc"));
+        zIPFuncButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                ZIPPopupWindow.openZIPFuncWindow();
+            }
+        });
+        HBox zIPFuncButtonButtonWrapper = new HBox(zIPFuncButton);
+        zIPFuncButtonButtonWrapper.setAlignment(Pos.CENTER_LEFT);
+
         VBox formatConversionVBox = new VBox(compressPDFPhotoAnchorPane,
                 formatConversionAnchorPane, compressPhotoAnchorPane, scalingAnchorPane, customScalingAnchorPane);
         formatConversionVBox.setSpacing(4);
@@ -112,7 +124,8 @@ public class HelpCtrl {
         AnchorPane.setRightAnchor(vBox, 2.0);
 
         VBox vb = new VBox();
-        vb.getChildren().addAll(title, langAnchorPane, decryptPDFAnchorPane, textToImgButtonWrapper, experimentalPane, statementPane);
+        vb.getChildren().addAll(title, langAnchorPane, decryptPDFAnchorPane, textToImgButtonWrapper,
+                zIPFuncButtonButtonWrapper, experimentalPane, statementPane);
         vb.setSpacing(2);
         HBox hBox = new HBox(vb);
         return hBox;
