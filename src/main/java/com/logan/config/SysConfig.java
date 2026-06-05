@@ -59,6 +59,8 @@ public class SysConfig implements Serializable {
     // 语言map，映射语言使用
     public static HashMap<String, String> LANG_MAP = new HashMap<>();
 
+    // pdf加密密码最低要求的长度
+    public static int pdfPwdLength = 12;
     // 高度
     public static int STAGE_HEIGHT = 496;
     // 宽度

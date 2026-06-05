@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class ZIPConfig {
     public static String compressionLevel = "NORMAL";
-    public static final int pwdMinLength = 16;
+    public static final int pwdMinLength = 12;
     public static String zipSavePath = "";
     public static String zipName = "";
     public static ArrayList<File> selectZIPFiles = new ArrayList<>();;
