@@ -111,18 +111,19 @@ public class AlertUtils {
                     res = null;
                     break;
                 }
+                // TODO 特殊的校验设定，需优化
                 if (password.equals("!=")) {
                     Alert alert = new Alert(Alert.AlertType.WARNING);
                     alert.setTitle(SysConfig.getLang("Waring"));
                     alert.setContentText(SysConfig.getLang("PasswordNotEqual"));
                     continue;
                 }
-                if (password.length() <= 16) {
+                if (password.length() < SysConfig.pdfPwdLength) {
                     Alert alert = new Alert(Alert.AlertType.WARNING);
                     alert.setTitle(SysConfig.getLang("Waring"));
                     alert.setContentText(SysConfig.getLang("PasswordWarning"));
                     Optional<ButtonType> buttonType = alert.showAndWait();
-                    LogUtils.info("Password length must be greater than 16 digits!");
+                    LogUtils.info("Password length must be greater than 12 digits!");
                     continue;
                 }
 
