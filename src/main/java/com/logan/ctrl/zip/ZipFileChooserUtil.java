@@ -37,29 +37,65 @@ public class ZipFileChooserUtil {
     }
 
 
-    public static void processFilesName(List<File> list,  DoublePasswordInput pwdComponent){
-        String nameNote = pwdComponent.isEncryptionEnabled() ? firstAndLast(pwdComponent.getPassword()) : "";
-        // 运行到这里size必大于0
-        // 获取用户选择文件所处在的文件夹，用来默认保存生成的zip文件
-        ZIPConfig.setZipSavePath(list.get(0).getParentFile().getAbsolutePath());
+    public static void processFilesName( DoublePasswordInput pwdComponent){
+        if (ZIPConfig.selectZIPFilesPath.size() == 0) {
+            return;
+        }
 
-        // zip的文件名获取
-        if (list.size() == 1){
-            if (pwdComponent.isEncryptionEnabled() && pwdComponent.isValid()){
-                ZIPConfig.zipName = getFileBaseName(list.get(0).getName()) + "_" + nameNote + "_"
-                        + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss")) + ".zip";
+
+        if (ZIPConfig.selectZIPFilesPath.size() == 1) {
+            if (ZIPConfig.selectZIPFiles.size() == 1){
+                setZipNameByFiles(pwdComponent);
+
+                // 获取用户选择文件所处在的文件夹，用来默认保存生成的zip文件
+                ZIPConfig.setZipSavePath(ZIPConfig.selectZIPFiles.get(0).getParentFile().getAbsolutePath());
             }else {
-                ZIPConfig.zipName = getFileBaseName(list.get(0).getName()) + "_"
-                        + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss")) + ".zip";
+                setZipNameByDir(pwdComponent);
+
+                // 获取用户选择文件所处在的文件夹，用来默认保存生成的zip文件
+                ZIPConfig.setZipSavePath(ZIPConfig.selectZIPDirs.get(0).getParentFile().getAbsolutePath());
             }
         } else {
-            if (pwdComponent.isEncryptionEnabled() && pwdComponent.isValid()){
-                ZIPConfig.zipName = list.get(0).getParentFile().getName() + "_photo2pdf_zip_" + nameNote + "_"
-                        + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss")) + ".zip";
+            // 优先使用文件夹名称
+            if (ZIPConfig.selectZIPDirs.size() > 0) {
+                setZipNameByDir(pwdComponent);
             }else {
-                ZIPConfig.zipName = list.get(0).getParentFile().getName() + "_"
-                        + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss")) + ".zip";
+                setZipNameByFiles(pwdComponent);
             }
+
+            // 默认列表第一个，获取用户选择文件所处在的文件夹，用来默认保存生成的zip文件
+            File file = new File(ZIPConfig.selectZIPFilesPath.get(0));
+            ZIPConfig.setZipSavePath(file.getParentFile().getAbsolutePath());
+        }
+
+    }
+
+
+    private static void setZipNameByDir(DoublePasswordInput pwdComponent){
+        String nameNote = "";
+        if (pwdComponent.isEncryptionEnabled() && pwdComponent.isValid()){
+            nameNote = firstAndLast(pwdComponent.getPassword());
+        }
+        if (pwdComponent.isEncryptionEnabled() && pwdComponent.isValid()){
+            ZIPConfig.zipName = getFileBaseName(ZIPConfig.selectZIPFiles.get(0).getName()) + "_" + nameNote + "_"
+                    + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss")) + ".zip";
+        }else {
+            ZIPConfig.zipName = getFileBaseName(ZIPConfig.selectZIPFiles.get(0).getName()) + "_"
+                    + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss")) + ".zip";
+        }
+    }
+
+    private static void setZipNameByFiles(DoublePasswordInput pwdComponent){
+        String nameNote = "";
+        if (pwdComponent.isEncryptionEnabled() && pwdComponent.isValid()){
+            nameNote = firstAndLast(pwdComponent.getPassword());
+        }
+        if (pwdComponent.isEncryptionEnabled() && pwdComponent.isValid()){
+            ZIPConfig.zipName = getFileBaseName(ZIPConfig.selectZIPFiles.get(0).getName()) + "_" + nameNote + "_"
+                    + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss")) + ".zip";
+        }else {
+            ZIPConfig.zipName = getFileBaseName(ZIPConfig.selectZIPFiles.get(0).getName()) + "_"
+                    + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss")) + ".zip";
         }
     }
 
