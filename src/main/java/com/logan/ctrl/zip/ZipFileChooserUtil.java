@@ -2,6 +2,7 @@ package com.logan.ctrl.zip;
 
 import com.logan.config.SysConfig;
 import com.logan.utils.LogUtils;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -25,6 +26,14 @@ public class ZipFileChooserUtil {
         }
         files.addAll(list);
         return files;
+    }
+
+    public File selectDirectory() {
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        directoryChooser.setTitle(SysConfig.getLang("SelectFile"));
+        // 可以设置初始目录
+        // directoryChooser.setInitialDirectory(new File("/path/to/default"));
+        return directoryChooser.showDialog(new Stage());
     }
 
 

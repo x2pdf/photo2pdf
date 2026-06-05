@@ -8,8 +8,9 @@ public class ZIPConfig {
     public static final int pwdMinLength = 12;
     public static String zipSavePath = "";
     public static String zipName = "";
-    public static ArrayList<File> selectZIPFiles = new ArrayList<>();;
-    public static ArrayList<String> selectZIPFilesPath = new ArrayList<>();;
+    public static ArrayList<File> selectZIPFiles = new ArrayList<>();
+    public static ArrayList<File> selectZIPDirs = new ArrayList<>();
+    public static ArrayList<String> selectZIPFilesPath = new ArrayList<>();
 
 
     public static void setZipSavePath(String zipSavePath) {
