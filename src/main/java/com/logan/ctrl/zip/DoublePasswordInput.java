@@ -50,6 +50,8 @@ public class DoublePasswordInput extends HBox {
         enableEncryptCheckBox.setMinWidth(100);
         enableEncryptCheckBox.setMaxWidth(100);
         enableEncryptCheckBox.setSelected(true);
+        Tooltip tooltip = new Tooltip(SysConfig.getLang("EncryptionTips"));
+        enableEncryptCheckBox.setTooltip(tooltip);
 
         pwd1.setPromptText(SysConfig.getLang("EnterZipPassword"));
         pwd2.setPromptText(SysConfig.getLang("EnterZipPasswordAgain"));
