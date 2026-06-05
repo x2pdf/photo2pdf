@@ -84,7 +84,7 @@ public class HelpCtrl {
         textToImgButtonWrapper.setAlignment(Pos.CENTER_LEFT);
 
         // ZIP 解压缩和加密
-        Button zIPFuncButton = new Button(SysConfig.getLang("ZIPFunc"));
+        Button zIPFuncButton = new Button(SysConfig.getLang("ZIPnEncryption"));
         zIPFuncButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
