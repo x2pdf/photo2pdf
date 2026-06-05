@@ -60,7 +60,7 @@ public class ZIPPopupWindow {
             }
         });
 
-        Button zipSelectDirButton = new Button(SysConfig.getLang("Step1SelectZIPFiles"));
+        Button zipSelectDirButton = new Button(SysConfig.getLang("Step1SelectZIPDir"));
         zipSelectDirButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
