@@ -96,8 +96,7 @@ public class ZIPPopupWindow {
                     }
 
                     try {
-                        // 名字还是需要来这里处理和刷新，因为用户重复zip时，zip的名字没有改变，会覆盖原先的文件名。
-                        ZipFileChooserUtil.processFilesName(ZIPConfig.selectZIPFiles, pwdComponent);
+                        ZipFileChooserUtil.processFilesName(pwdComponent);
                         String zipFileFullPathName = ZIPConfig.zipSavePath + File.separator + ZIPConfig.zipName;
 
                         ZipFile zipFile = new ZipFile(
@@ -212,7 +211,6 @@ public class ZIPPopupWindow {
                 HBox.setHgrow(spacer, Priority.ALWAYS);
                 removeBtn.setOnAction(e -> {
                     String item = getItem();
-                    System.out.println("==item: " + getItem());
                     deleteSelectFileOrDir(item);
                     setGraphic(null);
                     listView.getItems().remove(item);
