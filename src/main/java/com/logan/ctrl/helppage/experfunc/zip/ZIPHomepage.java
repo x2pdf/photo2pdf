@@ -54,8 +54,11 @@ public class ZIPHomepage {
                 ZipFileChooserUtil zipFileChooserUtil = new ZipFileChooserUtil();
                 ArrayList<File> files = zipFileChooserUtil.selectFiles();
                 for (File file : files) {
-                    addListviewDragFiles(file);
-                    listView.getItems().add(file.getAbsolutePath());
+                    boolean isAdd = addListviewDragFiles(file);
+                    // 成功才添加显示。保证数据一致性。
+                    if (isAdd){
+                        listView.getItems().add(file.getAbsolutePath());
+                    }
                 }
             }
         });
@@ -67,8 +70,11 @@ public class ZIPHomepage {
                 ZipFileChooserUtil zipFileChooserUtil = new ZipFileChooserUtil();
                 File selectDirectory = zipFileChooserUtil.selectDirectory();
                 if (selectDirectory != null){
-                    addListviewDragDir(selectDirectory);
-                    listView.getItems().add(selectDirectory.getAbsolutePath());
+                    boolean isAdd = addListviewDragDir(selectDirectory);
+                    // 成功才添加显示。保证数据一致性。
+                    if (isAdd){
+                        listView.getItems().add(selectDirectory.getAbsolutePath());
+                    }
                 }
             }
         });
@@ -191,8 +197,18 @@ public class ZIPHomepage {
                 for (File file : db.getFiles()) {
                     // 如果不存在
                     if (!isListviewContainsFile(file)){
-                        addListviewDragFiles(file);
-                        listView.getItems().add(file.getAbsolutePath());
+                        boolean isAdd = false;
+                        if (file.isFile()){
+                            isAdd = addListviewDragFiles(file);
+                        }
+                        if (file.isDirectory()){
+                            isAdd = addListviewDragDir(file);
+                        }
+
+                        // 成功才添加显示。保证数据一致性。
+                        if (isAdd){
+                            listView.getItems().add(file.getAbsolutePath());
+                        }
                     }
 
                 }
@@ -233,35 +249,47 @@ public class ZIPHomepage {
         });
     }
 
-    private static void addListviewDragDir(File file){
+    private static boolean addListviewDragDir(File file){
         if(file == null){
-            return;
+            return true;
         }
         if (!isListviewContainsFile(file)){
             ZIPConfig.selectZIPDirs.add(file);
             ZIPConfig.selectZIPFilesPath.add(file.getAbsolutePath());
+            return true;
         }
+        return false;
     }
 
-    private static void addListviewDragFiles(File file){
+    private static boolean addListviewDragFiles(File file){
         if(file == null){
-            return;
+            return true;
         }
         if (!isListviewContainsFile(file)){
             ZIPConfig.selectZIPFiles.add(file);
             ZIPConfig.selectZIPFilesPath.add(file.getAbsolutePath());
+            return true;
         }
+        return false;
     }
 
 
     private static boolean isListviewContainsFile(File file){
+        boolean isContain = false;
         for (File selectZIPFile : ZIPConfig.selectZIPFiles) {
             if (selectZIPFile.getAbsolutePath().equals(file.getAbsolutePath())){
                 LogUtils.info("文件已经存在listview当中：" + file.getAbsolutePath());
-                return true;
+                isContain =  true;
             }
         }
-        return false;
+
+        for (File selectZIPDirs : ZIPConfig.selectZIPDirs) {
+            if (selectZIPDirs.getAbsolutePath().equals(file.getAbsolutePath())){
+                LogUtils.info("文件已经存在listview当中：" + file.getAbsolutePath());
+                isContain =  true;
+            }
+        }
+        return isContain;
     }
 
     private static void deleteSelectFileOrDir(String item){
