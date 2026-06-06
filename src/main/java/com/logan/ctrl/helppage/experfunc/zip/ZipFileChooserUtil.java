@@ -76,10 +76,10 @@ public class ZipFileChooserUtil {
             nameNote = firstAndLast(pwdComponent.getPassword());
         }
         if (pwdComponent.isEncryptionEnabled() && pwdComponent.isValid()){
-            ZIPConfig.zipName = getFileBaseName(ZIPConfig.selectZIPFiles.get(0).getName()) + "_" + nameNote + "_"
+            ZIPConfig.zipName = getFileBaseName(ZIPConfig.selectZIPDirs.get(0).getName()) + "_" + nameNote + "_"
                     + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss")) + ".zip";
         }else {
-            ZIPConfig.zipName = getFileBaseName(ZIPConfig.selectZIPFiles.get(0).getName()) + "_"
+            ZIPConfig.zipName = getFileBaseName(ZIPConfig.selectZIPDirs.get(0).getName()) + "_"
                     + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss")) + ".zip";
         }
     }
