@@ -151,4 +151,10 @@ public class FileUtils {
         }
         return file.getAbsolutePath();
     }
+
+    public static String getUserComputerDownloadPath(){
+        String home = System.getProperty("user.home");
+        return home + File.separator + "Downloads";
+    }
+
 }

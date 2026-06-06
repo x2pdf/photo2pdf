@@ -33,7 +33,7 @@ set JAVA_HOME="C:/Program Files/Java/jdk-17.0.1
 
 
 * Step3:
-执行以下命令既可以将exe制作成可安装的exe（需要先安装 wix toolset）: <br>
+执行以下命令即可将exe制作成可安装的exe（需要先安装 wix toolset）: <br>
 在 photo2pdf/out/artifacts/photo2pdf/bundles 目录下执行以下命令 <br>
 jpackage -n photo2pdf --app-image ./photo2pdf --vendor photo2pdf --app-version 22.01 --icon ./photo2pdf/photo2pdf.ico --dest ./target/build-link-package --temp ./target/build-link-package/temp --win-dir-chooser --win-menu --win-menu-group photo2pdf --win-shortcut
 

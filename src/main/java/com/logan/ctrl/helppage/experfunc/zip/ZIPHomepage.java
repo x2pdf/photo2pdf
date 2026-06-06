@@ -2,6 +2,7 @@ package com.logan.ctrl.helppage.experfunc.zip;
 
 import com.logan.config.SysConfig;
 import com.logan.utils.AlertUtils;
+import com.logan.utils.FileUtils;
 import com.logan.utils.LogUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -23,6 +24,8 @@ import net.lingala.zip4j.model.enums.AesKeyStrength;
 import net.lingala.zip4j.model.enums.EncryptionMethod;
 
 import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 
@@ -103,7 +106,7 @@ public class ZIPHomepage {
 
                     try {
                         ZipFileChooserUtil.processFilesName(pwdComponent);
-                        String zipFileFullPathName = ZIPConfig.zipSavePath + File.separator + ZIPConfig.zipName;
+                        String zipFileFullPathName = makeZipName(toBeCompressedDirs);
 
                         ZipFile zipFile = new ZipFile(
                                 zipFileFullPathName,
@@ -296,5 +299,33 @@ public class ZIPHomepage {
         ZIPConfig.selectZIPFiles.removeIf(file -> item.equals(file.getAbsolutePath()));
         ZIPConfig.selectZIPDirs.removeIf(file -> item.equals(file.getAbsolutePath()));
         ZIPConfig.selectZIPFilesPath.removeIf(item::equals);
+    }
+
+
+    private static String makeZipName(ArrayList<File> toBeCompressedDirs){
+        String zipFileFullPathName = ZIPConfig.zipSavePath + File.separator + ZIPConfig.zipName;
+        if (!checkZipName(zipFileFullPathName, toBeCompressedDirs)){
+            String userComputerDownloadPath = FileUtils.getUserComputerDownloadPath();
+            if (checkZipName(userComputerDownloadPath, toBeCompressedDirs)){
+                zipFileFullPathName = userComputerDownloadPath + File.separator + ZIPConfig.zipName;
+            }else {
+                AlertUtils.error("File compression failed. Sorry~");
+                throw new IllegalArgumentException("ZIP的保存位置和压缩文件夹相同，存在循环压缩的bug。");
+            }
+        }
+        return zipFileFullPathName;
+    }
+
+
+    private static boolean checkZipName(String zipFileFullPathName, ArrayList<File> toBeCompressedDirs){
+        for (File toBeCompressedDir : toBeCompressedDirs) {
+            Path zipPath = Paths.get(zipFileFullPathName).toAbsolutePath().normalize();
+            Path dirPath = toBeCompressedDir.toPath().toAbsolutePath().normalize();
+            if (zipPath.startsWith(dirPath)) {
+                LogUtils.info("checkZipName, ZIP文件不能保存到待压缩目录内部: " + dirPath);
+                return false;
+            }
+        }
+        return true;
     }
 }
