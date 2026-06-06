@@ -102,8 +102,9 @@ public class ZIPHomepage {
                         ZipFile zipFile = new ZipFile(
                                 zipFileFullPathName,
                                 zipParameters.isEncryptFiles() ? pwdComponent.getPassword().toCharArray() : null);
-
-                        zipFile.addFiles(toBeCompressedFiles, zipParameters);
+                        if (toBeCompressedFiles.size() > 0){
+                            zipFile.addFiles(toBeCompressedFiles, zipParameters);
+                        }
                         for (File toBeCompressedDir : toBeCompressedDirs) {
                             zipFile.addFolder(toBeCompressedDir, zipParameters);
                         }
