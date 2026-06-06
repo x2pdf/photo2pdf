@@ -3,7 +3,7 @@ package com.logan.utils;
 import com.logan.config.CacheData;
 import com.logan.config.Format;
 import com.logan.config.SysConfig;
-import com.logan.ctrl.ViewGridPaneCtrl;
+import com.logan.ctrl.homepage.PDFViewGridAreaCtrl;
 import com.logan.model.PhotoFileInfo;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -160,8 +160,8 @@ public class HeifConvertUtils {
             if (convert(from, fileNameNew, targetFormat, quality)) {
                 //因为 heic 转成的图片可能会变大，所以压缩图片以减小存储空间 todo(感觉作用不是很大)
                 // compress(fileNameTemp, fileNameNew, quality);
-                PhotoFileInfo photoFileInfo = ViewGridPaneCtrl.getPhotoFileInfo(from);
-                PhotoFileInfo photoFileInfoNew = ViewGridPaneCtrl.getPhotoFileInfo(fileNameNew);
+                PhotoFileInfo photoFileInfo = PDFViewGridAreaCtrl.getPhotoFileInfo(from);
+                PhotoFileInfo photoFileInfoNew = PDFViewGridAreaCtrl.getPhotoFileInfo(fileNameNew);
                 photoFileInfoNew.setCreateTime(photoFileInfo.getCreateTime());
                 photoFileInfoNew.setLastModifyTime(photoFileInfo.getLastModifyTime());
                 CacheData.getPhotosFileInfoMap().put(from, photoFileInfo);
@@ -182,8 +182,8 @@ public class HeifConvertUtils {
         String fileNameNew = previewPhotosPath + fileName + "." + Format.jpeg.getValue();
         ;
         if (convert(from, fileNameNew, Format.jpeg.getValue(), "1")) {
-            PhotoFileInfo photoFileInfo = ViewGridPaneCtrl.getPhotoFileInfo(from);
-            PhotoFileInfo photoFileInfoNew = ViewGridPaneCtrl.getPhotoFileInfo(fileNameNew);
+            PhotoFileInfo photoFileInfo = PDFViewGridAreaCtrl.getPhotoFileInfo(from);
+            PhotoFileInfo photoFileInfoNew = PDFViewGridAreaCtrl.getPhotoFileInfo(fileNameNew);
             photoFileInfoNew.setCreateTime(photoFileInfo.getCreateTime());
             photoFileInfoNew.setLastModifyTime(photoFileInfo.getLastModifyTime());
             CacheData.getPhotosFileInfoMap().put(from, photoFileInfo);
@@ -200,8 +200,8 @@ public class HeifConvertUtils {
         String fileNameNew = previewPhotosPath + fileName + "." + Format.png.getValue();
         ;
         if (convert(from, fileNameNew, Format.png.getValue(), "1")) {
-            PhotoFileInfo photoFileInfo = ViewGridPaneCtrl.getPhotoFileInfo(from);
-            PhotoFileInfo photoFileInfoNew = ViewGridPaneCtrl.getPhotoFileInfo(fileNameNew);
+            PhotoFileInfo photoFileInfo = PDFViewGridAreaCtrl.getPhotoFileInfo(from);
+            PhotoFileInfo photoFileInfoNew = PDFViewGridAreaCtrl.getPhotoFileInfo(fileNameNew);
             photoFileInfoNew.setCreateTime(photoFileInfo.getCreateTime());
             photoFileInfoNew.setLastModifyTime(photoFileInfo.getLastModifyTime());
             CacheData.getPhotosFileInfoMap().put(from, photoFileInfo);

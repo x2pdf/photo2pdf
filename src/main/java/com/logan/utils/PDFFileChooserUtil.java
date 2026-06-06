@@ -1,10 +1,8 @@
-package com.logan.ctrl;
+package com.logan.utils;
 
 import com.logan.config.CacheData;
 import com.logan.config.GeneParamConfig;
 import com.logan.config.SysConfig;
-import com.logan.utils.HeifConvertUtils;
-import com.logan.utils.LogUtils;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -17,7 +15,7 @@ import java.util.List;
  * @author Logan Qin
  * @date 2021/12/22 15:11
  */
-public class FileChooserCtrl {
+public class PDFFileChooserUtil {
 
     public ArrayList<String> selectPhotos() {
         FileChooser fileChooser = new FileChooser();

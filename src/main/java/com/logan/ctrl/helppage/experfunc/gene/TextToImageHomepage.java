@@ -1,9 +1,9 @@
-package com.logan.ctrl.gene;
+package com.logan.ctrl.helppage.experfunc.gene;
 
 import com.logan.config.GeneParamConfig;
 import com.logan.config.SysConfig;
 import com.logan.utils.AlertUtils;
-import com.logan.utils.TimeUtils;
+import com.logan.utils.TimeFormatUtil;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -19,7 +19,7 @@ import java.io.File;
 import java.io.IOException;
 
 
-public class TextToImagePopupWindow {
+public class TextToImageHomepage {
 
     public static void openTextToImgWindow() {
         // 新建一个 Stage，也就是新的窗口
@@ -70,7 +70,7 @@ public class TextToImagePopupWindow {
                 if (!file.exists()) {
                     file.mkdirs();
                 }
-                boolean success = ImageTextRenderer.saveImage(image, "textToImage_" + TimeUtils.getNow_yyyy_MM_dd_HH_mm_ss() + ".png", savePath);
+                boolean success = ImageTextRenderer.saveImage(image, "textToImage_" + TimeFormatUtil.getNow_yyyy_MM_dd_HH_mm_ss() + ".png", savePath);
                 if (success) {
                     AlertUtils.openExplorer(savePath);
                 } else {

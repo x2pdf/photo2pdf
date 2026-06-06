@@ -1,4 +1,4 @@
-package com.logan.ctrl;
+package com.logan.ctrl.settings;
 
 import com.logan.config.CacheData;
 import com.logan.config.GeneParamConfig;

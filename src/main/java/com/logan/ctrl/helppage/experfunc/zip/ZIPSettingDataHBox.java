@@ -1,21 +1,11 @@
-package com.logan.ctrl.zip;
+package com.logan.ctrl.helppage.experfunc.zip;
 
 import com.logan.config.SysConfig;
-import com.logan.ctrl.gene.TextToImageDataDTO;
-import com.logan.utils.SingleRowAnchorPaneUtils;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
-
-import java.util.ArrayList;
 
 
 public class ZIPSettingDataHBox {

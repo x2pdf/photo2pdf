@@ -1,4 +1,4 @@
-package com.logan.ctrl.zip;
+package com.logan.ctrl.helppage.experfunc.zip;
 import com.logan.config.SysConfig;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -10,7 +10,7 @@ import javafx.geometry.Insets;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
-public class DoublePasswordInput extends HBox {
+public class ZIPPasswordInput extends HBox {
 
     private final int pwdMinLength = ZIPConfig.pwdMinLength;
     private final PasswordField pwd1 = new PasswordField();
@@ -30,7 +30,7 @@ public class DoublePasswordInput extends HBox {
                     "-fx-background-radius: 4;";
 
 
-    public DoublePasswordInput() {
+    public ZIPPasswordInput() {
         super(10);
         this.setAlignment(Pos.CENTER_RIGHT);
 

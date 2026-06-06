@@ -1,4 +1,4 @@
-package com.logan.ctrl;
+package com.logan.ctrl.homepage;
 
 import com.logan.config.CacheData;
 import com.logan.config.GeneParamConfig;
@@ -27,7 +27,7 @@ import java.util.Optional;
  * @author Logan Qin
  * @date 2021/12/22 15:27
  */
-public class FuncPaneCtrl {
+public class PDFFuncAreaCtrl {
 
     public HBox getBoxFunc() {
         Text text = new Text(SysConfig.getLang("FunctionalArea"));
@@ -98,8 +98,8 @@ public class FuncPaneCtrl {
                 CacheData.setAppStatus(SysConfig.PICK_FILE);
                 CacheData.refreshStatus();
                 // 1. 用户选择的图片原始路径
-                FileChooserCtrl fileChooserCtrl = new FileChooserCtrl();
-                ArrayList<String> selectPhotos = fileChooserCtrl.selectPhotos();
+                PDFFileChooserUtil PDFFileChooserUtil = new PDFFileChooserUtil();
+                ArrayList<String> selectPhotos = PDFFileChooserUtil.selectPhotos();
                 if (selectPhotos.size() == 0) {
                     return;
                 }
@@ -113,8 +113,8 @@ public class FuncPaneCtrl {
                 // 3. 刷新预览显示
                 GridPane gridPane = CacheData.gridPane;
                 // 先用空数据刷新一次
-                ViewGridPaneCtrl viewGridPaneCtrl = new ViewGridPaneCtrl();
-                viewGridPaneCtrl.photosViewPane(gridPane, new ArrayList<>());
+                PDFViewGridAreaCtrl PDFViewGridAreaCtrl = new PDFViewGridAreaCtrl();
+                PDFViewGridAreaCtrl.photosViewPane(gridPane, new ArrayList<>());
                 CacheData.setAppStatus(SysConfig.RENDER_PREVIEW);
                 CacheData.refreshStatus();
 
@@ -134,8 +134,8 @@ public class FuncPaneCtrl {
                 }
 
                 // 将真实预览的图片刷新页面
-                ViewGridPaneCtrl viewGridPaneCtrl2 = new ViewGridPaneCtrl();
-                viewGridPaneCtrl2.photosViewPane(gridPane, photosPath);
+                PDFViewGridAreaCtrl PDFViewGridAreaCtrl2 = new PDFViewGridAreaCtrl();
+                PDFViewGridAreaCtrl2.photosViewPane(gridPane, photosPath);
 
                 CacheData.setAppStatus(SysConfig.DEFAULT);
                 CacheData.refreshStatus();
@@ -201,18 +201,18 @@ public class FuncPaneCtrl {
         addMergePdfButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                FileChooserCtrl fileChooserCtrl = new FileChooserCtrl();
-                ArrayList<String> pdfs = fileChooserCtrl.selectPDFs();
+                PDFFileChooserUtil PDFFileChooserUtil = new PDFFileChooserUtil();
+                ArrayList<String> pdfs = PDFFileChooserUtil.selectPDFs();
 
                 // 缓存起来
                 CacheData.setMergePdfPath(pdfs);
-                ViewGridPaneCtrl viewGridPaneCtrl = new ViewGridPaneCtrl();
+                PDFViewGridAreaCtrl PDFViewGridAreaCtrl = new PDFViewGridAreaCtrl();
 
                 // 首先清除图片的预览画面（如果有图片预览时）
                 CacheData.clearAllView();
                 // 先用空数据刷新一次
-                CacheData.gridPane = viewGridPaneCtrl.pdfListPane(CacheData.gridPane, new ArrayList<>());
-                CacheData.gridPane = viewGridPaneCtrl.pdfListPane(CacheData.gridPane, pdfs);
+                CacheData.gridPane = PDFViewGridAreaCtrl.pdfListPane(CacheData.gridPane, new ArrayList<>());
+                CacheData.gridPane = PDFViewGridAreaCtrl.pdfListPane(CacheData.gridPane, pdfs);
             }
         });
     }
@@ -247,8 +247,8 @@ public class FuncPaneCtrl {
         encryptButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                FileChooserCtrl fileChooserCtrl = new FileChooserCtrl();
-                File pdf = fileChooserCtrl.selectSinglePdf();
+                PDFFileChooserUtil PDFFileChooserUtil = new PDFFileChooserUtil();
+                File pdf = PDFFileChooserUtil.selectSinglePdf();
                 if (pdf == null || pdf.length() == 0) {
                     return;
                 }
@@ -261,7 +261,7 @@ public class FuncPaneCtrl {
                     return;
                 }
 
-                String fmtTime = TimeUtils.getNow_yyyy_MM_dd_HH_mm_ss();
+                String fmtTime = TimeFormatUtil.getNow_yyyy_MM_dd_HH_mm_ss();
                 String passwordSubStr = password.charAt(0) + password.substring(password.length() - 1);
 
                 String savePath = GeneParamConfig.getPdfSavePath();
@@ -278,8 +278,8 @@ public class FuncPaneCtrl {
             @Override
             public void handle(ActionEvent event) {
                 // 选择pdf文件
-                FileChooserCtrl fileChooserCtrl = new FileChooserCtrl();
-                File pdf = fileChooserCtrl.selectSinglePdf();
+                PDFFileChooserUtil PDFFileChooserUtil = new PDFFileChooserUtil();
+                File pdf = PDFFileChooserUtil.selectSinglePdf();
                 if (pdf == null || pdf.length() == 0) {
                     return;
                 }

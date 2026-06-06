@@ -2,7 +2,7 @@ package com.logan.hbox.setting;
 
 import com.logan.config.GeneParamConfig;
 import com.logan.config.SysConfig;
-import com.logan.ctrl.FileChooserCtrl;
+import com.logan.utils.PDFFileChooserUtil;
 import com.logan.hbox.BaseHBox;
 import com.logan.utils.LogUtils;
 import com.logan.utils.SingleRowAnchorPaneUtils;
@@ -39,8 +39,8 @@ public class PDFSavePathHBox extends BaseHBox {
         pathButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                FileChooserCtrl fileChooserCtrl = new FileChooserCtrl();
-                String savePath = fileChooserCtrl.chooseFilePath(stage);
+                PDFFileChooserUtil PDFFileChooserUtil = new PDFFileChooserUtil();
+                String savePath = PDFFileChooserUtil.chooseFilePath(stage);
                 if (savePath != null) {
                     savePath = savePath + File.separator;
                     LogUtils.info("savePath refresh: " + savePath);

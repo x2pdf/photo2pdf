@@ -3,7 +3,7 @@ package com.logan.hbox.setting;
 import com.logan.config.CacheData;
 import com.logan.config.GeneParamConfig;
 import com.logan.config.SysConfig;
-import com.logan.ctrl.ViewGridPaneCtrl;
+import com.logan.ctrl.homepage.PDFViewGridAreaCtrl;
 import com.logan.hbox.BaseHBox;
 import com.logan.utils.LogUtils;
 import com.logan.utils.SingleRowAnchorPaneUtils;
@@ -54,8 +54,8 @@ public class PreviewHBox extends BaseHBox {
 
                 GridPane gridPane = CacheData.gridPane;
                 ArrayList<String> photosPath = CacheData.getPhotosPreviewPath();
-                ViewGridPaneCtrl viewGridPaneCtrl = new ViewGridPaneCtrl();
-                viewGridPaneCtrl.photosViewPane(gridPane, photosPath);
+                PDFViewGridAreaCtrl PDFViewGridAreaCtrl = new PDFViewGridAreaCtrl();
+                PDFViewGridAreaCtrl.photosViewPane(gridPane, photosPath);
                 LogUtils.info("Preview: No");
             }
         });

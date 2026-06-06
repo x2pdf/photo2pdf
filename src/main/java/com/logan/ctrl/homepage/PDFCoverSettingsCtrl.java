@@ -1,7 +1,9 @@
-package com.logan.ctrl;
+package com.logan.ctrl.homepage;
 
 import com.logan.config.GeneParamConfig;
 import com.logan.config.SysConfig;
+import com.logan.ctrl.DevCtrl;
+import com.logan.utils.PDFFileChooserUtil;
 import com.logan.utils.LogUtils;
 import com.logan.utils.SingleRowAnchorPaneUtils;
 import javafx.event.ActionEvent;
@@ -22,7 +24,7 @@ import java.time.format.DateTimeFormatter;
  * @author Logan Qin
  * @date 2021/12/22 15:59
  */
-public class PDFInfoCtrl {
+public class PDFCoverSettingsCtrl {
 
     public HBox getBoxPDFInfo() {
         Text text = new Text(SysConfig.getLang("CoverSetting"));
@@ -56,8 +58,8 @@ public class PDFInfoCtrl {
             GeneParamConfig.getPdf().setDesc(newValue);
 
             if (newValue != null) {
-                TestCtrl testCtrl = new TestCtrl();
-                testCtrl.devModeDetect(newValue);
+                DevCtrl devCtrl = new DevCtrl();
+                devCtrl.devModeDetect(newValue);
             }
         });
 
@@ -69,8 +71,8 @@ public class PDFInfoCtrl {
         coverButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                FileChooserCtrl fileChooserCtrl = new FileChooserCtrl();
-                File coverPhotoFile = fileChooserCtrl.selectSinglePhoto();
+                PDFFileChooserUtil PDFFileChooserUtil = new PDFFileChooserUtil();
+                File coverPhotoFile = PDFFileChooserUtil.selectSinglePhoto();
 
                 if (coverPhotoFile == null) {
                     LogUtils.info("cover Path no select photo");

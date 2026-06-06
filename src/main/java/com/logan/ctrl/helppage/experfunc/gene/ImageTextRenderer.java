@@ -1,10 +1,6 @@
-package com.logan.ctrl.gene;
+package com.logan.ctrl.helppage.experfunc.gene;
 
-import javax.imageio.IIOImage;
 import javax.imageio.ImageIO;
-import javax.imageio.ImageWriteParam;
-import javax.imageio.ImageWriter;
-import javax.imageio.stream.ImageOutputStream;
 import java.awt.*;
 import java.awt.font.FontRenderContext;
 import java.awt.font.LineBreakMeasurer;
@@ -17,7 +13,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.AttributedCharacterIterator;
 import java.text.AttributedString;
-import java.util.Iterator;
 
 /**
  * ImageTextRenderer - render text into JPEG images.
