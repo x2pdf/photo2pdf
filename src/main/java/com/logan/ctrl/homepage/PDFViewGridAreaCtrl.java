@@ -1,4 +1,4 @@
-package com.logan.ctrl;
+package com.logan.ctrl.homepage;
 
 import com.logan.config.CacheData;
 import com.logan.config.GeneParamConfig;
@@ -36,7 +36,7 @@ import java.util.stream.Collectors;
  * @author Logan Qin
  * @date 2021/12/22 15:28
  */
-public class ViewGridPaneCtrl {
+public class PDFViewGridAreaCtrl {
 
     // photosPath 为压缩图片绝对路径
     public GridPane photosViewPane(GridPane pane, List<String> photosPath) {
@@ -353,8 +353,8 @@ public class ViewGridPaneCtrl {
 
                     // 需要清除已有的pdf, 然后刷新
                     CacheData.gridPane.getChildren().clear();
-                    ViewGridPaneCtrl viewGridPaneCtrl = new ViewGridPaneCtrl();
-                    viewGridPaneCtrl.pdfListPane(CacheData.gridPane, CacheData.getMergePdfPath());
+                    PDFViewGridAreaCtrl PDFViewGridAreaCtrl = new PDFViewGridAreaCtrl();
+                    PDFViewGridAreaCtrl.pdfListPane(CacheData.gridPane, CacheData.getMergePdfPath());
 
                     CacheData.refreshStatus();
                 }

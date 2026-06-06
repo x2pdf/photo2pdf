@@ -3,7 +3,7 @@ package com.logan.utils;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 
-public class TimeUtils {
+public class TimeFormatUtil {
 
     public static LocalDateTime toDatetime(long timestamp) {
         Instant instant = Instant.ofEpochMilli(timestamp);

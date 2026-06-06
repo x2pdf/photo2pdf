@@ -1,10 +1,11 @@
-package com.logan.ctrl;
+package com.logan.ctrl.helppage;
 
 import com.logan.config.CacheData;
 import com.logan.config.GeneParamConfig;
 import com.logan.config.SysConfig;
-import com.logan.ctrl.gene.TextToImagePopupWindow;
-import com.logan.ctrl.zip.ZIPPopupWindow;
+import com.logan.ctrl.helppage.experfunc.zip.ZIPHomepage;
+import com.logan.utils.PDFFileChooserUtil;
+import com.logan.ctrl.helppage.experfunc.gene.TextToImageHomepage;
 import com.logan.utils.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -77,7 +78,7 @@ public class HelpCtrl {
         textToImgButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                TextToImagePopupWindow.openTextToImgWindow();
+                TextToImageHomepage.openTextToImgWindow();
             }
         });
 
@@ -86,24 +87,22 @@ public class HelpCtrl {
         zipFuncButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                ZIPPopupWindow.openZIPFuncWindow();
+                ZIPHomepage.openZIPFuncWindow();
             }
         });
 
-        Text spaceGap = new Text(SysConfig.getLang(""));
         HBox funcButtonBox1 = new HBox(10);
         funcButtonBox1.setAlignment(Pos.CENTER_LEFT);
-        zipFuncButton.setPrefWidth(120);
+        zipFuncButton.setPrefWidth(130);
         funcButtonBox1.getChildren().addAll(zipFuncButton);
         HBox funcButtonBox2 = new HBox(10);
         funcButtonBox2.setAlignment(Pos.CENTER_LEFT);
-        textToImgButton.setPrefWidth(120);
+        textToImgButton.setPrefWidth(130);
         funcButtonBox2.getChildren().addAll(textToImgButton);
 
 
         VBox formatConversionVBox = new VBox(compressPDFPhotoAnchorPane,
-                formatConversionAnchorPane, compressPhotoAnchorPane, scalingAnchorPane, customScalingAnchorPane,
-                spaceGap, funcButtonBox1, funcButtonBox2);
+                formatConversionAnchorPane, compressPhotoAnchorPane, scalingAnchorPane, customScalingAnchorPane);
         formatConversionVBox.setSpacing(4);
 
         Text experimentalTitle = new Text(SysConfig.getLang("ExperimentalFeature"));
@@ -122,17 +121,24 @@ public class HelpCtrl {
         Text version = new Text("photo2pdf version " + SysConfig.APP_VERSION);
         Text author = new Text("Author: Logan Cham.");
         Text allRight = new Text("All Rights Reserved.");
-        VBox vBox = new VBox(tipsButton, productIntroductionButton, operationManualButton, version, author, allRight);
+
+        HBox statementInfoBox = new HBox(10);
+        statementInfoBox.getChildren().addAll(author, allRight);
+        statementInfoBox.setAlignment(Pos.CENTER);
+
+        VBox vBox = new VBox(tipsButton, productIntroductionButton, operationManualButton, version, statementInfoBox);
         vBox.setAlignment(Pos.CENTER);
         vBox.setSpacing(4);
 
         AnchorPane statementPane = new AnchorPane(vBox);
-        AnchorPane.setBottomAnchor(vBox, 10.0);
+        AnchorPane.setBottomAnchor(vBox, 2.0);
         AnchorPane.setLeftAnchor(vBox, 2.0);
         AnchorPane.setRightAnchor(vBox, 2.0);
 
         VBox vb = new VBox();
-        vb.getChildren().addAll(title, langAnchorPane, decryptPDFAnchorPane, experimentalPane, statementPane);
+        Text spaceGap = new Text(SysConfig.getLang(""));
+        vb.getChildren().addAll(title, langAnchorPane, decryptPDFAnchorPane, funcButtonBox1, funcButtonBox2,
+                experimentalPane, spaceGap, statementPane);
         vb.setSpacing(2);
         HBox hBox = new HBox(vb);
         return hBox;
@@ -203,14 +209,14 @@ public class HelpCtrl {
         button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                FileChooserCtrl fileChooserCtrl = new FileChooserCtrl();
-                ArrayList<String> selectPhotos = fileChooserCtrl.selectPhotos4Experiment();
+                PDFFileChooserUtil PDFFileChooserUtil = new PDFFileChooserUtil();
+                ArrayList<String> selectPhotos = PDFFileChooserUtil.selectPhotos4Experiment();
                 if (selectPhotos == null || selectPhotos.size() == 0) {
                     LogUtils.info("CustomZoomImageResolution no select photo");
                     return;
                 }
 
-                String savePath = GeneParamConfig.getPdfSavePath() + "scale_custom_" + TimeUtils.getNow_yyyy_MM_dd_HH_mm_ss() + File.separator;
+                String savePath = GeneParamConfig.getPdfSavePath() + "scale_custom_" + TimeFormatUtil.getNow_yyyy_MM_dd_HH_mm_ss() + File.separator;
                 File file = new File(savePath);
                 if (!file.exists()) {
                     file.mkdirs();
@@ -308,13 +314,13 @@ public class HelpCtrl {
         scalingButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                FileChooserCtrl fileChooserCtrl = new FileChooserCtrl();
-                ArrayList<String> selectPhotos = fileChooserCtrl.selectPhotos4ExperimentCompress();
+                PDFFileChooserUtil PDFFileChooserUtil = new PDFFileChooserUtil();
+                ArrayList<String> selectPhotos = PDFFileChooserUtil.selectPhotos4ExperimentCompress();
                 if (selectPhotos == null || selectPhotos.size() == 0) {
                     LogUtils.info("CompressPictures no select photo");
                     return;
                 }
-                String savePath = GeneParamConfig.getPdfSavePath() + "scale_" + TimeUtils.getNow_yyyy_MM_dd_HH_mm_ss() + File.separator;
+                String savePath = GeneParamConfig.getPdfSavePath() + "scale_" + TimeFormatUtil.getNow_yyyy_MM_dd_HH_mm_ss() + File.separator;
                 File file = new File(savePath);
                 if (!file.exists()) {
                     file.mkdirs();
@@ -385,13 +391,13 @@ public class HelpCtrl {
         ratioButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                FileChooserCtrl fileChooserCtrl = new FileChooserCtrl();
-                ArrayList<String> selectPhotos = fileChooserCtrl.selectPhotos4Experiment();
+                PDFFileChooserUtil PDFFileChooserUtil = new PDFFileChooserUtil();
+                ArrayList<String> selectPhotos = PDFFileChooserUtil.selectPhotos4Experiment();
                 if (selectPhotos == null || selectPhotos.size() == 0) {
                     LogUtils.info("CompressPictures no select photo");
                     return;
                 }
-                String savePath = GeneParamConfig.getPdfSavePath() + "compress_" + TimeUtils.getNow_yyyy_MM_dd_HH_mm_ss() + File.separator;
+                String savePath = GeneParamConfig.getPdfSavePath() + "compress_" + TimeFormatUtil.getNow_yyyy_MM_dd_HH_mm_ss() + File.separator;
                 File file = new File(savePath);
                 if (!file.exists()) {
                     file.mkdirs();
@@ -442,15 +448,15 @@ public class HelpCtrl {
         formatButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                FileChooserCtrl fileChooserCtrl = new FileChooserCtrl();
-                ArrayList<String> selectPhotos = fileChooserCtrl.selectPhotos4Experiment(CacheData.getToFormat(),
+                PDFFileChooserUtil PDFFileChooserUtil = new PDFFileChooserUtil();
+                ArrayList<String> selectPhotos = PDFFileChooserUtil.selectPhotos4Experiment(CacheData.getToFormat(),
                         String.valueOf(GeneParamConfig.getPdfPhotoCompressionQuality()));
                 if (selectPhotos == null || selectPhotos.size() == 0) {
                     LogUtils.info("FormatConversion no select photo");
                     return;
                 }
 
-                String savePath = GeneParamConfig.getPdfSavePath() + "format_" + TimeUtils.getNow_yyyy_MM_dd_HH_mm_ss() + File.separator;
+                String savePath = GeneParamConfig.getPdfSavePath() + "format_" + TimeFormatUtil.getNow_yyyy_MM_dd_HH_mm_ss() + File.separator;
                 File file = new File(savePath);
                 if (!file.exists()) {
                     file.mkdirs();
@@ -521,8 +527,8 @@ public class HelpCtrl {
         ratioPDFPhotoButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                FileChooserCtrl fileChooserCtrl = new FileChooserCtrl();
-                ArrayList<String> pdfs = fileChooserCtrl.selectPDFs();
+                PDFFileChooserUtil PDFFileChooserUtil = new PDFFileChooserUtil();
+                ArrayList<String> pdfs = PDFFileChooserUtil.selectPDFs();
                 if (pdfs == null || pdfs.size() == 0) {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Info");
@@ -568,8 +574,8 @@ public class HelpCtrl {
         decryptPDFButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                FileChooserCtrl fileChooserCtrl = new FileChooserCtrl();
-                ArrayList<String> pdfs = fileChooserCtrl.selectPDFs();
+                PDFFileChooserUtil PDFFileChooserUtil = new PDFFileChooserUtil();
+                ArrayList<String> pdfs = PDFFileChooserUtil.selectPDFs();
                 if (pdfs == null || pdfs.size() == 0) {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Info");

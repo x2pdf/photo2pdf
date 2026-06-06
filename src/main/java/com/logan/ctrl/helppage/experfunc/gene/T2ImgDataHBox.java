@@ -1,4 +1,4 @@
-package com.logan.ctrl.gene;
+package com.logan.ctrl.helppage.experfunc.gene;
 
 import com.logan.config.SysConfig;
 import com.logan.utils.SingleRowAnchorPaneUtils;

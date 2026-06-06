@@ -2,7 +2,7 @@ package com.logan.config;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.logan.ctrl.HelpCtrl;
+import com.logan.ctrl.helppage.HelpCtrl;
 import com.logan.utils.LocalFileUtils;
 import com.logan.utils.LogUtils;
 

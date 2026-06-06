@@ -1,4 +1,4 @@
-package com.logan.ctrl.gene;
+package com.logan.ctrl.helppage.experfunc.gene;
 
 public class TextToImageConfig {
     public static int titleFontSize = 50;

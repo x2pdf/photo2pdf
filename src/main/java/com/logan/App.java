@@ -4,6 +4,12 @@ import com.logan.config.CacheData;
 import com.logan.config.GeneParamConfig;
 import com.logan.config.SysConfig;
 import com.logan.ctrl.*;
+import com.logan.ctrl.helppage.HelpCtrl;
+import com.logan.ctrl.homepage.PDFFuncAreaCtrl;
+import com.logan.ctrl.homepage.PDFCoverSettingsCtrl;
+import com.logan.ctrl.homepage.PDFPreviewAreaCtrl;
+import com.logan.ctrl.homepage.StatusBarCtrl;
+import com.logan.ctrl.settings.SettingsPaneCtrl;
 import com.logan.utils.LogUtils;
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -151,13 +157,13 @@ public class App extends Application {
         homepageAnchorPane.setPrefSize(SysConfig.STAGE_WIDTH, SysConfig.STAGE_HEIGHT);
 
         // 2.1功能区域
-        FuncPaneCtrl funcPaneCtrl = new FuncPaneCtrl();
-        HBox hBoxFunc = funcPaneCtrl.getBoxFunc();
+        PDFFuncAreaCtrl PDFFuncAreaCtrl = new PDFFuncAreaCtrl();
+        HBox hBoxFunc = PDFFuncAreaCtrl.getBoxFunc();
         hBoxFunc.setAlignment(Pos.TOP_CENTER);
 
         // 2.2 pdf封面信息区域
-        PDFInfoCtrl pdfInfoCtrl = new PDFInfoCtrl();
-        HBox pdfInfoHBox = pdfInfoCtrl.getBoxPDFInfo();
+        PDFCoverSettingsCtrl pdfCoverSettingsCtrl = new PDFCoverSettingsCtrl();
+        HBox pdfInfoHBox = pdfCoverSettingsCtrl.getBoxPDFInfo();
         pdfInfoHBox.setAlignment(Pos.TOP_CENTER);
 
         // 2.3 状态栏显示
@@ -167,10 +173,10 @@ public class App extends Application {
         statusInfoHBox.setAlignment(Pos.BOTTOM_CENTER);
 
         // 2.4 预览图片区域
-        PreviewPaneCtrl previewPaneCtrl = new PreviewPaneCtrl();
-        HBox previewActionHBox = previewPaneCtrl.getBoxPreviewAction();
+        PDFPreviewAreaCtrl PDFPreviewAreaCtrl = new PDFPreviewAreaCtrl();
+        HBox previewActionHBox = PDFPreviewAreaCtrl.getBoxPreviewAction();
         previewActionHBox.setAlignment(Pos.TOP_CENTER);
-        HBox previewHBox = previewPaneCtrl.getBoxPreview();
+        HBox previewHBox = PDFPreviewAreaCtrl.getBoxPreview();
         previewHBox.setAlignment(Pos.TOP_CENTER);
 
         VBox homepageVBox = new VBox();

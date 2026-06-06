@@ -1,7 +1,6 @@
-package com.logan.ctrl.zip;
+package com.logan.ctrl.helppage.experfunc.zip;
 
 import com.logan.config.SysConfig;
-import com.logan.utils.LogUtils;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -37,7 +36,7 @@ public class ZipFileChooserUtil {
     }
 
 
-    public static void processFilesName( DoublePasswordInput pwdComponent){
+    public static void processFilesName( ZIPPasswordInput pwdComponent){
         if (ZIPConfig.selectZIPFilesPath.size() == 0) {
             return;
         }
@@ -71,7 +70,7 @@ public class ZipFileChooserUtil {
     }
 
 
-    private static void setZipNameByDir(DoublePasswordInput pwdComponent){
+    private static void setZipNameByDir(ZIPPasswordInput pwdComponent){
         String nameNote = "";
         if (pwdComponent.isEncryptionEnabled() && pwdComponent.isValid()){
             nameNote = firstAndLast(pwdComponent.getPassword());
@@ -85,7 +84,7 @@ public class ZipFileChooserUtil {
         }
     }
 
-    private static void setZipNameByFiles(DoublePasswordInput pwdComponent){
+    private static void setZipNameByFiles(ZIPPasswordInput pwdComponent){
         String nameNote = "";
         if (pwdComponent.isEncryptionEnabled() && pwdComponent.isValid()){
             nameNote = firstAndLast(pwdComponent.getPassword());

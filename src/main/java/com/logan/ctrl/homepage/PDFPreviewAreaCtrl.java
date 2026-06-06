@@ -1,4 +1,4 @@
-package com.logan.ctrl;
+package com.logan.ctrl.homepage;
 
 import com.logan.config.CacheData;
 import com.logan.config.SysConfig;
@@ -23,7 +23,7 @@ import java.util.Optional;
  * @author Logan Qin
  * @date 2021/12/22 15:27
  */
-public class PreviewPaneCtrl {
+public class PDFPreviewAreaCtrl {
 
     public HBox getBoxPreviewAction() {
         Text text = new Text(SysConfig.getLang("Preview"));
@@ -115,8 +115,8 @@ public class PreviewPaneCtrl {
         ArrayList<String> photosPath = CacheData.getPhotosPreviewPath();
         GridPane gridPane = new GridPane();
         gridPane.setStyle("-fx-background-color:#fffef9;");
-        ViewGridPaneCtrl viewGridPaneCtrl2 = new ViewGridPaneCtrl();
-        CacheData.gridPane = viewGridPaneCtrl2.photosViewPane(gridPane, photosPath);
+        PDFViewGridAreaCtrl PDFViewGridAreaCtrl2 = new PDFViewGridAreaCtrl();
+        CacheData.gridPane = PDFViewGridAreaCtrl2.photosViewPane(gridPane, photosPath);
 
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.setContent(CacheData.gridPane);

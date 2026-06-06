@@ -2,8 +2,8 @@ package com.logan.config;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.logan.ctrl.StatusBarCtrl;
-import com.logan.ctrl.ViewGridPaneCtrl;
+import com.logan.ctrl.homepage.StatusBarCtrl;
+import com.logan.ctrl.homepage.PDFViewGridAreaCtrl;
 import com.logan.hbox.BaseHBox;
 import com.logan.model.PhotoFileInfo;
 import com.logan.utils.LocalFileUtils;
@@ -123,12 +123,12 @@ public class CacheData implements Serializable {
             // 从预览list中获取图片信息
             ArrayList<String> photosPath = CacheData.getPhotosPreviewPath();
             // 用户可能改变了排序方式，所以需要重新排序,然后放回预览的list去
-            ArrayList<String> sortPhotos = ViewGridPaneCtrl.sortPhotos(photosPath);
+            ArrayList<String> sortPhotos = PDFViewGridAreaCtrl.sortPhotos(photosPath);
             CacheData.setPhotosPreviewPath(sortPhotos);
             // 需要清除已有的图片
             gridPane.getChildren().clear();
-            ViewGridPaneCtrl viewGridPaneCtrl = new ViewGridPaneCtrl();
-            viewGridPaneCtrl.photosViewPane(gridPane, sortPhotos);
+            PDFViewGridAreaCtrl PDFViewGridAreaCtrl = new PDFViewGridAreaCtrl();
+            PDFViewGridAreaCtrl.photosViewPane(gridPane, sortPhotos);
 
             CacheData.refreshStatus();
         } catch (Exception e) {
@@ -181,7 +181,7 @@ public class CacheData implements Serializable {
         AllPhotoPath.addAll(CacheData.getPhotosPreviewPath());
 
         // 排序, 注意：排序的过程中会将照片的一些创建时间信息添加到缓存中
-        ArrayList<String> sortPhotos = ViewGridPaneCtrl.sortPhotos(AllPhotoPath);
+        ArrayList<String> sortPhotos = PDFViewGridAreaCtrl.sortPhotos(AllPhotoPath);
 
         // 将排序好的照片，同步到其他所有List中
         CacheData.getPhotosPath().clear();
@@ -311,8 +311,8 @@ public class CacheData implements Serializable {
         // 2. 刷新页面
         GridPane gridPane = CacheData.gridPane;
         ArrayList<String> photosPath = CacheData.getPhotosPreviewPath();
-        ViewGridPaneCtrl viewGridPaneCtrl = new ViewGridPaneCtrl();
-        viewGridPaneCtrl.photosViewPane(gridPane, photosPath);
+        PDFViewGridAreaCtrl PDFViewGridAreaCtrl = new PDFViewGridAreaCtrl();
+        PDFViewGridAreaCtrl.photosViewPane(gridPane, photosPath);
 
         CacheData.setAppStatus(SysConfig.DEFAULT);
         CacheData.refreshStatus();

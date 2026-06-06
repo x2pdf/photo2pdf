@@ -21,7 +21,7 @@ import java.util.List;
  * @author Logan Qin
  * @date 2021/12/22 19:03
  */
-public class TestCtrl {
+public class DevCtrl {
 
     public VBox getVMInfo() {
         Text text = new Text("Dev Info");
@@ -78,8 +78,8 @@ public class TestCtrl {
             if (SysConfig.IS_DEV_MODE) {
                 LogUtils.info("IS_DEV_MODE: true");
                 if (CacheData.vmInfo == null) {
-                    TestCtrl testCtrl = new TestCtrl();
-                    VBox vmInfo = testCtrl.getVMInfo();
+                    DevCtrl devCtrl = new DevCtrl();
+                    VBox vmInfo = devCtrl.getVMInfo();
                     CacheData.settingsVBox.getChildren().add(vmInfo);
 
                     CacheData.vmInfo = vmInfo;

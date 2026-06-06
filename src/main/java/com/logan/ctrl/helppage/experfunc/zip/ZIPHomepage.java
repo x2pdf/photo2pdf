@@ -1,4 +1,4 @@
-package com.logan.ctrl.zip;
+package com.logan.ctrl.helppage.experfunc.zip;
 
 import com.logan.config.SysConfig;
 import com.logan.utils.AlertUtils;
@@ -26,7 +26,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 
-public class ZIPPopupWindow {
+public class ZIPHomepage {
 
     public static void openZIPFuncWindow() {
         // 新建一个 Stage，也就是新的窗口
@@ -45,7 +45,7 @@ public class ZIPPopupWindow {
         processDeleteListviewItem(listView);
 
         // 密码组件
-        DoublePasswordInput pwdComponent = new DoublePasswordInput();
+        ZIPPasswordInput pwdComponent = new ZIPPasswordInput();
 
         Button zipSelectFilesButton = new Button(SysConfig.getLang("Step1SelectZIPFiles"));
         zipSelectFilesButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -160,7 +160,7 @@ public class ZIPPopupWindow {
 
     }
 
-    public static ZipParameters getZipParameters(DoublePasswordInput pwdComponent){
+    public static ZipParameters getZipParameters(ZIPPasswordInput pwdComponent){
         ZipParameters zipParameters = new ZipParameters();
         String pwd = pwdComponent.getPassword();
         // 启用了加密，密码验证通过，密码不为空

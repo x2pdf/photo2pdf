@@ -1,4 +1,4 @@
-package com.logan.ctrl;
+package com.logan.ctrl.homepage;
 
 import com.logan.config.CacheData;
 import com.logan.config.Format;
