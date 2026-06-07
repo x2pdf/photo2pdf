@@ -27,7 +27,7 @@ public class HBoxUtil {
             for (String businessTypeCode : businessSeqArr) {
 //                System.out.println("businessTypeCode: " + businessTypeCode);
                 for (Class<? extends BaseHBox> subType : subTypes) {
-                    BaseHBox hBox = subType.newInstance();
+                    BaseHBox hBox = subType.getDeclaredConstructor().newInstance();
                     if (hBox.getHBoxCode().equals(businessTypeCode)) {
                         hBoxes.add(hBox);
                         CacheData.hboxMap.put(businessTypeCode,hBox);
