@@ -161,7 +161,7 @@ public class PDFFuncAreaCtrl {
                     CacheData.refreshStatus();
 
                     int size = CacheData.getPhotosPreviewPath().size();
-                    if (size >= 50) {
+                    if (size >= SysConfig.LARGE_FILE_WARNING_THRESHOLD) {
                         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                         alert.setTitle("Info");
                         alert.setContentText(SysConfig.getLang("TooManyFile"));
@@ -285,7 +285,7 @@ public class PDFFuncAreaCtrl {
                 }
 
                 // 10 MB
-                if (pdf.length() >= 10000000) {
+                if (pdf.length() >= SysConfig.EXTRACT_PDF_MAX_SIZE) {
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                     alert.setTitle("Info");
                     alert.setContentText(SysConfig.getLang("TooManyFile"));

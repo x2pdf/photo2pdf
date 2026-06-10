@@ -269,12 +269,18 @@ public class CacheData implements Serializable {
 
 
     public static void removeByOffset(int photoOffset) {
+        // 边界检查,防止 IndexOutOfBoundsException
+        if (photoOffset < 0 || photoOffset >= CacheData.getPhotosPreviewPath().size()) {
+            LogUtils.info("Invalid photo offset: " + photoOffset + ", current size: " + CacheData.getPhotosPreviewPath().size());
+            return;
+        }
+            
         LogUtils.info("pathShouldRemove offset: " + photoOffset);
         // 1. 先直接根据 offset 移除预览和生成的照片
         String remove = CacheData.getPhotosPreviewPath().remove(photoOffset);
         CacheData.getPhotosPath().remove(photoOffset);
-
-        // 需要同步删除两个list中是图片，以避免选择 default排序时删除的照片依旧显示
+    
+        // 需要同步删除两个list中是图片,以避免选择 default排序时删除的照片依旧显示
         // todo 优化 removeIf 同名的图片将会全部删除
         CacheData.getPhotosPathUserSelectOrder().removeIf(remove::equals);
         LogUtils.info("pathShouldRemove path: " + remove);

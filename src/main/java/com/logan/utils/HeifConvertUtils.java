@@ -83,7 +83,7 @@ public class HeifConvertUtils {
         int size = heifPhotos.size();
         LogUtils.info("convert photo amount: " + size);
         // 检测图片是否压缩完成
-        LocalDateTime endTime = LocalDateTime.now().plusMinutes(30);
+        LocalDateTime endTime = LocalDateTime.now().plusMinutes(SysConfig.COMPRESS_TIMEOUT_MINUTES);
         LocalDateTime firstDetectQueueIsZero = null;
         while (true) {
             if (CacheData.convertPhotoAmount.get() == size) {
@@ -102,7 +102,7 @@ public class HeifConvertUtils {
             }
             if (firstDetectQueueIsZero != null) {
                 // 线程池的队列中缓存任务已经没有的情况下，等待核心线程最大等待时间 1 分钟
-                if (LocalDateTime.now().minusMinutes(1).compareTo(firstDetectQueueIsZero) > 0) {
+                if (LocalDateTime.now().minusMinutes(SysConfig.QUEUE_IDLE_WAIT_MINUTES).compareTo(firstDetectQueueIsZero) > 0) {
                     LogUtils.error("The cached task in the thread pool's queue has completed and has been waiting for more than 2 minutes.");
                     firstDetectQueueIsZero = null;
                     break;

@@ -171,7 +171,7 @@ public class GenePDFCtrl {
         int size = CacheData.getPhotosPreviewPath().size();
         LogUtils.info("Compress photo amount: " + size);
         // 检测图片是否压缩完成
-        LocalDateTime endTime = LocalDateTime.now().plusMinutes(30);
+        LocalDateTime endTime = LocalDateTime.now().plusMinutes(SysConfig.COMPRESS_TIMEOUT_MINUTES);
         LocalDateTime firstDetectQueueIsZero = null;
         while (true) {
             if (CacheData.compressPhotoAmount.get() == size) {
@@ -198,7 +198,7 @@ public class GenePDFCtrl {
             }
             if (firstDetectQueueIsZero != null) {
                 // 线程池的队列中缓存任务已经没有的情况下，等待核心线程最大等待时间 1 分钟
-                if (LocalDateTime.now().minusMinutes(1).compareTo(firstDetectQueueIsZero) > 0) {
+                if (LocalDateTime.now().minusMinutes(SysConfig.QUEUE_IDLE_WAIT_MINUTES).compareTo(firstDetectQueueIsZero) > 0) {
                     // 将压缩后的图片添加到预览和生成的List中，必须要在压缩完成之后才可以添加
                     CacheData.syncCompressPhoto2GeneList(CacheData.getPhotosCompressPathAndFullName());
                     // 需要清除掉数据，防止再次增加图片时数量出问题
