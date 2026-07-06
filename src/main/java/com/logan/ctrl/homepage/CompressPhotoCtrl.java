@@ -44,8 +44,6 @@ public class CompressPhotoCtrl {
         SysConfig.asyncPool.execute(() -> {
             try {
                 String photoPathCopy = photoPath;
-//                System.out.println("asyncWork start working.");
-//                LogUtils.info("Thread name: " + Thread.currentThread().getName());
                 String previewPhotosPath = LocalFileUtils.mkTempDir("previewPhotos");
                 String fileFullName = photoPathCopy.substring(photoPathCopy.lastIndexOf(File.separator) + 1);
                 String fileFormat = fileFullName.substring(fileFullName.lastIndexOf(".") + 1);
@@ -66,12 +64,10 @@ public class CompressPhotoCtrl {
                 if (fileFormat.equalsIgnoreCase(Format.jpg.getValue()) || fileFormat.equalsIgnoreCase(Format.jpeg.getValue())) {
                     byte[] load = LocalFileUtils.load(photoPathCopy);
                     String s = LocalFileUtils.save2Path(load, previewPhotosPath, fileFullNameNew);
-//                    System.out.println("使用   原始图片");
                 } else if (new File(photoPathCopy).length() <= SysConfig.skipCompressPhotoSize) {
                     isNeedScale = false;
                     byte[] load = LocalFileUtils.load(photoPathCopy);
                     String s = LocalFileUtils.save2Path(load, previewPhotosPath, fileFullNameNew);
-//                    System.out.println("使用   原始图片2  " + photoPath);
                 } else {
                     boolean b = false;
                     if (!fileFormat.equalsIgnoreCase(Format.heic.getValue()) || !fileFormat.equalsIgnoreCase(Format.heif.getValue())) {
@@ -99,11 +95,9 @@ public class CompressPhotoCtrl {
                     long compressSize = getFileSize(filePathFullNameCompress);
                     long resizeSize = getFileSize(filePathFullNameResize);
                     if (compressSize < resizeSize) {
-//                        System.out.println("使用   压缩图片");
                         filePathFullName = filePathFullNameCompress;
                     } else {
                         filePathFullName = filePathFullNameResize;
-//                        System.out.println("使用resize图片");
                     }
                 }
 

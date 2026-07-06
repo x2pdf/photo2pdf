@@ -88,13 +88,6 @@ public class InitSource {
 
 
     private void initNodeJSEnv() throws IOException {
-
-        // /Users/megan
-        // /Users/megan/code/photo2pdf-dev
-//        System.out.println(System.getProperty("user.home"));//user.home    用户的主目录
-//        System.out.println(System.getProperty("user.dir"));//user.dir    用户的当前工作目录
-
-//        String jsEvnPath = System.getProperty("user.dir")  + File.separator + "photo2pdf/nodejs" + File.separator;
         String nodejsPath;
         if (System.getProperty("os.name").toLowerCase().contains("mac")){
             // 移动文件
