@@ -334,11 +334,6 @@ public class CacheData implements Serializable {
         map.put("isAppRunning", isAppRunning);
         map.put("compressPhotoAmount", compressPhotoAmount);
         map.put("isClick2RemovePhoto", isClick2RemovePhoto);
-//        map.put("photosPathUserSelectOrder", photosPathUserSelectOrder);
-//        map.put("photosPath", photosPath);
-//        map.put("photosPreviewPath", photosPreviewPath);
-//        map.put("photosGenePath", photosGenePath);
-//        map.put("photosFileInfoMap", photosFileInfoMap);
         map.put("isClick2RemovePdf", isClick2RemovePdf);
         map.put("toFormat", toFormat);
         map.put("compressRatio", compressRatio);

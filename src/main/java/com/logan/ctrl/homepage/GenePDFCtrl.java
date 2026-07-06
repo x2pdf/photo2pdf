@@ -211,8 +211,6 @@ public class GenePDFCtrl {
 
             try {
                 // 页面卡死，渲染不了页面 todo
-//                CacheData.setAppStatus("Compress " + CacheData.compressPhotoAmount.get() + "/" + size);
-//                CacheData.refreshStatus();
 
                 // 间隔一定时间轮询
                 Thread.sleep(1000);

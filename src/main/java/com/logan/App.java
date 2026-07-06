@@ -29,15 +29,6 @@ import javafx.stage.WindowEvent;
 /**
  * JavaFX App
  */
-
-/*
- 预览图片太多时会出问题的解决方案
--Dprism.order=sw -Xmx4000m -Xmn100m
--Dprism.poolstats=true
--Dprism.maxvram=500m
--Dprism.order=sw
--Djavafx.animation.fullspeed=true
- */
 public class App extends Application {
     private final static String statement =
             "Please use it for learning purposes only.  Author: Logan Cham\n" +
