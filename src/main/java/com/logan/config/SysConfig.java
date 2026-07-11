@@ -56,6 +56,11 @@ public class SysConfig implements Serializable {
     public static String HEIC_CONVERT_JS_ZIP = APP_CACHE_PATH + "heic" + File.separator;
     // heic convert js node 工程的缓存路径
     public static String HEIC_CONVERT_JS_NODE = APP_CACHE_PATH + "heic" + File.separator + "heic-convert-js" + File.separator;
+
+    // TODO *** jxl convert 工程的缓存路径
+    public static String JXL_CONVERT = APP_CACHE_PATH + "jxl" + File.separator + "jxl-x64-windows-static\\x64-windows-static\\bin" + File.separator;
+
+
     // 语言map，映射语言使用
     public static HashMap<String, String> LANG_MAP = new HashMap<>();
 

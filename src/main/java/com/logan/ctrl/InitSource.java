@@ -2,6 +2,7 @@ package com.logan.ctrl;
 
 import com.logan.config.GeneParamConfig;
 import com.logan.config.SysConfig;
+import com.logan.ctrl.settings.InitSourceJXL;
 import com.logan.utils.LocalFileUtils;
 import com.logan.utils.LogUtils;
 
@@ -26,6 +27,8 @@ public class InitSource {
             moveAsset();
             initNodeJSEnv();
             moveJavaScriptHeicAsset();
+            InitSourceJXL initSourceJXL = new InitSourceJXL();
+            initSourceJXL.moveJXLWindows64Asset();
             LogUtils.info("InitSource end");
         } catch (Exception e) {
             LogUtils.error("initSource exception. info: " + e);

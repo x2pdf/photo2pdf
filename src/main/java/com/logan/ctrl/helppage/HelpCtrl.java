@@ -422,10 +422,10 @@ public class HelpCtrl {
     }
 
     public AnchorPane getFormatConversionAnchorPane() {
-        String format = "jpg";
+        String format = "jpeg";
         ArrayList<String> formatChoices = new ArrayList<>();
-        formatChoices.add("jpg");
         formatChoices.add("jpeg");
+        formatChoices.add("jxl");
         formatChoices.add("png");
         AnchorPane formatConversionAnchorPane = SingleRowAnchorPaneUtils.getTextTextChoiceBoxButton(SysConfig.getLang("FormatConversion") + ":",
                 format, formatChoices, SysConfig.getLang("SelectFile"));
@@ -433,14 +433,14 @@ public class HelpCtrl {
         formatChoiceBox.setOnAction((event) -> {
             int selectedIndex = formatChoiceBox.getSelectionModel().getSelectedIndex();
             if (selectedIndex == 0) {
-                CacheData.setToFormat("jpg");
-            } else if (selectedIndex == 1) {
                 CacheData.setToFormat("jpeg");
+            } else if (selectedIndex == 1) {
+                CacheData.setToFormat("jxl");
             } else if (selectedIndex == 2) {
                 CacheData.setToFormat("png");
             } else {
                 // default
-                CacheData.setToFormat("jpg");
+                CacheData.setToFormat("jpeg");
             }
         });
 
