@@ -54,8 +54,8 @@ public class GeneParamConfig implements Serializable {
 
     private GeneParamConfig() {
         LogUtils.info("GeneParamConfig init");
-        File home = FileSystemView.getFileSystemView().getHomeDirectory();
-        pdfSavePath = home.getAbsolutePath() + File.separator + "photo2pdf" + File.separator;
+        String home = System.getProperty("user.home");
+        pdfSavePath = home + File.separator + "photo2pdf" + File.separator;
         File file = new File(pdfSavePath);
         if (!file.exists()) {
             file.mkdirs();
