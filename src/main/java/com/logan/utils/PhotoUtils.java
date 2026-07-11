@@ -18,6 +18,13 @@ import java.math.BigDecimal;
 public class PhotoUtils {
 
     public static boolean compressPic(String srcFilePath, String descFilePath, String formatName, float quality) {
+
+        // TODO ***
+        if ("jxl".equals(formatName)){
+            JXLConverter.converter2JXL(srcFilePath, descFilePath, quality);
+            return true;
+        }
+
         FileInputStream file = null;
         BufferedImage src = null;
         FileOutputStream out = null;
