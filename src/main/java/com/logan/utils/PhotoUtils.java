@@ -20,8 +20,16 @@ public class PhotoUtils {
     public static boolean compressPic(String srcFilePath, String descFilePath, String formatName, float quality) {
 
         // TODO ***
-        if ("jxl".equals(formatName)){
-            JXLConverter.converter2JXL(srcFilePath, descFilePath, quality);
+        // 将 xxx 格式图片(支持的)转换为 jxl 格式图片
+        if ("jxl".equals(formatName) && descFilePath.endsWith("jxl")){
+            JXLConverterUtils.convert2JXLAdaptor(srcFilePath, descFilePath, quality);
+            return true;
+        }
+        // TODO ***
+        // 将 jxl 格式图片转换为 png 格式图片
+        if (("png".equals(formatName.toLowerCase()) || "jpeg".equals(formatName.toLowerCase()) || "jpg".equals(formatName.toLowerCase()))
+                && srcFilePath.endsWith("jxl")){
+            JXLConverterUtils.convertJXL2OthersAdaptor(srcFilePath, descFilePath, quality);
             return true;
         }
 

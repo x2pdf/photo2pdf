@@ -107,6 +107,7 @@ public class PDFFileChooserUtil {
         FileChooser fileChooser = new FileChooser();
         //设置标题
         fileChooser.setTitle(SysConfig.getLang("SelectFile"));
+        // TODO ***** 优化：根据转换目标格式，限制可选的原始图片格式
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("Photo Format",
                         "*.jpeg", "*.JPEG", "*.Jpeg",
@@ -114,6 +115,7 @@ public class PDFFileChooserUtil {
                         "*.png", "*.PNG", "*.Png",
                         "*.heic", "*.HEIC", "*.Heic",
                         "*.heif", "*.HEIF", "*.Heif",
+                        "*.jxl", "*.JXL",
                         "*.jfif", "*.JFIF",
                         "*.bmp", "*.BMP",
                         "*.gif", "*.GIF"

@@ -93,6 +93,7 @@ public class CacheData implements Serializable {
     // ===============Experimental cache data==================
     public static ArrayList<String> experimentalPhotos = new ArrayList<>();
     public static float compressPDFPhotoRatio = 0.7f;
+    // TODO *** hardcode
     public static String toFormat = "jpg";
     public static float compressRatio = 0.7f;
     public static float scale = 0.7f;
