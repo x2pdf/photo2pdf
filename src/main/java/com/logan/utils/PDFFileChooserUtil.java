@@ -3,6 +3,7 @@ package com.logan.utils;
 import com.logan.config.CacheData;
 import com.logan.config.GeneParamConfig;
 import com.logan.config.SysConfig;
+import com.logan.model.PhotoFormatEnum;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -107,20 +108,35 @@ public class PDFFileChooserUtil {
         FileChooser fileChooser = new FileChooser();
         //设置标题
         fileChooser.setTitle(SysConfig.getLang("SelectFile"));
-        // TODO ***** 优化：根据转换目标格式，限制可选的原始图片格式
-        fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("Photo Format",
-                        "*.jpeg", "*.JPEG", "*.Jpeg",
-                        "*.jpg", "*.JPG", "*.Jpg",
-                        "*.png", "*.PNG", "*.Png",
-                        "*.heic", "*.HEIC", "*.Heic",
-                        "*.heif", "*.HEIF", "*.Heif",
-                        "*.jxl", "*.JXL",
-                        "*.jfif", "*.JFIF",
-                        "*.bmp", "*.BMP",
-                        "*.gif", "*.GIF"
-                )
-        );
+        if (PhotoFormatEnum.JXL.getFormat().equals(toFormat.toLowerCase())) {
+            fileChooser.getExtensionFilters().addAll(
+                    new FileChooser.ExtensionFilter("Photo Format",
+                            "*.jpeg", "*.JPEG", "*.Jpeg",
+                            "*.jpg", "*.JPG", "*.Jpg",
+                            "*.png", "*.PNG", "*.Png","*.apng",
+                            "*.exr",
+                            "*.pam", "*.pgm","*.ppm",
+                            "*.pfm",
+                            "*.pgx",
+                            "*.jxl", "*.JXL",
+                            "*.gif", "*.GIF"
+                    )
+            );
+        } else {
+            fileChooser.getExtensionFilters().addAll(
+                    new FileChooser.ExtensionFilter("Photo Format",
+                            "*.jpeg", "*.JPEG", "*.Jpeg",
+                            "*.jpg", "*.JPG", "*.Jpg",
+                            "*.png", "*.PNG", "*.Png",
+                            "*.heic", "*.HEIC", "*.Heic",
+                            "*.heif", "*.HEIF", "*.Heif",
+                            "*.jxl", "*.JXL",
+                            "*.jfif", "*.JFIF",
+                            "*.bmp", "*.BMP",
+                            "*.gif", "*.GIF"
+                    )
+            );
+        }
 
         //显示选择窗口,获取选中文件
         ArrayList<String> strings = new ArrayList<>();

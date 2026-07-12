@@ -1,5 +1,7 @@
 package com.logan.utils;
 
+import com.logan.model.PhotoFormatEnum;
+
 import javax.imageio.IIOImage;
 import javax.imageio.ImageIO;
 import javax.imageio.ImageWriteParam;
@@ -17,18 +19,19 @@ import java.math.BigDecimal;
  */
 public class PhotoUtils {
 
+    // TODO *** 更改方法名字
     public static boolean compressPic(String srcFilePath, String descFilePath, String formatName, float quality) {
 
-        // TODO ***
         // 将 xxx 格式图片(支持的)转换为 jxl 格式图片
-        if ("jxl".equals(formatName) && descFilePath.endsWith("jxl")){
+        if (PhotoFormatEnum.JXL.getFormat().equals(formatName) && descFilePath.endsWith(PhotoFormatEnum.JXL.getFormat())){
             JXLConverterUtils.convert2JXLAdaptor(srcFilePath, descFilePath, quality);
             return true;
         }
-        // TODO ***
         // 将 jxl 格式图片转换为 png 格式图片
-        if (("png".equals(formatName.toLowerCase()) || "jpeg".equals(formatName.toLowerCase()) || "jpg".equals(formatName.toLowerCase()))
-                && srcFilePath.endsWith("jxl")){
+        if ((PhotoFormatEnum.PNG.getFormat().equals(formatName.toLowerCase())
+                || PhotoFormatEnum.JPEG.getFormat().equals(formatName.toLowerCase())
+                || PhotoFormatEnum.JPG.getFormat().equals(formatName.toLowerCase()))
+                && srcFilePath.endsWith(PhotoFormatEnum.JXL.getFormat())){
             JXLConverterUtils.convertJXL2OthersAdaptor(srcFilePath, descFilePath, quality);
             return true;
         }

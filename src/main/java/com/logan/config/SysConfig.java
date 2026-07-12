@@ -57,8 +57,7 @@ public class SysConfig implements Serializable {
     // heic convert js node 工程的缓存路径
     public static String HEIC_CONVERT_JS_NODE = APP_CACHE_PATH + "heic" + File.separator + "heic-convert-js" + File.separator;
 
-    // TODO *** jxl convert 工程的缓存路径
-//    public static String JXL_CONVERT = APP_CACHE_PATH + "jxl" + File.separator + "jxl-x64-windows-static\\x64-windows-static\\bin" + File.separator;
+    // jxl convert 工程的缓存路径
     public static String JXL_CONVERT_WINDOWS = APP_CACHE_PATH + "jxl" + File.separator + "jxl-x64-windows-static\\bin" + File.separator;
     public static String JXL_CONVERT_MAC = APP_CACHE_PATH + "jxl" + File.separator + "jxl-arm64-mac-static" + File.separator;
 

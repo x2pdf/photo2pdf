@@ -43,30 +43,10 @@ public class InitSourceJXL {
         // 解压文件
         un7zJXL(assetPath + "jxl-arm64-mac-static.7z", assetPath);
 
-        // TODO hardcode 解压完成后，给目录下所有文件授权
+        // 解压完成后，给目录下所有文件授权（仅mac需要这样子做）
         setChomd2ExecFilesInDirectory(assetPath + "jxl-arm64-mac-static");
     }
 
-
-    private static void unZipJXL(String srcPath, String save2Path) {
-        String savePath = "";
-        if (save2Path == null) {
-            savePath = srcPath.substring(0, srcPath.lastIndexOf(".")) + File.separator;
-        } else {
-            savePath = save2Path;
-        }
-
-        new File(savePath).mkdir();
-
-        try {
-            ZipFile zipFile = new ZipFile(srcPath);
-            zipFile.extractAll(savePath);
-            LogUtils.info("Successfully extracted: " + srcPath + " to " + savePath);
-        } catch (ZipException e) {
-            LogUtils.error("Failed to extract zip file: " + srcPath);
-            e.printStackTrace();
-        }
-    }
 
     private static void un7zJXL(String srcPath, String save2Path) {
         String savePath = "";
@@ -145,12 +125,12 @@ public class InitSourceJXL {
                     fileName.endsWith(".a") ||
                     fileName.endsWith(".o") ||
                     fileName.endsWith(".lib")) {
-                LogUtils.info("跳过不需要执行权限的文件: " + fileOrDir.getAbsolutePath());
+//                LogUtils.info("跳过不需要执行权限的文件: " + fileOrDir.getAbsolutePath());
                 return;
             }
 
             // 给可执行文件授权
-            LogUtils.info("给文件授权：chmod +x " + fileOrDir.getAbsolutePath());
+//            LogUtils.info("给文件授权：chmod +x " + fileOrDir.getAbsolutePath());
             try {
                 // 使用数组形式执行命令，避免路径转义问题
                 ProcessBuilder pb = new ProcessBuilder("chmod", "+x", fileOrDir.getAbsolutePath());
@@ -173,7 +153,7 @@ public class InitSourceJXL {
                                 ", 文件: " + fileOrDir.getAbsolutePath() +
                                 ", 输出: " + output.toString());
                     } else {
-                        LogUtils.info("文件授权成功: " + fileOrDir.getAbsolutePath());
+//                        LogUtils.info("文件授权成功: " + fileOrDir.getAbsolutePath());
                     }
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();

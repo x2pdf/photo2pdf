@@ -8,7 +8,8 @@ import java.nio.charset.StandardCharsets;
 
 /**
  * JXL格式图片和其他格式图片（JPEG/PNG）的转换器
- * 支持的系统平台：windows 64位
+ * 支持的系统平台：windows 64位，macOS ARM64位
+ * 不支持的系统平台：windows 32位，windows ARM，macOS intel chip
  */
 public class JXLConverterUtils {
 
@@ -34,7 +35,7 @@ public class JXLConverterUtils {
             Runtime runtime = Runtime.getRuntime();
 
             // 构建命令: SysConfig.JXL_CONVERT + "cjxl.exe" srcFilePath descFilePath
-            // TODO ***
+            // TODO **** 命令的可选参数，例如质量
             String cjxlPath = SysConfig.JXL_CONVERT_WINDOWS + "cjxl.exe";
             String[] command = new String[]{cjxlPath, srcFilePath, descFilePath};
 
@@ -67,7 +68,7 @@ public class JXLConverterUtils {
             Runtime runtime = Runtime.getRuntime();
 
             // 构建命令: SysConfig.JXL_CONVERT + "cjxl.exe" srcFilePath descFilePath
-            // TODO ***
+            // TODO **** 命令的可选参数，例如质量
             String cjxlPath = SysConfig.JXL_CONVERT_WINDOWS + "djxl.exe";
             String[] command = new String[]{cjxlPath, srcFilePath, descFilePath};
 
@@ -100,7 +101,7 @@ public class JXLConverterUtils {
             Runtime runtime = Runtime.getRuntime();
 
             // 构建命令: SysConfig.JXL_CONVERT + "cjxl.exe" srcFilePath descFilePath
-            // TODO ***
+            // TODO **** 命令的可选参数，例如质量
             String cjxlPath = SysConfig.JXL_CONVERT_MAC + "cjxl";
             String[] command = new String[]{cjxlPath, srcFilePath, descFilePath};
 
@@ -133,7 +134,7 @@ public class JXLConverterUtils {
             Runtime runtime = Runtime.getRuntime();
 
             // 构建命令: SysConfig.JXL_CONVERT + "cjxl.exe" srcFilePath descFilePath
-            // TODO ***
+            // TODO **** 命令的可选参数，例如质量
             String cjxlPath = SysConfig.JXL_CONVERT_MAC + "djxl";
             String[] command = new String[]{cjxlPath, srcFilePath, descFilePath};
 
