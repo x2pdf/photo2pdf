@@ -78,6 +78,7 @@ public class PDFFileChooserUtil {
                 new FileChooser.ExtensionFilter("Photo Format",
                         "*.jpeg", "*.JPEG", "*.Jpeg",
                         "*.jpg", "*.JPG", "*.Jpg",
+                        "*.jxl", "*.JXL", "*.Jxl",
                         "*.png", "*.PNG", "*.Png",
                         "*.heic", "*.HEIC", "*.Heic",
                         "*.heif", "*.HEIF", "*.Heif",

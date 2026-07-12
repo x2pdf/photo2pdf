@@ -82,6 +82,12 @@ public class PhotoUtils {
 
 
     public static boolean compressPic(String srcFilePath, String descFilePath, String formatName, float quality) {
+        // 将jxl 图片压缩
+        if (PhotoFormatEnum.JXL.getFormat().equals(formatName)){
+            JXLConverterUtils.compressJXLAdaptor(srcFilePath, descFilePath, quality);
+            return true;
+        }
+
         FileInputStream file = null;
         BufferedImage src = null;
         FileOutputStream out = null;

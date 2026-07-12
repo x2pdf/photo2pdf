@@ -157,6 +157,100 @@ public class JXLConverterUtils {
     }
 
 
+    public static void compressJXLAdaptor(String srcFilePath, String descFilePath, float quality) {
+        if (!isMacOS()) {
+            compressJXLWindowsX64(srcFilePath, descFilePath, quality);
+        } else {
+            compressJXLMacARM64(srcFilePath, descFilePath, quality);
+        }
+    }
+
+    public static void compressJXLWindowsX64(String srcFilePath, String descFilePath, float quality) {
+        try {
+            long start = System.currentTimeMillis();
+            Runtime runtime = Runtime.getRuntime();
+
+            // 构建命令: SysConfig.JXL_CONVERT + "cjxl.exe" srcFilePath descFilePath
+            String cjxlPath = SysConfig.JXL_CONVERT_WINDOWS + "cjxl.exe";
+            float jxlCompressRatio = getJXLCompressRatio(quality);
+            String[] command = new String[]{cjxlPath, srcFilePath, descFilePath, "-d", String.valueOf(jxlCompressRatio), "-e", "9", "-p"};
+
+            LogUtils.info("Executing JXL compression: " + cjxlPath + " " + srcFilePath + " -> " + descFilePath + ", jxlCompressRatio: "+  jxlCompressRatio);
+
+            Process process = runtime.exec(command, null, new File(SysConfig.JXL_CONVERT_WINDOWS));
+            // 读取标准输出
+            String outStr = consumeInputStream(process.getInputStream());
+            // 读取错误输出
+            String errStr = consumeInputStream(process.getErrorStream());
+            int exitCode = process.waitFor();
+            if (exitCode == 0) {
+                LogUtils.info("JXL compression success. Output: " + outStr);
+            } else {
+                LogUtils.error("JXL compression failed. Exit code: " + exitCode + ", Error: " + errStr);
+            }
+
+            long end = System.currentTimeMillis();
+            LogUtils.info("JXL compression spend(ms): " + (end - start));
+        } catch (IOException | InterruptedException e) {
+            LogUtils.error("JXL compression exception: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public static void compressJXLMacARM64(String srcFilePath, String descFilePath, float quality) {
+        try {
+            long start = System.currentTimeMillis();
+            Runtime runtime = Runtime.getRuntime();
+
+            // 构建命令: SysConfig.JXL_CONVERT + "cjxl.exe" srcFilePath descFilePath
+            String cjxlPath = SysConfig.JXL_CONVERT_MAC + "cjxl";
+            float jxlCompressRatio = getJXLCompressRatio(quality);
+            String[] command = new String[]{cjxlPath, srcFilePath, descFilePath, "-d", String.valueOf(jxlCompressRatio), "-e", "9", "-p"};
+
+            LogUtils.info("Executing JXL compression: " + cjxlPath + " " + srcFilePath + " -> " + descFilePath + ", jxlCompressRatio: "+  jxlCompressRatio);
+
+            Process process = runtime.exec(command, null, new File(SysConfig.JXL_CONVERT_MAC));
+            // 读取标准输出
+            String outStr = consumeInputStream(process.getInputStream());
+            // 读取错误输出
+            String errStr = consumeInputStream(process.getErrorStream());
+            int exitCode = process.waitFor();
+            if (exitCode == 0) {
+                LogUtils.info("JXL compression success. Output: " + outStr);
+            } else {
+                LogUtils.error("JXL compression failed. Exit code: " + exitCode + ", Error: " + errStr);
+            }
+
+            long end = System.currentTimeMillis();
+            LogUtils.info("JXL compression spend(ms): " + (end - start));
+        } catch (IOException | InterruptedException e) {
+            LogUtils.error("JXL compression exception: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    // TODO *** 需要细化。
+    private static float getJXLCompressRatio(float quality){
+        float compressRatio = 1.0f;
+        if (0 < quality && quality <= 0.3){
+            compressRatio = 5;
+        } else if (0.3 < quality && quality <= 0.5){
+            compressRatio = 4;
+        } else if (0.5 < quality && quality <= 0.6){
+            compressRatio = 3;
+        } else if (0.6 < quality && quality <= 0.7){
+            compressRatio = 2;
+        } else if (0.7 < quality && quality <= 0.8){
+            compressRatio = 1;
+        } else if (0.8 < quality && quality <= 0.9){
+            compressRatio = 0.5f;
+        }else {
+            compressRatio = 0.0f;
+        }
+        return compressRatio;
+    }
+
+
     private static boolean isMacOS() {
         if (System.getProperty("os.name").toLowerCase().contains("windows")) {
             return false;
