@@ -256,10 +256,11 @@ public class HeifConvertUtils {
         return false;
     }
 
-    private static void compress(String from, String to, String quality) {
-        String fileFullName = from.substring(from.lastIndexOf(File.separator) + 1);
-        boolean b = PhotoUtils.compressPic(from, to, CacheData.getToFormat(), Float.parseFloat(quality));
-    }
+    // TODO **
+//    private static void compress(String from, String to, String quality) {
+//        String fileFullName = from.substring(from.lastIndexOf(File.separator) + 1);
+//        boolean b = PhotoUtils.compressPic(from, to, CacheData.getToFormat(), Float.parseFloat(quality));
+//    }
 
     /**
      * 读取 is 中的文本数据

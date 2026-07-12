@@ -466,7 +466,7 @@ public class HelpCtrl {
                         String fileFullName = path.substring(path.lastIndexOf(File.separator) + 1);
                         String fileName = fileFullName.substring(0, fileFullName.lastIndexOf("."));
                         String AbsFileFullName = savePath + fileName + "." + CacheData.getToFormat();
-                        boolean b = PhotoUtils.compressPic(path, AbsFileFullName, CacheData.getToFormat(), 1);
+                        boolean b = PhotoUtils.convertPic(path, AbsFileFullName, CacheData.getToFormat(), 1);
                     } catch (Exception e) {
                         LogUtils.error("FormatConversion error: " + e.getMessage());
                     }
