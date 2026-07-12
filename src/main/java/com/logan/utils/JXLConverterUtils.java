@@ -35,9 +35,8 @@ public class JXLConverterUtils {
             Runtime runtime = Runtime.getRuntime();
 
             // 构建命令: SysConfig.JXL_CONVERT + "cjxl.exe" srcFilePath descFilePath
-            // TODO **** 命令的可选参数，例如质量
             String cjxlPath = SysConfig.JXL_CONVERT_WINDOWS + "cjxl.exe";
-            String[] command = new String[]{cjxlPath, srcFilePath, descFilePath};
+            String[] command = new String[]{cjxlPath, srcFilePath, descFilePath, "-d", "0.0", "-e", "9", "-p", "-j", "1"};
 
             LogUtils.info("Executing JXL conversion: " + cjxlPath + " " + srcFilePath + " -> " + descFilePath);
 
@@ -68,7 +67,6 @@ public class JXLConverterUtils {
             Runtime runtime = Runtime.getRuntime();
 
             // 构建命令: SysConfig.JXL_CONVERT + "cjxl.exe" srcFilePath descFilePath
-            // TODO **** 命令的可选参数，例如质量
             String cjxlPath = SysConfig.JXL_CONVERT_WINDOWS + "djxl.exe";
             String[] command = new String[]{cjxlPath, srcFilePath, descFilePath};
 
@@ -101,9 +99,8 @@ public class JXLConverterUtils {
             Runtime runtime = Runtime.getRuntime();
 
             // 构建命令: SysConfig.JXL_CONVERT + "cjxl.exe" srcFilePath descFilePath
-            // TODO **** 命令的可选参数，例如质量
             String cjxlPath = SysConfig.JXL_CONVERT_MAC + "cjxl";
-            String[] command = new String[]{cjxlPath, srcFilePath, descFilePath};
+            String[] command = new String[]{cjxlPath, srcFilePath, descFilePath, "-d", "0.0", "-e", "9", "-p", "-j", "1"};
 
             LogUtils.info("Executing JXL conversion: " + cjxlPath + " " + srcFilePath + " -> " + descFilePath);
 
@@ -134,7 +131,6 @@ public class JXLConverterUtils {
             Runtime runtime = Runtime.getRuntime();
 
             // 构建命令: SysConfig.JXL_CONVERT + "cjxl.exe" srcFilePath descFilePath
-            // TODO **** 命令的可选参数，例如质量
             String cjxlPath = SysConfig.JXL_CONVERT_MAC + "djxl";
             String[] command = new String[]{cjxlPath, srcFilePath, descFilePath};
 
