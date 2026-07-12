@@ -45,10 +45,21 @@ public class App extends Application {
     @Override
     public void start(Stage stage) {
         try {
+            long appStartTime = System.currentTimeMillis();
             LogUtils.info("\n\n***** statement *****\n" + statement);
+            long configStartTime = System.currentTimeMillis();
             CacheData.isAppRunning = true;
             initConfig();
+            long configEndTime = System.currentTimeMillis();
+            long configDuration = configEndTime - configStartTime;
+            LogUtils.info(String.format("[Performance] APP initConfig completed in %d ms", configDuration));
+
+            long stageStartTime = System.currentTimeMillis();
             initStage(stage);
+            long stageEndTime = System.currentTimeMillis();
+            long stageDuration = stageEndTime - stageStartTime;
+            LogUtils.info(String.format("[Performance] APP initStage completed in %d ms", stageDuration));
+
             stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
                 @Override
                 public void handle(WindowEvent event) {
@@ -59,6 +70,10 @@ public class App extends Application {
                 }
             });
             postStart();
+
+            long appEndTime = System.currentTimeMillis();
+            long appTotalDuration = appEndTime - appStartTime;
+            LogUtils.info(String.format("[Performance] Application startup completed in %d ms (total)", appTotalDuration));
         } catch (Exception e) {
             LogUtils.error("initConfig exception: " + e.toString());
         } catch (Error error) {
@@ -82,8 +97,12 @@ public class App extends Application {
 
     public void postStart() {
         SysConfig.asyncPool.execute(() -> {
+            long postStartStartTime = System.currentTimeMillis();
             InitSource initSource = new InitSource();
             initSource.init();
+            long postStartEndTime = System.currentTimeMillis();
+            long postStartDuration = postStartEndTime - postStartStartTime;
+            LogUtils.info(String.format("[Performance] APP postStart(async initSource) completed in %d ms", postStartDuration));
         });
     }
 
