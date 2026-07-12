@@ -28,7 +28,7 @@ public class InitSource {
             initNodeJSEnv();
             moveJavaScriptHeicAsset();
             InitSourceJXL initSourceJXL = new InitSourceJXL();
-            initSourceJXL.moveJXLWindows64Asset();
+            initSourceJXL.moveJXLAsset();
             LogUtils.info("InitSource end");
         } catch (Exception e) {
             LogUtils.error("initSource exception. info: " + e);

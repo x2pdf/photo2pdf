@@ -59,8 +59,8 @@ public class SysConfig implements Serializable {
 
     // TODO *** jxl convert 工程的缓存路径
 //    public static String JXL_CONVERT = APP_CACHE_PATH + "jxl" + File.separator + "jxl-x64-windows-static\\x64-windows-static\\bin" + File.separator;
-    public static String JXL_CONVERT = APP_CACHE_PATH + "jxl" + File.separator + "jxl-x64-windows-static\\bin" + File.separator;
-
+    public static String JXL_CONVERT_WINDOWS = APP_CACHE_PATH + "jxl" + File.separator + "jxl-x64-windows-static\\bin" + File.separator;
+    public static String JXL_CONVERT_MAC = APP_CACHE_PATH + "jxl" + File.separator + "jxl-arm64-mac-static" + File.separator;
 
     // 语言map，映射语言使用
     public static HashMap<String, String> LANG_MAP = new HashMap<>();
