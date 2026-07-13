@@ -1,4 +1,4 @@
-package com.logan.ctrl.helppage.experfunc.gene;
+package com.logan.ctrl.helppage.experfunc.txtgeneimg;
 
 import com.logan.config.SysConfig;
 import com.logan.hbox.BaseHBox;

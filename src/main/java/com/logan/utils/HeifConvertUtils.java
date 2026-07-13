@@ -2,7 +2,7 @@ package com.logan.utils;
 
 import com.logan.config.AppFilePathConfig;
 import com.logan.config.CacheData;
-import com.logan.config.Format;
+import com.logan.config.PhotoFormat;
 import com.logan.config.SysConfig;
 import com.logan.ctrl.homepage.PDFViewGridAreaCtrl;
 import com.logan.model.PhotoFileInfo;
@@ -41,7 +41,7 @@ public class HeifConvertUtils {
         for (String selectPhoto : selectPhotos) {
             String fileFullName = selectPhoto.substring(selectPhoto.lastIndexOf(File.separator) + 1);
             String fileFormat = fileFullName.substring(fileFullName.lastIndexOf(".") + 1);
-            if (Format.heic.getValue().equalsIgnoreCase(fileFormat) || Format.heif.getValue().equalsIgnoreCase(fileFormat)) {
+            if (PhotoFormat.HEIC.getValue().equalsIgnoreCase(fileFormat) || PhotoFormat.HEIF.getValue().equalsIgnoreCase(fileFormat)) {
                 heifPhotos.add(selectPhoto);
             }
         }
@@ -126,7 +126,7 @@ public class HeifConvertUtils {
         for (String selectPhoto : selectPhotos) {
             String fileFullName = selectPhoto.substring(selectPhoto.lastIndexOf(File.separator) + 1);
             String fileFormat = fileFullName.substring(fileFullName.lastIndexOf(".") + 1);
-            if (Format.heic.getValue().equalsIgnoreCase(fileFormat) || Format.heif.getValue().equalsIgnoreCase(fileFormat)) {
+            if (PhotoFormat.HEIC.getValue().equalsIgnoreCase(fileFormat) || PhotoFormat.HEIF.getValue().equalsIgnoreCase(fileFormat)) {
                 String s = CacheData.getHeic2convertPhotoMap().get(selectPhoto);
                 if (null != s) {
                     res.add(s);
@@ -151,12 +151,12 @@ public class HeifConvertUtils {
         String fileFullName = from.substring(from.lastIndexOf(File.separator) + 1);
         String fileFormat = fileFullName.substring(fileFullName.lastIndexOf(".") + 1);
         // 僅僅處理 heif 文件
-        if (Format.heic.getValue().equalsIgnoreCase(fileFormat) || Format.heif.getValue().equalsIgnoreCase(fileFormat)) {
+        if (PhotoFormat.HEIC.getValue().equalsIgnoreCase(fileFormat) || PhotoFormat.HEIF.getValue().equalsIgnoreCase(fileFormat)) {
             if (targetFormat == null || "".equals(targetFormat)) {
-                targetFormat = Format.jpeg.getValue();
+                targetFormat = PhotoFormat.JPEG.getValue();
             }
             String fileName = fileFullName.substring(0, fileFullName.lastIndexOf("."));
-            String fileNameNew = previewPhotosPath + fileName + "." + Format.jpeg.getValue();
+            String fileNameNew = previewPhotosPath + fileName + "." + PhotoFormat.JPEG.getValue();
 //            String fileNameTemp = previewPhotosPath + fileName + System.currentTimeMillis() +  "." + Format.jpeg.getValue();
             if (convert(from, fileNameNew, targetFormat, quality)) {
                 //因为 heic 转成的图片可能会变大，所以压缩图片以减小存储空间 todo(感觉作用不是很大)
@@ -180,9 +180,9 @@ public class HeifConvertUtils {
         String previewPhotosPath = LocalFileUtils.mkTempDir("previewPhotos");
         String fileFullName = from.substring(from.lastIndexOf(File.separator) + 1);
         String fileName = fileFullName.substring(0, fileFullName.lastIndexOf("."));
-        String fileNameNew = previewPhotosPath + fileName + "." + Format.jpeg.getValue();
+        String fileNameNew = previewPhotosPath + fileName + "." + PhotoFormat.JPEG.getValue();
         ;
-        if (convert(from, fileNameNew, Format.jpeg.getValue(), "1")) {
+        if (convert(from, fileNameNew, PhotoFormat.JPEG.getValue(), "1")) {
             PhotoFileInfo photoFileInfo = PDFViewGridAreaCtrl.getPhotoFileInfo(from);
             PhotoFileInfo photoFileInfoNew = PDFViewGridAreaCtrl.getPhotoFileInfo(fileNameNew);
             photoFileInfoNew.setCreateTime(photoFileInfo.getCreateTime());
@@ -198,9 +198,9 @@ public class HeifConvertUtils {
         String previewPhotosPath = LocalFileUtils.mkTempDir("previewPhotos");
         String fileFullName = from.substring(from.lastIndexOf(File.separator) + 1);
         String fileName = fileFullName.substring(0, fileFullName.lastIndexOf("."));
-        String fileNameNew = previewPhotosPath + fileName + "." + Format.png.getValue();
+        String fileNameNew = previewPhotosPath + fileName + "." + PhotoFormat.PNG.getValue();
         ;
-        if (convert(from, fileNameNew, Format.png.getValue(), "1")) {
+        if (convert(from, fileNameNew, PhotoFormat.PNG.getValue(), "1")) {
             PhotoFileInfo photoFileInfo = PDFViewGridAreaCtrl.getPhotoFileInfo(from);
             PhotoFileInfo photoFileInfoNew = PDFViewGridAreaCtrl.getPhotoFileInfo(fileNameNew);
             photoFileInfoNew.setCreateTime(photoFileInfo.getCreateTime());
@@ -220,7 +220,7 @@ public class HeifConvertUtils {
     public static boolean convert(String from, String to, String targetFormat, String quality) {
         try {
             if (targetFormat == null || "".equals(targetFormat)) {
-                targetFormat = Format.jpeg.getValue();
+                targetFormat = PhotoFormat.JPEG.getValue();
             }
             if (quality == null || "".equals(quality)) {
                 quality = "1";
@@ -230,7 +230,7 @@ public class HeifConvertUtils {
             String[] command;
             String nodejsPath = SysConfig.NODEJS_PATH;
             // node heic2png.js D:\Logan\code\photo2pdf\xxx.heic=D:\Logan\code\photo2pdf\xxx.png [quality]
-            if (Format.jpeg.getValue().equalsIgnoreCase(targetFormat) || Format.jpg.getValue().equalsIgnoreCase(targetFormat)) {
+            if (PhotoFormat.JPEG.getValue().equalsIgnoreCase(targetFormat) || PhotoFormat.JPG.getValue().equalsIgnoreCase(targetFormat)) {
                 // 当转换为jpeg时， 可以有质量 quality 的参数设定
                 command = new String[]{nodejsPath + "node", "heic2jpeg.js", from + "=" + to, quality};
             } else {

@@ -1,6 +1,6 @@
 package com.logan.utils;
 
-import com.logan.model.PhotoFormatEnum;
+import com.logan.config.PhotoFormat;
 
 import javax.imageio.IIOImage;
 import javax.imageio.ImageIO;
@@ -21,15 +21,15 @@ public class PhotoUtils {
 
     public static boolean convertPic(String srcFilePath, String descFilePath, String formatName, float quality) {
         // 将 xxx 格式图片(支持的)转换为 jxl 格式图片
-        if (PhotoFormatEnum.JXL.getFormat().equals(formatName) && descFilePath.endsWith(PhotoFormatEnum.JXL.getFormat())){
+        if (PhotoFormat.JXL.getValue().equals(formatName) && descFilePath.endsWith(PhotoFormat.JXL.getValue())){
             JXLConverterUtils.convert2JXLAdaptor(srcFilePath, descFilePath, quality);
             return true;
         }
         // 将 jxl 格式图片转换为 png 格式图片
-        if ((PhotoFormatEnum.PNG.getFormat().equals(formatName.toLowerCase())
-                || PhotoFormatEnum.JPEG.getFormat().equals(formatName.toLowerCase())
-                || PhotoFormatEnum.JPG.getFormat().equals(formatName.toLowerCase()))
-                && srcFilePath.endsWith(PhotoFormatEnum.JXL.getFormat())){
+        if ((PhotoFormat.PNG.getValue().equals(formatName.toLowerCase())
+                || PhotoFormat.JPEG.getValue().equals(formatName.toLowerCase())
+                || PhotoFormat.JPG.getValue().equals(formatName.toLowerCase()))
+                && srcFilePath.endsWith(PhotoFormat.JXL.getValue())){
             JXLConverterUtils.convertJXL2OthersAdaptor(srcFilePath, descFilePath, quality);
             return true;
         }
@@ -83,7 +83,7 @@ public class PhotoUtils {
 
     public static boolean compressPic(String srcFilePath, String descFilePath, String formatName, float quality) {
         // 将jxl 图片压缩
-        if (PhotoFormatEnum.JXL.getFormat().equals(formatName)){
+        if (PhotoFormat.JXL.getValue().equals(formatName)){
             JXLConverterUtils.compressJXLAdaptor(srcFilePath, descFilePath, quality);
             return true;
         }

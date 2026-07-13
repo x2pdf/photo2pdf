@@ -1,4 +1,4 @@
-package com.logan.ctrl.helppage.experfunc.gene;
+package com.logan.ctrl.helppage.experfunc.txtgeneimg;
 
 public class TextToImageDataDTO {
     public static String title = "";

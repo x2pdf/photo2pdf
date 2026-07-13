@@ -2,8 +2,8 @@ package com.logan.utils;
 
 import com.logan.config.CacheData;
 import com.logan.config.GeneParamConfig;
+import com.logan.config.PhotoFormat;
 import com.logan.config.SysConfig;
-import com.logan.model.PhotoFormatEnum;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -109,7 +109,7 @@ public class PDFFileChooserUtil {
         FileChooser fileChooser = new FileChooser();
         //设置标题
         fileChooser.setTitle(SysConfig.getLang("SelectFile"));
-        if (PhotoFormatEnum.JXL.getFormat().equals(toFormat.toLowerCase())) {
+        if (PhotoFormat.JXL.getValue().equals(toFormat.toLowerCase())) {
             fileChooser.getExtensionFilters().addAll(
                     new FileChooser.ExtensionFilter("Photo Format",
                             "*.jpeg", "*.JPEG", "*.Jpeg",

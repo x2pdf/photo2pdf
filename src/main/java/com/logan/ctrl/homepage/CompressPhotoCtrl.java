@@ -1,7 +1,7 @@
 package com.logan.ctrl.homepage;
 
 import com.logan.config.CacheData;
-import com.logan.config.Format;
+import com.logan.config.PhotoFormat;
 import com.logan.config.GeneParamConfig;
 import com.logan.config.SysConfig;
 import com.logan.utils.HeifConvertUtils;
@@ -52,12 +52,12 @@ public class CompressPhotoCtrl {
                 // 增加识别的后缀，已识别同一张图片被用户选择两次的图片
                 String filePathFullNameCompress = previewPhotosPath + fileFullNameNew;
 
-                if (fileFormat.equalsIgnoreCase(Format.heic.getValue()) || fileFormat.equalsIgnoreCase(Format.heif.getValue())) {
+                if (fileFormat.equalsIgnoreCase(PhotoFormat.HEIC.getValue()) || fileFormat.equalsIgnoreCase(PhotoFormat.HEIF.getValue())) {
                     String fileFullNameNewConvert = PhotoUtils.getHEICConvertName(fileFullName);
                     String filePathFullNameCompress2 = previewPhotosPath + fileFullNameNewConvert;
-                    HeifConvertUtils.convert(photoPathCopy, filePathFullNameCompress2,Format.jpeg.getValue(), "0.7");
+                    HeifConvertUtils.convert(photoPathCopy, filePathFullNameCompress2, PhotoFormat.JPEG.getValue(), "0.7");
                     photoPathCopy = filePathFullNameCompress2;
-                    fileFormat = Format.jpeg.getValue();
+                    fileFormat = PhotoFormat.JPEG.getValue();
                     fileFullName = photoPathCopy.substring(photoPathCopy.lastIndexOf(File.separator) + 1);
                     fileFullNameNew = PhotoUtils.getCompressName(fileFullName);
                     filePathFullNameCompress = previewPhotosPath + fileFullNameNew;
@@ -66,7 +66,7 @@ public class CompressPhotoCtrl {
                 // 图片文件小于 200 kB 的不压缩了
                 boolean isNeedScale = true;
                 // 不压缩的图片格式（压缩后文件变得更大了）, 直接 copy 到目标位置
-                if (fileFormat.equalsIgnoreCase(Format.jpg.getValue()) || fileFormat.equalsIgnoreCase(Format.jpeg.getValue())) {
+                if (fileFormat.equalsIgnoreCase(PhotoFormat.JPG.getValue()) || fileFormat.equalsIgnoreCase(PhotoFormat.JPEG.getValue())) {
                     byte[] load = LocalFileUtils.load(photoPathCopy);
                     filePathFullNameCompress = LocalFileUtils.save2Path(load, previewPhotosPath, fileFullNameNew);
                 } else if (new File(photoPathCopy).length() <= SysConfig.skipCompressPhotoSize) {
@@ -75,7 +75,7 @@ public class CompressPhotoCtrl {
                     filePathFullNameCompress = LocalFileUtils.save2Path(load, previewPhotosPath, fileFullNameNew);
                 } else {
                     boolean b = false;
-                    if (!fileFormat.equalsIgnoreCase(Format.heic.getValue()) && !fileFormat.equalsIgnoreCase(Format.heif.getValue())) {
+                    if (!fileFormat.equalsIgnoreCase(PhotoFormat.HEIC.getValue()) && !fileFormat.equalsIgnoreCase(PhotoFormat.HEIF.getValue())) {
                         b = PhotoUtils.compressPic(photoPathCopy, filePathFullNameCompress, fileFormat, quality);
                     }
                     if (!b) {

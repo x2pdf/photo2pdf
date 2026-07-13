@@ -6,7 +6,7 @@ import com.logan.config.GeneParamConfig;
 import com.logan.config.SysConfig;
 import com.logan.ctrl.helppage.experfunc.zip.ZIPHomepage;
 import com.logan.utils.PDFFileChooserUtil;
-import com.logan.ctrl.helppage.experfunc.gene.TextToImageHomepage;
+import com.logan.ctrl.helppage.experfunc.txtgeneimg.TextToImageHomepage;
 import com.logan.utils.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
