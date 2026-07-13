@@ -1,5 +1,6 @@
 package com.logan.utils;
 
+import com.logan.config.AppFilePathConfig;
 import com.logan.config.SysConfig;
 
 import java.io.*;
@@ -18,8 +19,8 @@ import java.util.List;
  */
 public class LocalFileUtils {
     // 设定缓存文件的保存路径
-    private static String cachePath = SysConfig.APP_CACHE_PATH;
-    private static String logPath = SysConfig.LOG_CACHE_PATH;
+    private static String cachePath = AppFilePathConfig.APP_CACHE_PATH;
+    private static String logPath = AppFilePathConfig.LOG_CACHE_PATH;
 
     public static String getLogPath() {
         return logPath;
@@ -83,7 +84,7 @@ public class LocalFileUtils {
     }
 
     public static String append2Log(String content) {
-        return append2Log(content, SysConfig.LOG_FILE_NAME);
+        return append2Log(content, AppFilePathConfig.LOG_FILE_NAME);
     }
 
     public static String append2Log(String content, String fileFullName) {

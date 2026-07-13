@@ -1,5 +1,6 @@
 package com.logan.utils;
 
+import com.logan.config.AppFilePathConfig;
 import com.logan.config.SysConfig;
 
 import java.io.*;
@@ -35,12 +36,12 @@ public class JXLConverterUtils {
             Runtime runtime = Runtime.getRuntime();
 
             // 构建命令: SysConfig.JXL_CONVERT + "cjxl.exe" srcFilePath descFilePath
-            String cjxlPath = SysConfig.JXL_CONVERT_WINDOWS + "cjxl.exe";
+            String cjxlPath = AppFilePathConfig.JXL_CONVERT_WINDOWS + "cjxl.exe";
             String[] command = new String[]{cjxlPath, srcFilePath, descFilePath, "-d", "0.0", "-e", "9", "-p", "-j", "1"};
 
             LogUtils.info("Executing JXL conversion: " + cjxlPath + " " + srcFilePath + " -> " + descFilePath);
 
-            Process process = runtime.exec(command, null, new File(SysConfig.JXL_CONVERT_WINDOWS));
+            Process process = runtime.exec(command, null, new File(AppFilePathConfig.JXL_CONVERT_WINDOWS));
             // 读取标准输出
             String outStr = consumeInputStream(process.getInputStream());
             // 读取错误输出
@@ -67,12 +68,12 @@ public class JXLConverterUtils {
             Runtime runtime = Runtime.getRuntime();
 
             // 构建命令: SysConfig.JXL_CONVERT + "cjxl.exe" srcFilePath descFilePath
-            String cjxlPath = SysConfig.JXL_CONVERT_WINDOWS + "djxl.exe";
+            String cjxlPath = AppFilePathConfig.JXL_CONVERT_WINDOWS + "djxl.exe";
             String[] command = new String[]{cjxlPath, srcFilePath, descFilePath};
 
             LogUtils.info("Executing JXL conversion: " + cjxlPath + " " + srcFilePath + " -> " + descFilePath);
 
-            Process process = runtime.exec(command, null, new File(SysConfig.JXL_CONVERT_WINDOWS));
+            Process process = runtime.exec(command, null, new File(AppFilePathConfig.JXL_CONVERT_WINDOWS));
             // 读取标准输出
             String outStr = consumeInputStream(process.getInputStream());
             // 读取错误输出
@@ -99,12 +100,12 @@ public class JXLConverterUtils {
             Runtime runtime = Runtime.getRuntime();
 
             // 构建命令: SysConfig.JXL_CONVERT + "cjxl.exe" srcFilePath descFilePath
-            String cjxlPath = SysConfig.JXL_CONVERT_MAC + "cjxl";
+            String cjxlPath = AppFilePathConfig.JXL_CONVERT_MAC + "cjxl";
             String[] command = new String[]{cjxlPath, srcFilePath, descFilePath, "-d", "0.0", "-e", "9", "-p", "-j", "1"};
 
             LogUtils.info("Executing JXL conversion: " + cjxlPath + " " + srcFilePath + " -> " + descFilePath);
 
-            Process process = runtime.exec(command, null, new File(SysConfig.JXL_CONVERT_MAC));
+            Process process = runtime.exec(command, null, new File(AppFilePathConfig.JXL_CONVERT_MAC));
             // 读取标准输出
             String outStr = consumeInputStream(process.getInputStream());
             // 读取错误输出
@@ -131,12 +132,12 @@ public class JXLConverterUtils {
             Runtime runtime = Runtime.getRuntime();
 
             // 构建命令: SysConfig.JXL_CONVERT + "cjxl.exe" srcFilePath descFilePath
-            String cjxlPath = SysConfig.JXL_CONVERT_MAC + "djxl";
+            String cjxlPath = AppFilePathConfig.JXL_CONVERT_MAC + "djxl";
             String[] command = new String[]{cjxlPath, srcFilePath, descFilePath};
 
             LogUtils.info("Executing JXL conversion: " + cjxlPath + " " + srcFilePath + " -> " + descFilePath);
 
-            Process process = runtime.exec(command, null, new File(SysConfig.JXL_CONVERT_MAC));
+            Process process = runtime.exec(command, null, new File(AppFilePathConfig.JXL_CONVERT_MAC));
             // 读取标准输出
             String outStr = consumeInputStream(process.getInputStream());
             // 读取错误输出
@@ -171,13 +172,13 @@ public class JXLConverterUtils {
             Runtime runtime = Runtime.getRuntime();
 
             // 构建命令: SysConfig.JXL_CONVERT + "cjxl.exe" srcFilePath descFilePath
-            String cjxlPath = SysConfig.JXL_CONVERT_WINDOWS + "cjxl.exe";
+            String cjxlPath = AppFilePathConfig.JXL_CONVERT_WINDOWS + "cjxl.exe";
             float jxlCompressRatio = getJXLCompressRatio(quality);
             String[] command = new String[]{cjxlPath, srcFilePath, descFilePath, "-d", String.valueOf(jxlCompressRatio), "-e", "9", "-p"};
 
             LogUtils.info("Executing JXL compression: " + cjxlPath + " " + srcFilePath + " -> " + descFilePath + ", jxlCompressRatio: "+  jxlCompressRatio);
 
-            Process process = runtime.exec(command, null, new File(SysConfig.JXL_CONVERT_WINDOWS));
+            Process process = runtime.exec(command, null, new File(AppFilePathConfig.JXL_CONVERT_WINDOWS));
             // 读取标准输出
             String outStr = consumeInputStream(process.getInputStream());
             // 读取错误输出
@@ -203,13 +204,13 @@ public class JXLConverterUtils {
             Runtime runtime = Runtime.getRuntime();
 
             // 构建命令: SysConfig.JXL_CONVERT + "cjxl.exe" srcFilePath descFilePath
-            String cjxlPath = SysConfig.JXL_CONVERT_MAC + "cjxl";
+            String cjxlPath = AppFilePathConfig.JXL_CONVERT_MAC + "cjxl";
             float jxlCompressRatio = getJXLCompressRatio(quality);
             String[] command = new String[]{cjxlPath, srcFilePath, descFilePath, "-d", String.valueOf(jxlCompressRatio), "-e", "9", "-p"};
 
             LogUtils.info("Executing JXL compression: " + cjxlPath + " " + srcFilePath + " -> " + descFilePath + ", jxlCompressRatio: "+  jxlCompressRatio);
 
-            Process process = runtime.exec(command, null, new File(SysConfig.JXL_CONVERT_MAC));
+            Process process = runtime.exec(command, null, new File(AppFilePathConfig.JXL_CONVERT_MAC));
             // 读取标准输出
             String outStr = consumeInputStream(process.getInputStream());
             // 读取错误输出

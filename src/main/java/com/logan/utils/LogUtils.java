@@ -1,5 +1,6 @@
 package com.logan.utils;
 
+import com.logan.config.AppFilePathConfig;
 import com.logan.config.CacheData;
 import com.logan.config.GeneParamConfig;
 import com.logan.config.SysConfig;
@@ -22,7 +23,7 @@ public class LogUtils {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
         String fmtTime = dtf.format(time);
         System.out.println(fmtTime + " ==== [INFO] " + content);
-        LocalFileUtils.append2Log(fmtTime + " ==== [INFO] " + content, SysConfig.LOG_FILE_NAME);
+        LocalFileUtils.append2Log(fmtTime + " ==== [INFO] " + content, AppFilePathConfig.LOG_FILE_NAME);
         cleanLog();
     }
 
@@ -31,7 +32,7 @@ public class LogUtils {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
         String fmtTime = dtf.format(time);
         System.err.println(fmtTime + " ==== [ERROR] " + content);
-        LocalFileUtils.append2Log(fmtTime + " ==== [ERROR] " + content, SysConfig.LOG_FILE_NAME);
+        LocalFileUtils.append2Log(fmtTime + " ==== [ERROR] " + content, AppFilePathConfig.LOG_FILE_NAME);
         cleanLog();
     }
 
@@ -43,12 +44,12 @@ public class LogUtils {
         String cacheData = CacheData.instance().toString();
         String geneParamConfig = GeneParamConfig.instance().toString();
 
-        System.out.println(fmtTime + " ==== [INFO] sysConfig: " + sysConfig);
-        System.out.println(fmtTime + " ==== [INFO] cacheData: " + cacheData);
-        System.out.println(fmtTime + " ==== [INFO] geneParamConfig: " + geneParamConfig);
-        LocalFileUtils.append2Log(fmtTime + " ==== [INFO] sysConfig: " + sysConfig, SysConfig.LOG_FILE_NAME);
-        LocalFileUtils.append2Log(fmtTime + " ==== [INFO] cacheData: " + cacheData, SysConfig.LOG_FILE_NAME);
-        LocalFileUtils.append2Log(fmtTime + " ==== [INFO] geneParamConfig: " + geneParamConfig, SysConfig.LOG_FILE_NAME);
+//        System.out.println(fmtTime + " ==== [INFO] sysConfig: " + sysConfig);
+//        System.out.println(fmtTime + " ==== [INFO] cacheData: " + cacheData);
+//        System.out.println(fmtTime + " ==== [INFO] geneParamConfig: " + geneParamConfig);
+        LocalFileUtils.append2Log(fmtTime + " ==== [INFO] sysConfig: " + sysConfig, AppFilePathConfig.LOG_FILE_NAME);
+        LocalFileUtils.append2Log(fmtTime + " ==== [INFO] cacheData: " + cacheData, AppFilePathConfig.LOG_FILE_NAME);
+        LocalFileUtils.append2Log(fmtTime + " ==== [INFO] geneParamConfig: " + geneParamConfig, AppFilePathConfig.LOG_FILE_NAME);
 
         return sysConfig + "\n" + cacheData + "\n" + geneParamConfig + "\n";
     }

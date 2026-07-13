@@ -1,5 +1,6 @@
 package com.logan.utils;
 
+import com.logan.config.AppFilePathConfig;
 import com.logan.config.CacheData;
 import com.logan.config.Format;
 import com.logan.config.SysConfig;
@@ -236,7 +237,7 @@ public class HeifConvertUtils {
                 command = new String[]{nodejsPath + "node", "heic2png.js", from + "=" + to};
             }
 
-            Process process = runtime.exec(command, null, new File(SysConfig.HEIC_CONVERT_JS_NODE));
+            Process process = runtime.exec(command, null, new File(AppFilePathConfig.HEIC_CONVERT_JS_NODE));
             String inStr = consumeInputStream(process.getInputStream());
             String errStr = consumeInputStream(process.getErrorStream()); //若有错误信息则输出
             int proc = process.waitFor();

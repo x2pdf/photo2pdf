@@ -30,48 +30,13 @@ public class SysConfig implements Serializable {
 
     private static SysConfig sysConfig;
 
-    // 程序名称
-    public static String APP_NAME = "photo2pdf";
-    // 应用版本号
-    public static String APP_VERSION = "26.03";
-    // 应用语言,默认cn
-    public static String LANG = "cn";
     // 是否处于开发模式
     public static boolean IS_DEV_MODE = false;
     // 现在日期
     public static LocalDate TODAY = LocalDate.now();
-    // 缓存路径根目录
-    public static String APP_CACHE_PATH = System.getProperty("java.io.tmpdir") + SysConfig.APP_NAME + File.separator;
-    // 日志的缓存路径
-    public static String LOG_CACHE_PATH = APP_CACHE_PATH + "log" + File.separator;
-    // 日志的文件名称
-    public static String LOG_FILE_NAME = "dev_debug_" + DateTimeFormatter.ofPattern("yyyy_MM_dd").format(LocalDateTime.now()) + ".log";
-    // key的缓存路径
-    public static String KEY_CACHE_PATH = APP_CACHE_PATH + "key" + File.separator;
-    // 使用过key或者其他的历史文件的缓存路径
-    public static String HISTORY_CACHE_PATH = APP_CACHE_PATH + "history" + File.separator;
-    // 语言文件的缓存路径
-    public static String LANG_CACHE_PATH = APP_CACHE_PATH + "language" + File.separator;
-    // heic convert js 文件的缓存路径
-    public static String HEIC_CONVERT_JS_ZIP = APP_CACHE_PATH + "heic" + File.separator;
-    // heic convert js node 工程的缓存路径
-    public static String HEIC_CONVERT_JS_NODE = APP_CACHE_PATH + "heic" + File.separator + "heic-convert-js" + File.separator;
-
-    // jxl convert 工程的缓存路径
-    public static String JXL_CONVERT_WINDOWS = APP_CACHE_PATH + "jxl" + File.separator + "jxl-x64-windows-static\\bin" + File.separator;
-    public static String JXL_CONVERT_MAC = APP_CACHE_PATH + "jxl" + File.separator + "jxl-arm64-mac-static" + File.separator;
 
     // 语言map，映射语言使用
     public static HashMap<String, String> LANG_MAP = new HashMap<>();
-
-    // pdf加密密码最低要求的长度
-    public static int pdfPwdLength = 12;
-    // 高度
-    public static int STAGE_HEIGHT = 496;
-    // 宽度
-    public static int STAGE_WIDTH = 800;
-    // 边缘宽度默认值
-    public static double STAGE_MARGIN_DEFAULT = 2.0;
 
     // 线程池--用来压缩图片使用
     public static ThreadPoolExecutor asyncPool;
@@ -96,38 +61,19 @@ public class SysConfig implements Serializable {
     public static String CLEAR = "Clear";
 
     // ========== 常量定义 ==========
-    /** 触发分批合并的最小图片数量(避免内存溢出) */
-    public static final int GENE_PDF_MERGE_THRESHOLD = 100;
-    
-    /** 每批生成的PDF页数(平衡内存和性能) */
-    public static final int GENE_PDF_BATCH_PAGE_SIZE = 20;
-    
     /** 跳过压缩的图片大小阈值(200KB,小图无需压缩) */
     public static final int SKIP_COMPRESS_SIZE_THRESHOLD = 200_000;
-    
-    /** PDF生成警告阈值(提醒用户确认) */
-    public static final int LARGE_FILE_WARNING_THRESHOLD = 50;
-    
-    /** PDF提取文件大小限制(10MB) */
-    public static final long EXTRACT_PDF_MAX_SIZE = 10_000_000L;
-    
     /** 图片压缩超时时间(分钟) */
     public static final int COMPRESS_TIMEOUT_MINUTES = 30;
-    
     /** 线程池队列空闲检测等待时间(分钟) */
     public static final int QUEUE_IDLE_WAIT_MINUTES = 1;
-
-    // 生成pdf的图片的数量大于这个值时,就分批次生成pdf再合并pdf
-    public static int genePdfByMergeMinAmount = GENE_PDF_MERGE_THRESHOLD;
-    // 分批生成pdf的过程中，多少页的pdf作为一个小的pdf
-    public static int genePdfByMergePageUnit = GENE_PDF_BATCH_PAGE_SIZE;
     // 图片文件小于 200 kB 的不压缩了
     public static int skipCompressPhotoSize = SKIP_COMPRESS_SIZE_THRESHOLD;
     // nodejs程序根路径
     public static String NODEJS_PATH = "";
 
     private SysConfig() {
-        LogUtils.info("APP_CACHE_PATH: " + APP_CACHE_PATH);
+        LogUtils.info("APP_CACHE_PATH: " + AppFilePathConfig.APP_CACHE_PATH);
         asyncExecutor();
         initLang();
 
@@ -153,9 +99,9 @@ public class SysConfig implements Serializable {
             sysConfig = new SysConfig();
         }
         if (System.getProperty("os.name").toLowerCase().contains("windows")){
-            SysConfig.APP_VERSION = SysConfig.APP_VERSION + " win";
+            AppInfoConfig.APP_VERSION = AppInfoConfig.APP_VERSION + " win";
         }else {
-            SysConfig.APP_VERSION = SysConfig.APP_VERSION + " mac";
+            AppInfoConfig.APP_VERSION = AppInfoConfig.APP_VERSION + " mac";
         }
 
         return sysConfig;
@@ -185,14 +131,14 @@ public class SysConfig implements Serializable {
     public void initLang() {
         try {
             // 1. 是否存在缓存文件
-            ArrayList<File> filesInFold = LocalFileUtils.getFilesInFold(LANG_CACHE_PATH);
+            ArrayList<File> filesInFold = LocalFileUtils.getFilesInFold(AppFilePathConfig.LANG_CACHE_PATH);
             if (filesInFold == null) {
                 HelpCtrl helpCtrl = new HelpCtrl();
-                helpCtrl.changeLangFile(SysConfig.LANG);
+                helpCtrl.changeLangFile(AppInfoConfig.LANG);
             }
 
             // 2. 读取文件到内存
-            ArrayList<File> filesInFold2 = LocalFileUtils.getFilesInFold(LANG_CACHE_PATH);
+            ArrayList<File> filesInFold2 = LocalFileUtils.getFilesInFold(AppFilePathConfig.LANG_CACHE_PATH);
             // filesInFold2 不应当没有文件， 步骤 1 已经初始化了
             for (File file : filesInFold2) {
                 String name = file.getName();
@@ -218,7 +164,7 @@ public class SysConfig implements Serializable {
 
 
     private void updateLang(String lang) {
-        SysConfig.LANG = lang;
+        AppInfoConfig.LANG = lang;
     }
 
     public static String getLang(String key) {
@@ -245,22 +191,22 @@ public class SysConfig implements Serializable {
     public String toString() {
         String res = null;
         HashMap<String, Object> map = new HashMap<>();
-        map.put("APP_NAME", APP_NAME);
-        map.put("APP_VERSION", APP_VERSION);
-        map.put("LANG", LANG);
+        map.put("APP_NAME", AppInfoConfig.APP_NAME);
+        map.put("APP_VERSION", AppInfoConfig.APP_VERSION);
+        map.put("LANG", AppInfoConfig.LANG);
         map.put("IS_DEV_MODE", IS_DEV_MODE);
         map.put("TODAY", TODAY.toString());
-        map.put("APP_CACHE_PATH", APP_CACHE_PATH);
-        map.put("LOG_CACHE_PATH", LOG_CACHE_PATH);
-        map.put("LOG_FILE_NAME", LOG_FILE_NAME);
-        map.put("KEY_CACHE_PATH", KEY_CACHE_PATH);
-        map.put("HISTORY_CACHE_PATH", HISTORY_CACHE_PATH);
-        map.put("LANG_CACHE_PATH", LANG_CACHE_PATH);
-        map.put("STAGE_HEIGHT", STAGE_HEIGHT);
-        map.put("STAGE_WIDTH", STAGE_WIDTH);
+        map.put("APP_CACHE_PATH", AppFilePathConfig.APP_CACHE_PATH);
+        map.put("LOG_CACHE_PATH", AppFilePathConfig.LOG_CACHE_PATH);
+        map.put("LOG_FILE_NAME", AppFilePathConfig.LOG_FILE_NAME);
+        map.put("KEY_CACHE_PATH", AppFilePathConfig.KEY_CACHE_PATH);
+        map.put("HISTORY_CACHE_PATH", AppFilePathConfig.HISTORY_CACHE_PATH);
+        map.put("LANG_CACHE_PATH", AppFilePathConfig.LANG_CACHE_PATH);
+        map.put("STAGE_HEIGHT", AppUIConfig.STAGE_HEIGHT);
+        map.put("STAGE_WIDTH", AppUIConfig.STAGE_WIDTH);
         map.put("func", func);
-        map.put("genePdfByMergeMinAmount", genePdfByMergeMinAmount);
-        map.put("genePdfByMergePageUnit", genePdfByMergePageUnit);
+        map.put("genePdfByMergeMinAmount", PDFConfig.genePdfByMergeMinAmount);
+        map.put("genePdfByMergePageUnit", PDFConfig.genePdfByMergePageUnit);
         map.put("skipCompressPhotoSize", skipCompressPhotoSize);
 
         ObjectMapper objectMapper = new ObjectMapper();

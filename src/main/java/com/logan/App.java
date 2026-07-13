@@ -1,5 +1,6 @@
 package com.logan;
 
+import com.logan.config.AppUIConfig;
 import com.logan.config.CacheData;
 import com.logan.config.GeneParamConfig;
 import com.logan.config.SysConfig;
@@ -141,7 +142,7 @@ public class App extends Application {
 
     private AnchorPane getSettingTab(Stage stage) {
         AnchorPane settingsAnchorPane = new AnchorPane();
-        settingsAnchorPane.setPrefSize(SysConfig.STAGE_WIDTH, SysConfig.STAGE_HEIGHT);
+        settingsAnchorPane.setPrefSize(AppUIConfig.STAGE_WIDTH, AppUIConfig.STAGE_HEIGHT);
         SettingsPaneCtrl settingsPaneCtrl = new SettingsPaneCtrl();
         HBox hBoxConfig = settingsPaneCtrl.getBoxConfig(stage);
         hBoxConfig.setAlignment(Pos.TOP_CENTER);
@@ -150,13 +151,13 @@ public class App extends Application {
         CacheData.settingsVBox = settingsVBox;
         settingsVBox.getChildren().addAll(hBoxConfig);
         settingsVBox.setSpacing(10);
-        settingsVBox.setPadding(new Insets(SysConfig.STAGE_MARGIN_DEFAULT, 0, SysConfig.STAGE_MARGIN_DEFAULT, 0));
+        settingsVBox.setPadding(new Insets(AppUIConfig.STAGE_MARGIN_DEFAULT, 0, AppUIConfig.STAGE_MARGIN_DEFAULT, 0));
         settingsVBox.setAlignment(Pos.BASELINE_CENTER);
         settingsAnchorPane.getChildren().add(settingsVBox);
-        AnchorPane.setTopAnchor(settingsVBox, SysConfig.STAGE_MARGIN_DEFAULT);
-        AnchorPane.setLeftAnchor(settingsVBox, SysConfig.STAGE_MARGIN_DEFAULT);
-        AnchorPane.setRightAnchor(settingsVBox, SysConfig.STAGE_MARGIN_DEFAULT);
-        AnchorPane.setBottomAnchor(settingsVBox, SysConfig.STAGE_MARGIN_DEFAULT);
+        AnchorPane.setTopAnchor(settingsVBox, AppUIConfig.STAGE_MARGIN_DEFAULT);
+        AnchorPane.setLeftAnchor(settingsVBox, AppUIConfig.STAGE_MARGIN_DEFAULT);
+        AnchorPane.setRightAnchor(settingsVBox, AppUIConfig.STAGE_MARGIN_DEFAULT);
+        AnchorPane.setBottomAnchor(settingsVBox, AppUIConfig.STAGE_MARGIN_DEFAULT);
 
         return settingsAnchorPane;
     }
@@ -164,7 +165,7 @@ public class App extends Application {
 
     private AnchorPane getHomeTab() {
         AnchorPane homepageAnchorPane = new AnchorPane();
-        homepageAnchorPane.setPrefSize(SysConfig.STAGE_WIDTH, SysConfig.STAGE_HEIGHT);
+        homepageAnchorPane.setPrefSize(AppUIConfig.STAGE_WIDTH, AppUIConfig.STAGE_HEIGHT);
 
         // 2.1功能区域
         PDFFuncAreaCtrl PDFFuncAreaCtrl = new PDFFuncAreaCtrl();
@@ -192,17 +193,17 @@ public class App extends Application {
         VBox homepageVBox = new VBox();
         homepageVBox.getChildren().addAll(pdfInfoHBox, hBoxFunc, previewActionHBox, previewHBox);
         homepageVBox.setSpacing(10);
-        homepageVBox.setPadding(new Insets(SysConfig.STAGE_MARGIN_DEFAULT, 0, SysConfig.STAGE_MARGIN_DEFAULT, 0));
+        homepageVBox.setPadding(new Insets(AppUIConfig.STAGE_MARGIN_DEFAULT, 0, AppUIConfig.STAGE_MARGIN_DEFAULT, 0));
         homepageVBox.setAlignment(Pos.BASELINE_CENTER);
 
-        AnchorPane.setTopAnchor(homepageVBox, SysConfig.STAGE_MARGIN_DEFAULT);
-        AnchorPane.setLeftAnchor(homepageVBox, SysConfig.STAGE_MARGIN_DEFAULT);
-        AnchorPane.setRightAnchor(homepageVBox, SysConfig.STAGE_MARGIN_DEFAULT);
+        AnchorPane.setTopAnchor(homepageVBox, AppUIConfig.STAGE_MARGIN_DEFAULT);
+        AnchorPane.setLeftAnchor(homepageVBox, AppUIConfig.STAGE_MARGIN_DEFAULT);
+        AnchorPane.setRightAnchor(homepageVBox, AppUIConfig.STAGE_MARGIN_DEFAULT);
         AnchorPane.setBottomAnchor(homepageVBox, 22.0); // 不要和状态栏重叠
 
-        AnchorPane.setLeftAnchor(statusInfoHBox, SysConfig.STAGE_MARGIN_DEFAULT);
-        AnchorPane.setRightAnchor(statusInfoHBox, SysConfig.STAGE_MARGIN_DEFAULT);
-        AnchorPane.setBottomAnchor(statusInfoHBox, SysConfig.STAGE_MARGIN_DEFAULT);
+        AnchorPane.setLeftAnchor(statusInfoHBox, AppUIConfig.STAGE_MARGIN_DEFAULT);
+        AnchorPane.setRightAnchor(statusInfoHBox, AppUIConfig.STAGE_MARGIN_DEFAULT);
+        AnchorPane.setBottomAnchor(statusInfoHBox, AppUIConfig.STAGE_MARGIN_DEFAULT);
         homepageAnchorPane.getChildren().addAll(homepageVBox, statusInfoHBox);
 
         return homepageAnchorPane;
@@ -217,15 +218,15 @@ public class App extends Application {
         VBox helpVBox = new VBox();
         helpVBox.getChildren().addAll(boxHelp);
         helpVBox.setSpacing(10);
-        helpVBox.setPadding(new Insets(SysConfig.STAGE_MARGIN_DEFAULT, 0, SysConfig.STAGE_MARGIN_DEFAULT, 0));
+        helpVBox.setPadding(new Insets(AppUIConfig.STAGE_MARGIN_DEFAULT, 0, AppUIConfig.STAGE_MARGIN_DEFAULT, 0));
         helpVBox.setAlignment(Pos.BASELINE_CENTER);
-        AnchorPane.setTopAnchor(helpVBox, SysConfig.STAGE_MARGIN_DEFAULT);
-        AnchorPane.setLeftAnchor(helpVBox, SysConfig.STAGE_MARGIN_DEFAULT);
-        AnchorPane.setRightAnchor(helpVBox, SysConfig.STAGE_MARGIN_DEFAULT);
-        AnchorPane.setBottomAnchor(helpVBox, SysConfig.STAGE_MARGIN_DEFAULT);
+        AnchorPane.setTopAnchor(helpVBox, AppUIConfig.STAGE_MARGIN_DEFAULT);
+        AnchorPane.setLeftAnchor(helpVBox, AppUIConfig.STAGE_MARGIN_DEFAULT);
+        AnchorPane.setRightAnchor(helpVBox, AppUIConfig.STAGE_MARGIN_DEFAULT);
+        AnchorPane.setBottomAnchor(helpVBox, AppUIConfig.STAGE_MARGIN_DEFAULT);
 
         AnchorPane helpAnchorPane = new AnchorPane();
-        helpAnchorPane.setPrefSize(SysConfig.STAGE_WIDTH, SysConfig.STAGE_HEIGHT);
+        helpAnchorPane.setPrefSize(AppUIConfig.STAGE_WIDTH, AppUIConfig.STAGE_HEIGHT);
         helpAnchorPane.getChildren().add(helpVBox);
 
         return helpAnchorPane;

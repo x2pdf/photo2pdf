@@ -1,5 +1,6 @@
 package com.logan.utils;
 
+import com.logan.config.PDFConfig;
 import com.logan.config.SysConfig;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -118,7 +119,7 @@ public class AlertUtils {
                     alert.setContentText(SysConfig.getLang("PasswordNotEqual"));
                     continue;
                 }
-                if (password.length() < SysConfig.pdfPwdLength) {
+                if (password.length() < PDFConfig.pdfPwdLength) {
                     Alert alert = new Alert(Alert.AlertType.WARNING);
                     alert.setTitle(SysConfig.getLang("Waring"));
                     alert.setContentText(SysConfig.getLang("PasswordWarning"));

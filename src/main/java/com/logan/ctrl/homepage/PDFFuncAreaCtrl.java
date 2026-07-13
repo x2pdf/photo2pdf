@@ -2,6 +2,7 @@ package com.logan.ctrl.homepage;
 
 import com.logan.config.CacheData;
 import com.logan.config.GeneParamConfig;
+import com.logan.config.PDFConfig;
 import com.logan.config.SysConfig;
 import com.logan.utils.*;
 import javafx.event.ActionEvent;
@@ -161,7 +162,7 @@ public class PDFFuncAreaCtrl {
                     CacheData.refreshStatus();
 
                     int size = CacheData.getPhotosPreviewPath().size();
-                    if (size >= SysConfig.LARGE_FILE_WARNING_THRESHOLD) {
+                    if (size >= PDFConfig.LARGE_FILE_WARNING_THRESHOLD) {
                         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                         alert.setTitle("Info");
                         alert.setContentText(SysConfig.getLang("TooManyFile"));
@@ -285,7 +286,7 @@ public class PDFFuncAreaCtrl {
                 }
 
                 // 10 MB
-                if (pdf.length() >= SysConfig.EXTRACT_PDF_MAX_SIZE) {
+                if (pdf.length() >= PDFConfig.EXTRACT_PDF_MAX_SIZE) {
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                     alert.setTitle("Info");
                     alert.setContentText(SysConfig.getLang("TooManyFile"));

@@ -1,8 +1,6 @@
 package com.logan.ctrl.homepage;
 
-import com.logan.config.CacheData;
-import com.logan.config.GeneParamConfig;
-import com.logan.config.SysConfig;
+import com.logan.config.*;
 import com.logan.model.PDF;
 import com.logan.model.PDFNotes;
 import com.logan.model.PhotoFileInfo;
@@ -35,7 +33,7 @@ public class GenePDFCtrl {
         ArrayList<String> photosPath = CacheData.getPhotosGenePath();
         LogUtils.info("Generate pdf with actual number of photos: " + photosPath.size());
         String saveTo;
-        if (photosPath.size() >= SysConfig.genePdfByMergeMinAmount) {
+        if (photosPath.size() >= PDFConfig.genePdfByMergeMinAmount) {
             saveTo = genePdfsAndMergeAndSave();
         } else {
             saveTo = geneSinglePdfAndSave();
@@ -104,7 +102,7 @@ public class GenePDFCtrl {
             parameters.putAll(photoData);
             byte[] bytes = geneBy(parameters);
 
-            String savePath = SysConfig.HISTORY_CACHE_PATH;
+            String savePath = AppFilePathConfig.HISTORY_CACHE_PATH;
             String fileFullName = getGenePDFFullName();
 
             String save = null;
@@ -404,7 +402,7 @@ public class GenePDFCtrl {
         // 计算图片页的总页数
         // 粗略按照pdf划分，而不是根据图片数量划分
         int singlePagePhotos = GeneParamConfig.instance().getColumn() * GeneParamConfig.instance().getRow();
-        int pageUnit = SysConfig.genePdfByMergePageUnit;
+        int pageUnit = PDFConfig.genePdfByMergePageUnit;
         ArrayList<ArrayList<String>> resList = new ArrayList<>();
         int splitListSize = singlePagePhotos * pageUnit;
         ArrayList<String> strings = null;
@@ -686,7 +684,7 @@ public class GenePDFCtrl {
 
     }
 
-    private static final String summaryDesc = "photo2pdf version " + SysConfig.APP_VERSION + "\n" +
+    private static final String summaryDesc = "photo2pdf version " + AppInfoConfig.APP_VERSION + "\n" +
             "For the acquisition, content, use, dissemination of files processed by this application, \n" +
             "and other user personal behaviors not listed yet, the user shall bear the corresponding legal responsibilities, \n" +
             "and this application shall not bear any responsibility.\n" +

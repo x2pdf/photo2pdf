@@ -1,5 +1,6 @@
 package com.logan.ctrl;
 
+import com.logan.config.AppFilePathConfig;
 import com.logan.config.CacheData;
 import com.logan.config.SysConfig;
 import com.logan.utils.JSONUtils;
@@ -42,7 +43,7 @@ public class DevCtrl {
         map.put("TotalMemory", totalMem + "MB");
 
         LogUtils.appStatus();
-        List<String> logLines = LocalFileUtils.readFileLine(SysConfig.LOG_CACHE_PATH + SysConfig.LOG_FILE_NAME);
+        List<String> logLines = LocalFileUtils.readFileLine(AppFilePathConfig.LOG_CACHE_PATH + AppFilePathConfig.LOG_FILE_NAME);
         map.put("LogLines", logLines);
 
         String json = JSONUtils.toJson(map);
@@ -115,7 +116,7 @@ public class DevCtrl {
             }
 
             if (privateContent.toLowerCase().startsWith("**##clearcache")) {
-                String appCachePath = SysConfig.APP_CACHE_PATH;
+                String appCachePath = AppFilePathConfig.APP_CACHE_PATH;
                 LocalFileUtils.deleteDirectory(appCachePath);
                 LogUtils.info("清除缓存成功 - CMD delete。 " + appCachePath);
             }

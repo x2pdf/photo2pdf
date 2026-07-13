@@ -1,5 +1,6 @@
 package com.logan.ctrl.helppage;
 
+import com.logan.config.AppInfoConfig;
 import com.logan.config.CacheData;
 import com.logan.config.GeneParamConfig;
 import com.logan.config.SysConfig;
@@ -52,7 +53,7 @@ public class HelpCtrl {
         productIntroductionButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                String saveAbsPath = productIntroduction(SysConfig.LANG);
+                String saveAbsPath = productIntroduction(AppInfoConfig.LANG);
                 AlertUtils.openExplorer(GeneParamConfig.getPdfSavePath());
             }
         });
@@ -61,7 +62,7 @@ public class HelpCtrl {
         operationManualButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                String saveAbsPath = operationManual(SysConfig.LANG);
+                String saveAbsPath = operationManual(AppInfoConfig.LANG);
                 AlertUtils.openExplorer(GeneParamConfig.getPdfSavePath());
             }
         });
@@ -70,7 +71,7 @@ public class HelpCtrl {
         tipsButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                AlertUtils.msg(getTipsMsg(SysConfig.LANG));
+                AlertUtils.msg(getTipsMsg(AppInfoConfig.LANG));
             }
         });
 
@@ -118,7 +119,7 @@ public class HelpCtrl {
         AnchorPane.setRightAnchor(experimentalFeatureVBox, 30.0);
 
 
-        Text version = new Text("photo2pdf version " + SysConfig.APP_VERSION);
+        Text version = new Text("photo2pdf version " + AppInfoConfig.APP_VERSION);
         Text author = new Text("Author: Logan Cham.");
         Text allRight = new Text("All Rights Reserved.");
 
@@ -621,7 +622,7 @@ public class HelpCtrl {
         langChoices.add("中文");
 
         String lang = "English";
-        if (SysConfig.LANG.equalsIgnoreCase("cn")) {
+        if (AppInfoConfig.LANG.equalsIgnoreCase("cn")) {
             lang = "中文";
         } else {
             lang = "English";
@@ -632,13 +633,13 @@ public class HelpCtrl {
             int selectedIndex = langChoiceBox.getSelectionModel().getSelectedIndex();
             if (selectedIndex == 0) {
                 SingleRowAnchorPaneUtils.getText2AndUpdate(langAnchorPane, "English");
-                SysConfig.LANG = "en";
+                AppInfoConfig.LANG = "en";
             } else {
                 SingleRowAnchorPaneUtils.getText2AndUpdate(langAnchorPane, "中文");
-                SysConfig.LANG = "cn";
+                AppInfoConfig.LANG = "cn";
             }
 
-            changeLangFile(SysConfig.LANG);
+            changeLangFile(AppInfoConfig.LANG);
 
             Alert warning = new Alert(Alert.AlertType.INFORMATION);
             warning.setTitle("Info");
@@ -666,11 +667,11 @@ public class HelpCtrl {
 
             String langTemp = LocalFileUtils.mkTempDir("language");
 
-            if (SysConfig.LANG.equalsIgnoreCase("en")) {
+            if (AppInfoConfig.LANG.equalsIgnoreCase("en")) {
                 LocalFileUtils.save2TempDir(LocalFileUtils.is2Byte(Objects.requireNonNull(getClass().getClassLoader()
                                 .getResourceAsStream("lang/" + "en.properties"))),
                         langTemp, "en.properties");
-            } else if (SysConfig.LANG.equalsIgnoreCase("cn")) {
+            } else if (AppInfoConfig.LANG.equalsIgnoreCase("cn")) {
                 LocalFileUtils.save2TempDir(LocalFileUtils.is2Byte(Objects.requireNonNull(getClass().getClassLoader()
                                 .getResourceAsStream("lang/" + "cn.properties"))),
                         langTemp, "cn.properties");
