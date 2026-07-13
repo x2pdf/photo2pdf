@@ -43,6 +43,7 @@ public class CompressPhotoCtrl {
     public CompletableFuture<Void> asyncWork(String photoPath, float quality) {
         SysConfig.asyncPool.execute(() -> {
             try {
+                LogUtils.info("compressPhotos asyncWork, photoPath: " + photoPath + ", quality: " + quality);
                 String photoPathCopy = photoPath;
                 String previewPhotosPath = LocalFileUtils.mkTempDir("previewPhotos");
                 String fileFullName = photoPathCopy.substring(photoPathCopy.lastIndexOf(File.separator) + 1);
@@ -56,6 +57,10 @@ public class CompressPhotoCtrl {
                     String filePathFullNameCompress2 = previewPhotosPath + fileFullNameNewConvert;
                     HeifConvertUtils.convert(photoPathCopy, filePathFullNameCompress2,Format.jpeg.getValue(), "0.7");
                     photoPathCopy = filePathFullNameCompress2;
+                    fileFormat = Format.jpeg.getValue();
+                    fileFullName = photoPathCopy.substring(photoPathCopy.lastIndexOf(File.separator) + 1);
+                    fileFullNameNew = PhotoUtils.getCompressName(fileFullName);
+                    filePathFullNameCompress = previewPhotosPath + fileFullNameNew;
                 }
 
                 // 图片文件小于 200 kB 的不压缩了
@@ -63,20 +68,20 @@ public class CompressPhotoCtrl {
                 // 不压缩的图片格式（压缩后文件变得更大了）, 直接 copy 到目标位置
                 if (fileFormat.equalsIgnoreCase(Format.jpg.getValue()) || fileFormat.equalsIgnoreCase(Format.jpeg.getValue())) {
                     byte[] load = LocalFileUtils.load(photoPathCopy);
-                    String s = LocalFileUtils.save2Path(load, previewPhotosPath, fileFullNameNew);
+                    filePathFullNameCompress = LocalFileUtils.save2Path(load, previewPhotosPath, fileFullNameNew);
                 } else if (new File(photoPathCopy).length() <= SysConfig.skipCompressPhotoSize) {
                     isNeedScale = false;
                     byte[] load = LocalFileUtils.load(photoPathCopy);
-                    String s = LocalFileUtils.save2Path(load, previewPhotosPath, fileFullNameNew);
+                    filePathFullNameCompress = LocalFileUtils.save2Path(load, previewPhotosPath, fileFullNameNew);
                 } else {
                     boolean b = false;
-                    if (!fileFormat.equalsIgnoreCase(Format.heic.getValue()) || !fileFormat.equalsIgnoreCase(Format.heif.getValue())) {
+                    if (!fileFormat.equalsIgnoreCase(Format.heic.getValue()) && !fileFormat.equalsIgnoreCase(Format.heif.getValue())) {
                         b = PhotoUtils.compressPic(photoPathCopy, filePathFullNameCompress, fileFormat, quality);
                     }
                     if (!b) {
                         byte[] load = LocalFileUtils.load(photoPathCopy);
-                        String s = LocalFileUtils.save2Path(load, previewPhotosPath, fileFullNameNew);
-                        LogUtils.info("compress exception, copy original file to: " + s);
+                        filePathFullNameCompress = LocalFileUtils.save2Path(load, previewPhotosPath, fileFullNameNew);
+                        LogUtils.info("compress exception, copy original file to: " + filePathFullNameCompress);
                     }
                 }
 
@@ -104,6 +109,7 @@ public class CompressPhotoCtrl {
                 // 缓存压缩图片路径与原始图片路径的信息
                 CacheData.getOriginalPhoto2compressPhotoMap().put(photoPath, filePathFullName);
                 CacheData.getCompressPhoto2OriginalPhotoMap().put(filePathFullName, photoPath);
+                LogUtils.info("compressPhotos asyncWork, original photoPath: " + photoPath + ", compression photoPath: " + filePathFullName);
                 // 添加到 list
                 CacheData.getPhotosCompressPathAndFullName().add(filePathFullName);
                 int i = CacheData.compressPhotoAmount.addAndGet(1);
