@@ -1,9 +1,6 @@
 package com.logan;
 
-import com.logan.config.AppUIConfig;
-import com.logan.config.CacheData;
-import com.logan.config.GeneParamConfig;
-import com.logan.config.SysConfig;
+import com.logan.config.*;
 import com.logan.ctrl.*;
 import com.logan.ctrl.helppage.HelpCtrl;
 import com.logan.ctrl.homepage.PDFFuncAreaCtrl;
@@ -65,7 +62,7 @@ public class App extends Application {
                 @Override
                 public void handle(WindowEvent event) {
                     CacheData.clearAllView();
-                    SysConfig.asyncPool.shutdown();
+                    ThreadPool.asyncPool.shutdown();
                     LogUtils.appStatus();
                     System.gc();
                 }
@@ -88,6 +85,7 @@ public class App extends Application {
 
     public void initConfig() {
         try {
+            ThreadPool.init();
             SysConfig.instance();
             CacheData.instance();
             GeneParamConfig.instance();
@@ -97,7 +95,7 @@ public class App extends Application {
     }
 
     public void postStart() {
-        SysConfig.asyncPool.execute(() -> {
+        ThreadPool.asyncPool.execute(() -> {
             long postStartStartTime = System.currentTimeMillis();
             InitSource initSource = new InitSource();
             initSource.init();

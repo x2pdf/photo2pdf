@@ -190,7 +190,7 @@ public class GenePDFCtrl {
                 break;
             }
 
-            if (firstDetectQueueIsZero == null && SysConfig.asyncPool.getQueue().size() == 0) {
+            if (firstDetectQueueIsZero == null && ThreadPool.asyncPool.getQueue().size() == 0) {
                 // 借助线程池的队列中缓存任务的数量来判断是否接近结束了
                 firstDetectQueueIsZero = LocalDateTime.now();
             }

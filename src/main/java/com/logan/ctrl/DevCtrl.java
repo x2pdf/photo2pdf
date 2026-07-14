@@ -3,6 +3,7 @@ package com.logan.ctrl;
 import com.logan.config.AppFilePathConfig;
 import com.logan.config.CacheData;
 import com.logan.config.SysConfig;
+import com.logan.config.ThreadPool;
 import com.logan.utils.JSONUtils;
 import com.logan.utils.LocalFileUtils;
 import com.logan.utils.LogUtils;
@@ -109,8 +110,8 @@ public class DevCtrl {
                 if (split.length > 1) {
                     String coreSize = split[1];
                     int corePoolSize = Integer.parseInt(coreSize);
-                    int corePoolSizeOld = SysConfig.asyncPool.getCorePoolSize();
-                    SysConfig.asyncPool.setCorePoolSize(corePoolSize);
+                    int corePoolSizeOld = ThreadPool.asyncPool.getCorePoolSize();
+                    ThreadPool.asyncPool.setCorePoolSize(corePoolSize);
                     LogUtils.info("threadPool core Size: " + corePoolSizeOld + " --> " + corePoolSize);
                 }
             }

@@ -1,9 +1,6 @@
 package com.logan.ctrl.homepage;
 
-import com.logan.config.CacheData;
-import com.logan.config.PhotoFormat;
-import com.logan.config.GeneParamConfig;
-import com.logan.config.SysConfig;
+import com.logan.config.*;
 import com.logan.utils.HeifConvertUtils;
 import com.logan.utils.LocalFileUtils;
 import com.logan.utils.LogUtils;
@@ -41,7 +38,7 @@ public class CompressPhotoCtrl {
     }
 
     public CompletableFuture<Void> asyncWork(String photoPath, float quality) {
-        SysConfig.asyncPool.execute(() -> {
+        ThreadPool.asyncPool.execute(() -> {
             try {
                 LogUtils.info("compressPhotos asyncWork, photoPath: " + photoPath + ", quality: " + quality);
                 String photoPathCopy = photoPath;
@@ -121,7 +118,7 @@ public class CompressPhotoCtrl {
                 throw new RuntimeException("asyncWork compress photo exception");
             } finally {
                 if (CacheData.compressPhotoAmount.get() % 10 == 0) {
-                    LogUtils.info("corePoolSize: " + SysConfig.asyncPool.getCorePoolSize() + ", queue size: " + SysConfig.asyncPool.getQueue().size());
+                    LogUtils.info("corePoolSize: " + ThreadPool.asyncPool.getCorePoolSize() + ", queue size: " + ThreadPool.asyncPool.getQueue().size());
                     LogUtils.info("compress photo gc starting");
                     CacheData.gc();
                 }

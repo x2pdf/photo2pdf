@@ -1,9 +1,6 @@
 package com.logan.utils;
 
-import com.logan.config.AppFilePathConfig;
-import com.logan.config.CacheData;
-import com.logan.config.PhotoFormat;
-import com.logan.config.SysConfig;
+import com.logan.config.*;
 import com.logan.ctrl.homepage.PDFViewGridAreaCtrl;
 import com.logan.model.PhotoFileInfo;
 import javafx.scene.control.Alert;
@@ -64,7 +61,7 @@ public class HeifConvertUtils {
         // 异步线程去处理转换
         if (heifPhotos.size() > 0) {
             for (String heicPhoto : heifPhotos) {
-                SysConfig.asyncPool.execute(() -> {
+                ThreadPool.asyncPool.execute(() -> {
                     try {
                         String s = convert(heicPhoto, targetFormat, quality);
                         CacheData.convertPhotoAmount.addAndGet(1);
@@ -97,7 +94,7 @@ public class HeifConvertUtils {
                 break;
             }
 
-            if (firstDetectQueueIsZero == null && SysConfig.asyncPool.getQueue().size() == 0) {
+            if (firstDetectQueueIsZero == null && ThreadPool.asyncPool.getQueue().size() == 0) {
                 // 借助线程池的队列中缓存任务的数量来判断是否接近结束了
                 firstDetectQueueIsZero = LocalDateTime.now();
             }

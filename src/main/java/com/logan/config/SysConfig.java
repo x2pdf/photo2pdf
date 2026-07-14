@@ -38,11 +38,6 @@ public class SysConfig implements Serializable {
     // 语言map，映射语言使用
     public static HashMap<String, String> LANG_MAP = new HashMap<>();
 
-    // 线程池--用来压缩图片使用
-    public static ThreadPoolExecutor asyncPool;
-
-    // 无需 key 即可使用的功能
-    public static HashMap<String, String> func = new HashMap<>();
 
     // 系统当前所处的状态
     // 默认状态
@@ -74,24 +69,7 @@ public class SysConfig implements Serializable {
 
     private SysConfig() {
         LogUtils.info("APP_CACHE_PATH: " + AppFilePathConfig.APP_CACHE_PATH);
-        asyncExecutor();
         initLang();
-
-        // 功能使用的配置
-        func.put("PDFSavePath", "");
-//        func.put("Preview", "");
-        func.put("PDFCover", "");
-        func.put("PDFSummary", "");
-        func.put("CompressPDFPhoto", "");
-        func.put("PhotoMark", "");
-//        func.put("PictureFillPage", "");
-        func.put("PDFLayout", "");
-        func.put("PhotoSortBy", "");
-        func.put("DecryptPDF", "");
-//        func.put("MergePDF", "");
-//        func.put("Step2Generate", "");
-//        func.put("EncryptPDF", "");
-//        func.put("ExtractPhoto", "");
     }
 
     public static SysConfig instance() {
@@ -107,21 +85,7 @@ public class SysConfig implements Serializable {
         return sysConfig;
     }
 
-    public ThreadPoolExecutor asyncExecutor() {
-        if (asyncPool == null) {
-            int corePoolSize = 4;
-            int availableProcessors = Runtime.getRuntime().availableProcessors();
-            if (availableProcessors > corePoolSize) {
-                corePoolSize = availableProcessors;
-            }
-            asyncPool = new ThreadPoolExecutor(
-                    corePoolSize, corePoolSize * 2, 5, TimeUnit.SECONDS,
-                    new LinkedBlockingDeque<>(corePoolSize * 100), new ThreadPoolExecutor.CallerRunsPolicy());
-        }
 
-        LogUtils.info("asyncPool init. corePoolSize: " + asyncPool.getCorePoolSize() + " queue size: " + asyncPool.getQueue().size());
-        return asyncPool;
-    }
 
     public static String getLogFileName(LocalDate localDate) {
         return "dev_debug_" + DateTimeFormatter.ofPattern("yyyy_MM_dd").format(localDate) + ".log";
@@ -204,7 +168,6 @@ public class SysConfig implements Serializable {
         map.put("LANG_CACHE_PATH", AppFilePathConfig.LANG_CACHE_PATH);
         map.put("STAGE_HEIGHT", AppUIConfig.STAGE_HEIGHT);
         map.put("STAGE_WIDTH", AppUIConfig.STAGE_WIDTH);
-        map.put("func", func);
         map.put("genePdfByMergeMinAmount", PDFConfig.genePdfByMergeMinAmount);
         map.put("genePdfByMergePageUnit", PDFConfig.genePdfByMergePageUnit);
         map.put("skipCompressPhotoSize", skipCompressPhotoSize);
