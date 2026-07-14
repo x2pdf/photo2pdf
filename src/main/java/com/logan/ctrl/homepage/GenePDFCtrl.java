@@ -171,6 +171,7 @@ public class GenePDFCtrl {
         // 检测图片是否压缩完成
         LocalDateTime endTime = LocalDateTime.now().plusMinutes(SysConfig.COMPRESS_TIMEOUT_MINUTES);
         LocalDateTime firstDetectQueueIsZero = null;
+        LocalDateTime whileStartTime = LocalDateTime.now();
         while (true) {
             if (CacheData.compressPhotoAmount.get() == size) {
                 // 将压缩后的图片添加到预览和生成的 List 中，必须要在压缩完成之后才可以添加
@@ -201,14 +202,23 @@ public class GenePDFCtrl {
                     CacheData.syncCompressPhoto2GeneList(CacheData.getPhotosCompressPathAndFullName());
                     // 需要清除掉数据，防止再次增加图片时数量出问题
                     CacheData.getPhotosCompressPathAndFullName().clear();
-                    LogUtils.error("The cached task in the thread pool's queue has completed and has been waiting for more than 2 minutes.");
+                    LogUtils.error("The cached task in the thread pool's queue has completed and has been waiting for more than 1 minutes.");
                     firstDetectQueueIsZero = null;
                     break;
                 }
             }
 
             try {
-                // 页面卡死，渲染不了页面 todo
+                // TODO **** 页面卡死，渲染不了页面
+                if (LocalDateTime.now().minusMinutes(1).compareTo(whileStartTime) >= 0){
+                    // 如果过了1分钟并且还没有一张图片压缩成功，说明压缩图片失败了
+                    if (0 == CacheData.compressPhotoAmount.get()){
+                        LogUtils.error("compressPreviewPhoto error.");
+                        AlertUtils.error(SysConfig.getLang("Gene") + ": " + SysConfig.getLang("FuncError"));
+                        break;
+                    }
+
+                }
 
                 // 间隔一定时间轮询
                 Thread.sleep(1000);
