@@ -29,8 +29,9 @@ public class GenePDFCtrl {
     public String genePdfAndSave() {
         LogUtils.appStatus();
         long start = System.currentTimeMillis();
-        compressPreviewPhoto();
-        ArrayList<String> photosPath = CacheData.getPhotosGenePath();
+        // TODO ***
+        CacheData.setPhotosGenePath(CacheData.getPhotosPreviewPath());
+        ArrayList<String> photosPath = CacheData.getPhotosPreviewPath();
         LogUtils.info("Generate pdf with actual number of photos: " + photosPath.size());
         String saveTo;
         if (photosPath.size() >= PDFConfig.genePdfByMergeMinAmount) {
@@ -47,6 +48,7 @@ public class GenePDFCtrl {
 
     public String geneSinglePdfAndSave() {
         LocalFileUtils.append2Log("gene pdf starting");
+        // TODO 优化：通过传递参数的函数式风格，不要当前直接内部获取参数的方式。
         HashMap<String, Object> parameters = this.getGeneData();
         byte[] bytes = geneBy(parameters);
         LocalFileUtils.append2Log("gene pdf end");
@@ -148,6 +150,8 @@ public class GenePDFCtrl {
     }
 
 
+    // TODO ** 移除
+    @Deprecated
     public void compressPreviewPhoto() {
         // 特殊的设定, 不需要预览也不需要压缩的情况
         if (!GeneParamConfig.isIsPreviewPDFLayout() && GeneParamConfig.getPdfPhotoCompressionQuality() == 1.0f) {
