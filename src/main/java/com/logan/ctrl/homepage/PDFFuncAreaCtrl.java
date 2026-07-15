@@ -40,6 +40,7 @@ public class PDFFuncAreaCtrl {
         styleButton(selectButton);
         step1SelectOnAction(selectButton);
 
+        // TODO  现在生成PDF之后预览区还显示图片，但是在此点击生成却显示没有选择任何图片（问题！）。
         Button geneButton = new Button(SysConfig.getLang("Step2Generate"));
         styleButton(geneButton);
         step2GenerateOnAction(geneButton);

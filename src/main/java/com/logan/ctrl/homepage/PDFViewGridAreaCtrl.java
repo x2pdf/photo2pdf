@@ -187,6 +187,7 @@ public class PDFViewGridAreaCtrl {
             });
 
 
+            // TODO *** 现在使用这个功能时点击单张图片，全部图片都清除了？
             // 鼠标点击图片时，可能需要删除图片
             node.setOnMouseClicked(event -> {
                 Node source = (Node) event.getSource();
@@ -510,8 +511,11 @@ public class PDFViewGridAreaCtrl {
         // 1. 收集每一张图片的信息
         for (String path : photosPath) {
             PhotoFileInfo photoFileInfo = getPhotoFileInfo(path);
-            photoFileInfos.add(photoFileInfo);
-            CacheData.getPhotosFileInfoMap().put(path, photoFileInfo);
+            // 过滤掉 null 值，避免后续排序异常
+            if (photoFileInfo != null) {
+                photoFileInfos.add(photoFileInfo);
+                CacheData.getPhotosFileInfoMap().put(path, photoFileInfo);
+            }
         }
 
         // 2. 按照收集到的信息对图片进行排序

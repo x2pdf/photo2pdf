@@ -123,9 +123,16 @@ public class CacheData implements Serializable {
             GridPane gridPane = CacheData.gridPane;
             // 从预览list中获取图片信息
             ArrayList<String> photosPath = CacheData.getPhotosPreviewPath();
+            // 创建副本用于排序，避免直接修改原列表
+            ArrayList<String> photosToSort = copyList(photosPath);
+
             // 用户可能改变了排序方式，所以需要重新排序,然后放回预览的list去
-            ArrayList<String> sortPhotos = PDFViewGridAreaCtrl.sortPhotos(photosPath);
+            ArrayList<String> sortPhotos = PDFViewGridAreaCtrl.sortPhotos(photosToSort);
             CacheData.setPhotosPreviewPath(sortPhotos);
+
+            // 同步更新 photosPath 保持一致
+            CacheData.setPhotosPath(copyList(sortPhotos));
+
             // 需要清除已有的图片
             gridPane.getChildren().clear();
             PDFViewGridAreaCtrl PDFViewGridAreaCtrl = new PDFViewGridAreaCtrl();
@@ -284,6 +291,12 @@ public class CacheData implements Serializable {
         // 需要同步删除两个list中是图片,以避免选择 default排序时删除的照片依旧显示
         // todo 优化 removeIf 同名的图片将会全部删除
         CacheData.getPhotosPathUserSelectOrder().removeIf(remove::equals);
+        
+        // 同时从压缩相关的 Map 中清理数据
+        CacheData.getCompressPhoto2OriginalPhotoMap().values().removeIf(original -> original.equals(remove));
+        CacheData.getOriginalPhoto2compressPhotoMap().keySet().removeIf(original -> original.equals(remove));
+        CacheData.getPhotosFileInfoMap().remove(remove);
+        
         LogUtils.info("pathShouldRemove path: " + remove);
     }
 

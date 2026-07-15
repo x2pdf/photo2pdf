@@ -5,6 +5,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class AppFilePathConfig {
+    // APP文件存储的根目录
+    public static String APP_FILE_ROOT_PATH = System.getProperty("user.home") + File.separator + "photo2pdf" + File.separator;
+
     // 缓存路径根目录
     public static String APP_CACHE_PATH = System.getProperty("java.io.tmpdir") + AppInfoConfig.APP_NAME + File.separator;
     // 日志的缓存路径
