@@ -34,7 +34,6 @@ public class AlertUtils {
                 if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.OPEN)) {
                     Desktop.getDesktop().open(new File(savePath));
                 }
-                System.gc();
             } catch (IOException e) {
                 e.printStackTrace();
             }
