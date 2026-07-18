@@ -42,6 +42,15 @@ jpackage -n photo2pdf --app-image ./photo2pdf --vendor photo2pdf --app-version 2
 photo2pdf/out/artifacts/photo2pdf/bundles/target/build-link-package/
 <br>然后如同往常安装 windows 软件一样安装 photo2pdf-22.01.exe 即可使用！
 
+## 一些包/依赖的操作
+
+#### jasperreports-fonts-6.11.0.jar的打包
+这个包src/main/resources/lib/jasperreports-fonts-6.11.0.jar的打包操作： 
+
+cd /Users/megan/code/photo2pdf/src/main/resources/lib/jasperreports-fonts-6.11.0
+
+jar cf ../jasperreports-fonts-6.11.0.jar .
+
 ### 开发指令
 在首页--封面设置--描述 输入以下命令，将会触发开发相关的行为
 **##devmode=true  -- 开启开发模式，将会在【设置】页看到一些日志信息
