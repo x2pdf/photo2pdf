@@ -29,8 +29,7 @@ public class GenePDFCtrl {
     public String genePdfAndSave() {
         LogUtils.appStatus();
         long start = System.currentTimeMillis();
-        // TODO ***
-        CacheData.setPhotosGenePath(CacheData.getPhotosPreviewPath());
+        CacheData.setPhotosGenePath(CacheData.copyList(CacheData.getPhotosPreviewPath()));
         ArrayList<String> photosPath = CacheData.getPhotosPreviewPath();
         LogUtils.info("Generate pdf with actual number of photos: " + photosPath.size());
         String saveTo;

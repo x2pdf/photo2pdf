@@ -193,7 +193,7 @@ public class PDFViewGridAreaCtrl {
                 Node source = (Node) event.getSource();
                 Integer colIndex = GridPane.getColumnIndex(source);
                 Integer rowIndex = GridPane.getRowIndex(source);
-//                System.out.printf("setOnMouseClicked: %d, %d%n", rowIndex + 1, colIndex + 1);
+                LogUtils.info("delete single photo setOnMouseClicked, row:" + rowIndex + 1 + ", col:" + colIndex + 1);
                 if (CacheData.isClick2RemovePhoto) {
                     long startClick = System.currentTimeMillis();
                     int photoOffset = getPhotoOffset(rowIndex, colIndex);

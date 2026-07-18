@@ -70,7 +70,7 @@ public class PDFPreviewAreaCtrl {
                     CacheData.isClick2RemovePdf = false;
                     CacheData.setAppStatus(SysConfig.DEFAULT);
                 } else {
-                    // todo 当预览的是pdf列表时不用提醒
+                    // TODO *** 当预览的是pdf列表（合并PDF功能）时不用提醒
                     Alert warning = new Alert(Alert.AlertType.CONFIRMATION);
                     warning.setTitle("Warning");
                     warning.setContentText(SysConfig.getLang("ClearClickedWarning"));

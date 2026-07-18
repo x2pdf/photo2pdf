@@ -152,8 +152,14 @@ public class PDFFuncAreaCtrl {
             @Override
             public void handle(ActionEvent event) {
                 CacheData.refreshStatus();
+                
+                LogUtils.info("=== Debug: Before generate check ===");
+                LogUtils.info("photosPreviewPath size: " + CacheData.getPhotosPreviewPath().size());
+                LogUtils.info("photosPath size: " + CacheData.getPhotosPath().size());
+                LogUtils.info("photosGenePath size: " + CacheData.getPhotosGenePath().size());
+                
                 if (CacheData.getPhotosPreviewPath().size() == 0) {
-                    // case: no file
+                    LogUtils.info("Debug: photosPreviewPath is empty!");
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Info");
                     alert.setContentText(SysConfig.getLang("NoFileSelected"));
@@ -184,7 +190,10 @@ public class PDFFuncAreaCtrl {
 
                     GenePDFCtrl genePDFCtrl = new GenePDFCtrl();
                     String savePath = genePDFCtrl.genePdfAndSave();
-                    LocalFileUtils.deleteFolder(LocalFileUtils.mkTempDir("previewPhotos"));
+
+                    LogUtils.info("=== Debug: After generate ===");
+                    LogUtils.info("photosPreviewPath size: " + CacheData.getPhotosPreviewPath().size());
+                    LogUtils.info("photosGenePath size: " + CacheData.getPhotosGenePath().size());
 
                     CacheData.setAppStatus(SysConfig.DEFAULT);
                     CacheData.refreshStatus();
