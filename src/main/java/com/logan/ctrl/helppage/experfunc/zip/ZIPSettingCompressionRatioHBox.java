@@ -24,7 +24,7 @@ public class ZIPSettingCompressionRatioHBox extends BaseHBox {
         choices.add(SysConfig.getLang("FAST"));
         choices.add(SysConfig.getLang("NORMAL"));
         choices.add(SysConfig.getLang("MAXIMUM"));
-        choices.add(SysConfig.getLang("ULTRA"));
+        choices.add(SysConfig.getLang("ULTRA_COMPRESSION"));
 
         anchorPane = SingleRowAnchorPaneUtils.getTextTextChoiceBox(SysConfig.getLang("CompressionLevel") + ":",
                 SysConfig.getLang("Recommend"), SysConfig.getLang("NORMAL"), choices);
@@ -49,8 +49,8 @@ public class ZIPSettingCompressionRatioHBox extends BaseHBox {
                 SingleRowAnchorPaneUtils.getText2AndUpdate(anchorPane, SysConfig.getLang("MAXIMUM"));
                 ZIPConfig.setCompressionLevel("MAXIMUM");
             } else if (selectedIndex == 4) {
-                SingleRowAnchorPaneUtils.getText2AndUpdate(anchorPane, SysConfig.getLang("ULTRA"));
-                ZIPConfig.setCompressionLevel("ULTRA");
+                SingleRowAnchorPaneUtils.getText2AndUpdate(anchorPane, SysConfig.getLang("ULTRA_COMPRESSION"));
+                ZIPConfig.setCompressionLevel("ULTRA_COMPRESSION");
             } else {
                 // default:NO_COMPRESSION
                 SingleRowAnchorPaneUtils.getText2AndUpdate(anchorPane, SysConfig.getLang("NO_COMPRESSION"));

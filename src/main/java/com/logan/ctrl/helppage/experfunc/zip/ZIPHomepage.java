@@ -36,9 +36,18 @@ public class ZIPHomepage {
         Stage popupStage = new Stage();
         popupStage.setTitle(SysConfig.getLang("ZIPnEncryption"));
 
+        // 密码组件
+        ZIPPasswordInput pwdComponent = new ZIPPasswordInput();
+
+        // zip 压缩率的选择HBox
         ZIPSettingCompressionRatioHBox zipSettingCompressionRatioHBox = new ZIPSettingCompressionRatioHBox();
         zipSettingCompressionRatioHBox.initPane();
         zipSettingCompressionRatioHBox.setAction(popupStage);
+
+        // zip 预设密码的选择HBox
+        ZIPPasswordPresetHBox zipPasswordPresetHBox = new ZIPPasswordPresetHBox();
+        zipPasswordPresetHBox.initPane();
+        zipPasswordPresetHBox.setAction(popupStage, pwdComponent);
 
         ListView<String> listView = new ListView<>();
         listView.getItems().addAll(ZIPConfig.selectZIPFilesPath);
@@ -47,8 +56,6 @@ public class ZIPHomepage {
         processListviewDrag(listView);
         processDeleteListviewItem(listView);
 
-        // 密码组件
-        ZIPPasswordInput pwdComponent = new ZIPPasswordInput();
 
         Button zipSelectFilesButton = new Button(SysConfig.getLang("Step1SelectZIPFiles"));
         zipSelectFilesButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -141,6 +148,7 @@ public class ZIPHomepage {
 
         // 给按钮与上方组件增加间距
         configVBox.getChildren().add(zipSettingCompressionRatioHBox.getAnchorPane());
+        configVBox.getChildren().add(zipPasswordPresetHBox.getAnchorPane());
         configVBox.getChildren().add(pwdComponent);
         VBox.setMargin(filesPane, new Insets(10, 0, 0, 0)); // 上方间距10px
         configVBox.getChildren().add(filesPane);

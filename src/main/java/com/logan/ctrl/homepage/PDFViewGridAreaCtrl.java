@@ -187,7 +187,6 @@ public class PDFViewGridAreaCtrl {
             });
 
 
-            // TODO *** 现在使用这个功能时点击单张图片，全部图片都清除了？
             // 鼠标点击图片时，可能需要删除图片
             node.setOnMouseClicked(event -> {
                 Node source = (Node) event.getSource();

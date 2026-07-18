@@ -3,6 +3,7 @@ package com.logan;
 import com.logan.config.*;
 import com.logan.ctrl.*;
 import com.logan.ctrl.helppage.HelpCtrl;
+import com.logan.ctrl.helppage.experfunc.zip.ZIPPasswordPresetConfig;
 import com.logan.ctrl.homepage.PDFFuncAreaCtrl;
 import com.logan.ctrl.homepage.PDFCoverSettingsCtrl;
 import com.logan.ctrl.homepage.PDFPreviewAreaCtrl;
@@ -103,6 +104,9 @@ public class App extends Application {
             long postStartDuration = postStartEndTime - postStartStartTime;
             LogUtils.info(String.format("[Performance] APP postStart(async initSource) completed in %d ms", postStartDuration));
         });
+
+        // 加载zip的密码预设
+        ZIPPasswordPresetConfig.initZIPPasswordPresetFromFile();
     }
 
     public void initStage(Stage stage) {

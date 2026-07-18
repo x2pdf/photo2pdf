@@ -24,6 +24,9 @@ public class AppFilePathConfig {
     public static String LANG_CACHE_PATH = APP_CACHE_PATH + "language" + File.separator;
 
 
+    // password preset的缓存路径
+    public static String PWD_PRESET_CACHE_PATH = APP_CACHE_PATH + "passwordpreset" + File.separator;
+
     // heic convert js node 工程的缓存路径
     public static String HEIC_CONVERT_JS_NODE = APP_CACHE_PATH + "heic" + File.separator + "heic-convert-js" + File.separator;
 

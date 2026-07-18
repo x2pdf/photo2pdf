@@ -116,6 +116,26 @@ public class ZIPPasswordInput extends HBox {
         return pwd1.getText();
     }
 
+
+    /**
+     * 设置密码到两个密码输入框中
+     *
+     * 当提供有效密码时，会同时填充确认密码框并触发表单验证；
+     * 当传入null时，仅清空第一个密码框的内容。
+     *
+     * @param password 要设置的密码字符串，如果为null则只清空pwd1
+     */
+    public void setPassword(String password) {
+        if (password != null) {
+            pwd1.setText(password);
+            pwd2.setText(password);
+            validate();
+        } else {
+            pwd1.setText(null);
+            pwd2.setText(null);
+        }
+    }
+
     public boolean isValid() {
         String p1 = pwd1.getText();
         return p1 != null && p1.length() >= pwdMinLength && p1.equals(pwd2.getText());
