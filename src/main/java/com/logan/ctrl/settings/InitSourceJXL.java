@@ -2,6 +2,7 @@ package com.logan.ctrl.settings;
 
 import com.logan.utils.LocalFileUtils;
 import com.logan.utils.LogUtils;
+import com.logan.utils.ZipUtils;
 import net.lingala.zip4j.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
 import org.apache.commons.compress.archivers.sevenz.SevenZFile;
@@ -30,7 +31,7 @@ public class InitSourceJXL {
                         .getResourceAsStream("jxl/" + "jxl-x64-windows-static.7z"))),
                 assetPath, "jxl-x64-windows-static.7z");
         // 解压文件
-        un7zJXL(assetPath + "jxl-x64-windows-static.7z", assetPath);
+        ZipUtils.un7z(assetPath + "jxl-x64-windows-static.7z", assetPath);
     }
 
 
@@ -41,51 +42,14 @@ public class InitSourceJXL {
                         .getResourceAsStream("jxl/" + "jxl-arm64-mac-static.7z"))),
                 assetPath, "jxl-arm64-mac-static.7z");
         // 解压文件
-        un7zJXL(assetPath + "jxl-arm64-mac-static.7z", assetPath);
+        ZipUtils.un7z(assetPath + "jxl-arm64-mac-static.7z", assetPath);
 
         // 解压完成后，给目录下所有文件授权（仅mac需要这样子做）
         setChomd2ExecFilesInDirectory(assetPath + "jxl-arm64-mac-static");
     }
 
 
-    private static void un7zJXL(String srcPath, String save2Path) {
-        String savePath = "";
-        if (save2Path == null) {
-            savePath = srcPath.substring(0, srcPath.lastIndexOf(".")) + File.separator;
-        } else {
-            savePath = save2Path;
-        }
 
-        File saveDir = new File(savePath);
-        saveDir.mkdirs();
-
-        try (SevenZFile sevenZFile = new SevenZFile(new File(srcPath))) {
-            org.apache.commons.compress.archivers.ArchiveEntry entry;
-
-            while ((entry = sevenZFile.getNextEntry()) != null) {
-                File outputFile = new File(saveDir, entry.getName());
-
-                if (entry.isDirectory()) {
-                    outputFile.mkdirs();
-                } else {
-                    outputFile.getParentFile().mkdirs();
-                    try (FileOutputStream outputStream = new FileOutputStream(outputFile)) {
-                        byte[] buffer = new byte[8192];
-                        int bytesRead;
-                        while ((bytesRead = sevenZFile.read(buffer)) != -1) {
-                            outputStream.write(buffer, 0, bytesRead);
-                        }
-                    }
-                }
-            }
-
-            LogUtils.info("Successfully extracted: " + srcPath + " to " + savePath);
-
-        } catch (IOException e) {
-            LogUtils.error("Failed to extract 7z file: " + srcPath);
-            e.printStackTrace();
-        }
-    }
 
     private static boolean isMacOS() {
         if (System.getProperty("os.name").toLowerCase().contains("windows")) {
