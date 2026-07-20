@@ -43,13 +43,62 @@ photo2pdf/out/artifacts/photo2pdf/bundles/target/build-link-package/
 <br>然后如同往常安装 windows 软件一样安装 photo2pdf-22.01.exe 即可使用！
 
 ## 一些包/依赖的操作
+### 鸣谢开源巨人
+JasperReports (6.11.0)
 
-#### jasperreports-fonts-6.11.0.jar的打包
+jasperreports (6.11.0)
+
+jasperreports-functions (6.11.0)
+
+jasperreports-fonts (6.11.0)
+
+Bouncy Castle (1.67)
+
+bcprov-jdk15on (1.67)
+
+bcpg-jdk15on (1.67)
+
+Jackson (2.12.6)
+
+jackson-core (2.12.6)
+
+jackson-datatype-jsr310 (2.12.6)
+
+jackson-databind (2.12.6)
+
+jackson-annotations (2.12.6)
+
+Apache PDFBox (2.0.25)
+
+Reflections (0.9.12)
+
+Zip4j (2.11.6)
+
+Apache Commons Compress (1.28.0)
+
+Tukaani XZ (1.12)
+
+iText (2.1.7.js7 / 2.1.7.js9) 
+
+JasperReports Fonts (6.11.0)
+
+libavif - AVIF 图像格式转换（1.4.2）
+
+libjxl - JPEG XL 图像格式转换 (v0.13.0 开发版)
+
+Node.js + heic-convert-js - HEIC/HEIF 图像格式转换
+
+JavaFX (16) - GUI 框架
+
+
+
+### jasperreports-fonts-6.11.0.jar的打包
 这个包src/main/resources/lib/jasperreports-fonts-6.11.0.jar的打包操作： 
 
 cd /Users/megan/code/photo2pdf/src/main/resources/lib/jasperreports-fonts-6.11.0
 
 jar cf ../jasperreports-fonts-6.11.0.jar .
+
 
 ### 开发指令
 在首页--封面设置--描述 输入以下命令，将会触发开发相关的行为
