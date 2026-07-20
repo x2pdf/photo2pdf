@@ -34,4 +34,8 @@ public class AppFilePathConfig {
     // jxl convert 工程的缓存路径
     public static String JXL_CONVERT_WINDOWS = APP_CACHE_PATH + "jxl" + File.separator + "jxl-x64-windows-static\\bin" + File.separator;
     public static String JXL_CONVERT_MAC = APP_CACHE_PATH + "jxl" + File.separator + "jxl-arm64-mac-static" + File.separator;
+
+    // avif convert工程
+    public static String AVIF_CONVERT_WINDOWS = APP_CACHE_PATH + "avif" + File.separator + "libavif-windows" + File.separator;
+    public static String AVIF_CONVERT_MAC = APP_CACHE_PATH + "avif" + File.separator + "libavif-mac" + File.separator;
 }

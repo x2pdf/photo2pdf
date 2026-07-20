@@ -123,6 +123,14 @@ public class PDFFileChooserUtil {
                             "*.gif", "*.GIF"
                     )
             );
+        } else if (PhotoFormat.AVIF.getValue().equals(toFormat.toLowerCase())) {
+            fileChooser.getExtensionFilters().addAll(
+                    new FileChooser.ExtensionFilter("Photo Format",
+                            "*.jpeg", "*.JPEG", "*.Jpeg",
+                            "*.jpg", "*.JPG", "*.Jpg",
+                            "*.png", "*.PNG", "*.Png"
+                    )
+            );
         } else {
             fileChooser.getExtensionFilters().addAll(
                     new FileChooser.ExtensionFilter("Photo Format",
@@ -132,6 +140,7 @@ public class PDFFileChooserUtil {
                             "*.heic", "*.HEIC", "*.Heic",
                             "*.heif", "*.HEIF", "*.Heif",
                             "*.jxl", "*.JXL",
+                            "*.avif", "*.AVIF",
                             "*.jfif", "*.JFIF",
                             "*.bmp", "*.BMP",
                             "*.gif", "*.GIF"

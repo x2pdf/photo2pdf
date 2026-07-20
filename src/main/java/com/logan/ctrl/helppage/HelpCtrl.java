@@ -428,6 +428,7 @@ public class HelpCtrl {
         formatChoices.add("jpeg");
         formatChoices.add("jxl");
         formatChoices.add("png");
+        formatChoices.add("avif");
         AnchorPane formatConversionAnchorPane = SingleRowAnchorPaneUtils.getTextTextChoiceBoxButton(SysConfig.getLang("FormatConversion") + ":",
                 format, formatChoices, SysConfig.getLang("SelectFile"));
         ChoiceBox formatChoiceBox = SingleRowAnchorPaneUtils.getChoiceBox(formatConversionAnchorPane);
@@ -439,7 +440,9 @@ public class HelpCtrl {
                 CacheData.setToFormat("jxl");
             } else if (selectedIndex == 2) {
                 CacheData.setToFormat("png");
-            } else {
+            } else if (selectedIndex == 3) {
+                CacheData.setToFormat("avif");
+            }else {
                 // default
                 CacheData.setToFormat("jpeg");
             }

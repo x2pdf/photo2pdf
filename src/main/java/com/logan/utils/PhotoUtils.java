@@ -34,6 +34,20 @@ public class PhotoUtils {
             return true;
         }
 
+        // 将 xxx 格式图片(支持的)转换为 avif 格式图片
+        if (PhotoFormat.AVIF.getValue().equals(formatName) && descFilePath.endsWith(PhotoFormat.AVIF.getValue())){
+            AVIFConverterUtils.convert2AVIFAdaptor(srcFilePath, descFilePath, (int) quality);
+            return true;
+        }
+        // 将 avif 格式图片转换为 png 格式图片
+        if ((PhotoFormat.PNG.getValue().equals(formatName.toLowerCase())
+                || PhotoFormat.JPEG.getValue().equals(formatName.toLowerCase())
+                || PhotoFormat.JPG.getValue().equals(formatName.toLowerCase()))
+                && srcFilePath.endsWith(PhotoFormat.AVIF.getValue())){
+            AVIFConverterUtils.convertAVIF2OthersAdaptor(srcFilePath, descFilePath, (int) quality);
+            return true;
+        }
+
         FileInputStream file = null;
         BufferedImage src = null;
         FileOutputStream out = null;

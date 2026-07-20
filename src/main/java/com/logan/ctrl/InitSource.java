@@ -2,6 +2,7 @@ package com.logan.ctrl;
 
 import com.logan.config.GeneParamConfig;
 import com.logan.config.SysConfig;
+import com.logan.ctrl.settings.InitSourceAVIF;
 import com.logan.ctrl.settings.InitSourceJXL;
 import com.logan.utils.LocalFileUtils;
 import com.logan.utils.LogUtils;
@@ -30,6 +31,11 @@ public class InitSource {
             moveJavaScriptHeicAsset();
             InitSourceJXL initSourceJXL = new InitSourceJXL();
             initSourceJXL.moveJXLAsset();
+
+            // AVIF 文件初始化
+            InitSourceAVIF initSourceAVIF = new InitSourceAVIF();
+            initSourceAVIF.moveAVIFAsset();
+
             LogUtils.info("InitSource end");
         } catch (Exception e) {
             LogUtils.error("initSource exception. info: " + e);
