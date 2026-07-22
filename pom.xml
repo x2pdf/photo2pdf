@@ -15,6 +15,70 @@
         <javafx.version>16</javafx.version>
         <javafx.maven.plugin.version>0.0.6</javafx.maven.plugin.version>
     </properties>
+
+    <profiles>
+        <!-- Mac 平台专用配置 -->
+        <profile>
+            <id>mac</id>
+            <activation>
+                <os>
+                    <family>mac</family>
+                </os>
+            </activation>
+            <build>
+                <resources>
+                    <resource>
+                        <directory>src/main/resources</directory>
+                        <excludes>
+                            <!-- 排除 Windows 专用的 7z 文件 -->
+                            <exclude>avif/libavif-windows.7z</exclude>
+                            <exclude>jxl/jxl-x64-windows-static.7z</exclude>
+                            <exclude>heic/nodejs.7z</exclude>
+                        </excludes>
+                    </resource>
+                </resources>
+            </build>
+        </profile>
+
+        <!-- Windows 平台专用配置 -->
+        <profile>
+            <id>windows</id>
+            <activation>
+                <os>
+                    <family>windows</family>
+                </os>
+            </activation>
+            <build>
+                <resources>
+                    <resource>
+                        <directory>src/main/resources</directory>
+                        <excludes>
+                            <!-- 排除 Mac 专用的 7z 文件 -->
+                            <exclude>avif/libavif-mac.7z</exclude>
+                            <exclude>heic/nodejs-mac-x64.7z</exclude>
+                        </excludes>
+                    </resource>
+                </resources>
+            </build>
+        </profile>
+
+        <!-- 默认配置：包含所有资源（用于跨平台构建） -->
+        <profile>
+            <id>all-platforms</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <resources>
+                    <resource>
+                        <directory>src/main/resources</directory>
+                    </resource>
+                </resources>
+            </build>
+        </profile>
+    </profiles>
+
+
     <dependencies>
         <!--jasper 部分的依赖 -->
         <!-- https://mvnrepository.com/artifact/net.sf.jasperreports/jasperreports -->
@@ -142,6 +206,8 @@
                         <nonFilteredFileExtension>jrxml</nonFilteredFileExtension>
                         <nonFilteredFileExtension>jar</nonFilteredFileExtension>
                         <nonFilteredFileExtension>asc</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>7z</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>zip</nonFilteredFileExtension>
                     </nonFilteredFileExtensions>
                 </configuration>
             </plugin>
