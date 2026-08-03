@@ -89,12 +89,10 @@ public class InitSourceJXL {
                     fileName.endsWith(".a") ||
                     fileName.endsWith(".o") ||
                     fileName.endsWith(".lib")) {
-//                LogUtils.info("跳过不需要执行权限的文件: " + fileOrDir.getAbsolutePath());
                 return;
             }
 
             // 给可执行文件授权
-//            LogUtils.info("给文件授权：chmod +x " + fileOrDir.getAbsolutePath());
             try {
                 // 使用数组形式执行命令，避免路径转义问题
                 ProcessBuilder pb = new ProcessBuilder("chmod", "+x", fileOrDir.getAbsolutePath());
@@ -116,8 +114,6 @@ public class InitSourceJXL {
                         LogUtils.error("文件授权失败，退出码: " + exitCode +
                                 ", 文件: " + fileOrDir.getAbsolutePath() +
                                 ", 输出: " + output.toString());
-                    } else {
-//                        LogUtils.info("文件授权成功: " + fileOrDir.getAbsolutePath());
                     }
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();

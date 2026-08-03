@@ -16,24 +16,9 @@ import java.text.AttributedString;
 
 /**
  * ImageTextRenderer - render text into JPEG images.
- * <p>
- * Two static methods:
- * - renderTextImage(...) : pixel-precise rendering based on given aspect ratio and long side pixels.
- * - renderTextImage2(...): A4-like layout where fonts and layout scale proportionally with output pixels.
- * <p>
- * Both return byte[] of JPEG data (highest quality when photoQuality=1f).
  */
 public class ImageTextRenderer {
 
-    /**
-     * 渲染文本为 JPEG 图片并返回图片 bytes。
-     * <p>
-     * 参数与你要求对应，若传入 null 或 非法数值，则使用默认值（见代码）。
-     * <p>
-     * 返回：byte[] JPEG 数据（photoQuality 范围 0..1，默认为 1.0f；edgePixels 范围 0..500，默认 20）。
-     * <p>
-     * 可能抛出 IOException（写入 JPEG 时）。
-     */
     public static byte[] renderTextImage(
             String title,
             String text,

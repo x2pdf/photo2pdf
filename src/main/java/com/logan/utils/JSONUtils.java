@@ -12,11 +12,10 @@ public class JSONUtils {
 
     public static String toJson(Object o) {
         try {
-//            objectMapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
             return objectMapper.writeValueAsString(o);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
-            return "";
+            return "{}";
         }
     }
 }

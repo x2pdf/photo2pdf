@@ -2,8 +2,8 @@ package com.logan.ctrl.helppage.experfunc.zip;
 
 import com.logan.config.SysConfig;
 import com.logan.utils.AlertUtils;
-import com.logan.utils.FileUtils;
 import com.logan.utils.LogUtils;
+import com.logan.utils.OSUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -313,7 +313,7 @@ public class ZIPHomepage {
     private static String makeZipName(ArrayList<File> toBeCompressedDirs){
         String zipFileFullPathName = ZIPConfig.zipSavePath + File.separator + ZIPConfig.zipName;
         if (!checkZipName(zipFileFullPathName, toBeCompressedDirs)){
-            String userComputerDownloadPath = FileUtils.getUserComputerDownloadPath();
+            String userComputerDownloadPath = OSUtils.getUserComputerDownloadPath();
             if (checkZipName(userComputerDownloadPath, toBeCompressedDirs)){
                 zipFileFullPathName = userComputerDownloadPath + File.separator + ZIPConfig.zipName;
             }else {
