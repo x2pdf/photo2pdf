@@ -93,8 +93,7 @@ public class CacheData implements Serializable {
     // ===============Experimental cache data==================
     public static ArrayList<String> experimentalPhotos = new ArrayList<>();
     public static float compressPDFPhotoRatio = 0.7f;
-    // TODO *** hardcode
-    public static String toFormat = "jpg";
+    public static String toFormat = PhotoFormat.JPEG.getValue();
     public static float compressRatio = 0.7f;
     public static float scale = 0.7f;
     public static int width = 1920;
@@ -277,22 +276,21 @@ public class CacheData implements Serializable {
 
 
     public static void removeByOffset(int photoOffset) {
-        // 边界检查,防止 IndexOutOfBoundsException
         if (photoOffset < 0 || photoOffset >= CacheData.getPhotosPreviewPath().size()) {
             LogUtils.info("Invalid photo offset: " + photoOffset + ", current size: " + CacheData.getPhotosPreviewPath().size());
             return;
         }
             
         LogUtils.info("pathShouldRemove offset: " + photoOffset);
-        // 1. 先直接根据 offset 移除预览和生成的照片
+        
         String remove = CacheData.getPhotosPreviewPath().remove(photoOffset);
         CacheData.getPhotosPath().remove(photoOffset);
     
-        // 需要同步删除两个list中是图片,以避免选择 default排序时删除的照片依旧显示
-        // todo 优化 removeIf 同名的图片将会全部删除
-        CacheData.getPhotosPathUserSelectOrder().removeIf(remove::equals);
+        int indexToRemove = CacheData.getPhotosPathUserSelectOrder().indexOf(remove);
+        if (indexToRemove != -1) {
+            CacheData.getPhotosPathUserSelectOrder().remove(indexToRemove);
+        }
         
-        // 同时从压缩相关的 Map 中清理数据
         CacheData.getCompressPhoto2OriginalPhotoMap().values().removeIf(original -> original.equals(remove));
         CacheData.getOriginalPhoto2compressPhotoMap().keySet().removeIf(original -> original.equals(remove));
         CacheData.getPhotosFileInfoMap().remove(remove);

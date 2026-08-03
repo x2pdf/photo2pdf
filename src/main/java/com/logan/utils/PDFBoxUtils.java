@@ -135,7 +135,6 @@ public class PDFBoxUtils {
             // 当前（2021-12-28）版本为： 2.0.25
             int keyLength = 256;
 
-            // todo 优化设置权限
             AccessPermission ap = new AccessPermission();
             // Disable printing, everything else is allowed
             ap.setCanPrint(false);
