@@ -35,7 +35,6 @@ public class FileUtils {
         if (!dir.exists() || !dir.isDirectory()) {
             throw new IllegalArgumentException("无效的文件夹路径: " + folderAbsolutePath);
         }
-        System.out.println("folderAbsolutePath：  " + new File(folderAbsolutePath).getAbsolutePath());
         ProcessBuilder pb = new ProcessBuilder("tar", "-xzvf", tarGzFileName);
         // 设置命令执行目录
         pb.directory(dir);
@@ -49,7 +48,6 @@ public class FileUtils {
                 new InputStreamReader(process.getInputStream()))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                System.out.println(line);
             }
         }
 

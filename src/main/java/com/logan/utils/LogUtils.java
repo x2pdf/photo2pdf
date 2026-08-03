@@ -22,7 +22,6 @@ public class LogUtils {
         LocalDateTime time = LocalDateTime.now();
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
         String fmtTime = dtf.format(time);
-        System.out.println(fmtTime + " ==== [INFO] " + content);
         LocalFileUtils.append2Log(fmtTime + " ==== [INFO] " + content, AppFilePathConfig.LOG_FILE_NAME);
         cleanLog();
     }
@@ -44,9 +43,6 @@ public class LogUtils {
         String cacheData = CacheData.instance().toString();
         String geneParamConfig = GeneParamConfig.instance().toString();
 
-//        System.out.println(fmtTime + " ==== [INFO] sysConfig: " + sysConfig);
-//        System.out.println(fmtTime + " ==== [INFO] cacheData: " + cacheData);
-//        System.out.println(fmtTime + " ==== [INFO] geneParamConfig: " + geneParamConfig);
         LocalFileUtils.append2Log(fmtTime + " ==== [INFO] sysConfig: " + sysConfig, AppFilePathConfig.LOG_FILE_NAME);
         LocalFileUtils.append2Log(fmtTime + " ==== [INFO] cacheData: " + cacheData, AppFilePathConfig.LOG_FILE_NAME);
         LocalFileUtils.append2Log(fmtTime + " ==== [INFO] geneParamConfig: " + geneParamConfig, AppFilePathConfig.LOG_FILE_NAME);
@@ -56,10 +52,10 @@ public class LogUtils {
 
 
     public static void cleanLog() {
-        if (Math.random() < 0.999999) {
+        if (Math.random() < 0.9999) {
             return;
         }
-        // 十万分之一的概率移除日志文件
+        // 万分之一的概率移除日志文件
         String logPath = LocalFileUtils.getLogPath();
         for (int i = 30; i < 388; i++) {
             LocalDate date = LocalDate.now().minusDays(i);

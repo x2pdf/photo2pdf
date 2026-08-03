@@ -126,7 +126,6 @@ public class GenePDFCtrl {
         String savePath = GeneParamConfig.getPdfSavePath() + fileFullName;
 
         for (int i = 0; i < pdfSavePath.size(); i++) {
-            System.out.println("*** pdfSavePath path: " + pdfSavePath.get(i));
         }
 
         String save = PDFBoxUtils.merge2One(pdfSavePath, savePath);

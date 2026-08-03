@@ -33,7 +33,6 @@ public class T2ImgDataHBox {
         textTextArea.setWrapText(true);      // 自动换行
         textTextArea.setPrefRowCount(16);    // 可视行数
         textTextArea.textProperty().addListener((observable, oldValue, newValue) -> {
-            System.out.println("textTextArea newValue: " + newValue);
             TextToImageDataDTO.text = newValue;
         });
 
