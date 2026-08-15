@@ -1,6 +1,8 @@
 package com.logan.utils;
 
 import com.logan.config.PhotoFormat;
+import com.logan.utils.convert.ImageConvertStrategy;
+import com.logan.utils.convert.ImageConvertStrategyFactory;
 
 import javax.imageio.IIOImage;
 import javax.imageio.ImageIO;
@@ -20,78 +22,14 @@ import java.math.BigDecimal;
 public class PhotoUtils {
 
     public static boolean convertPic(String srcFilePath, String descFilePath, String formatName, float quality) {
-        // 将 xxx 格式图片(支持的)转换为 jxl 格式图片
-        if (PhotoFormat.JXL.getValue().equals(formatName) && descFilePath.endsWith(PhotoFormat.JXL.getValue())){
-            JXLConverterUtils.convert2JXLAdaptor(srcFilePath, descFilePath, quality);
-            return true;
-        }
-        // 将 jxl 格式图片转换为 png 格式图片
-        if ((PhotoFormat.PNG.getValue().equals(formatName.toLowerCase())
-                || PhotoFormat.JPEG.getValue().equals(formatName.toLowerCase())
-                || PhotoFormat.JPG.getValue().equals(formatName.toLowerCase()))
-                && srcFilePath.endsWith(PhotoFormat.JXL.getValue())){
-            JXLConverterUtils.convertJXL2OthersAdaptor(srcFilePath, descFilePath, quality);
-            return true;
-        }
+        ImageConvertStrategy strategy = ImageConvertStrategyFactory.getStrategy(srcFilePath, descFilePath);
 
-        // 将 xxx 格式图片(支持的)转换为 avif 格式图片
-        if (PhotoFormat.AVIF.getValue().equals(formatName) && descFilePath.endsWith(PhotoFormat.AVIF.getValue())){
-            AVIFConverterUtils.convert2AVIFAdaptor(srcFilePath, descFilePath, (int) quality);
-            return true;
-        }
-        // 将 avif 格式图片转换为 png 格式图片
-        if ((PhotoFormat.PNG.getValue().equals(formatName.toLowerCase())
-                || PhotoFormat.JPEG.getValue().equals(formatName.toLowerCase())
-                || PhotoFormat.JPG.getValue().equals(formatName.toLowerCase()))
-                && srcFilePath.endsWith(PhotoFormat.AVIF.getValue())){
-            AVIFConverterUtils.convertAVIF2OthersAdaptor(srcFilePath, descFilePath, (int) quality);
-            return true;
-        }
-
-        FileInputStream file = null;
-        BufferedImage src = null;
-        FileOutputStream out = null;
-        ImageWriter imgWrier;
-        ImageWriteParam imgWriteParams;
-        // 指定写图片的方式为 jpg
-        try {
-            imgWriteParams = new javax.imageio.plugins.jpeg.JPEGImageWriteParam(null);
-            // 要使用压缩，必须指定压缩方式为 MODE_EXPLICIT
-            imgWriteParams.setCompressionMode(imgWriteParams.MODE_EXPLICIT);
-            // 这里指定压缩的程度，参数 quality 是取值 0~1 范围内，
-            imgWriteParams.setCompressionQuality(quality);
-//        imgWriteParams.setProgressiveMode(imgWriteParams.MODE_DISABLED);
-            ColorModel colorModel = ImageIO.read(new FileInputStream(srcFilePath)).getColorModel();// ColorModel.getRGBdefault();
-            // 指定压缩时使用的色彩模式
-            imgWriteParams.setDestinationType(new javax.imageio.ImageTypeSpecifier(
-                    colorModel, colorModel.createCompatibleSampleModel(16, 16)));
-
-            file = new FileInputStream(srcFilePath);
-//            LogUtils.info(file.length());
-            src = ImageIO.read(file);
-            out = new FileOutputStream(descFilePath);
-
-            imgWrier = ImageIO.getImageWritersByFormatName(formatName).next();
-            imgWrier.reset();
-            // 必须先指定 out值，才能调用write方法, ImageOutputStream可以通过任何
-            // OutputStream构造
-            imgWrier.setOutput(ImageIO.createImageOutputStream(out));
-            // 调用write方法，就可以向输入流写图片
-            imgWrier.write(null, new IIOImage(src, null, null), imgWriteParams);
-            out.flush();
-            out.close();
-
-            file = null;
-            src = null;
-            out = null;
-            imgWrier = null;
-            imgWriteParams = null;
-        } catch (Exception | Error e) {
-            LogUtils.error("compressPic exception path: " + srcFilePath);
-            e.printStackTrace();
+        if (strategy == null) {
+            LogUtils.error("No suitable conversion strategy found for: " + srcFilePath + " -> " + descFilePath);
             return false;
         }
-        return true;
+
+        return strategy.convert(srcFilePath, descFilePath, quality);
     }
 
 
