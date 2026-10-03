@@ -25,6 +25,7 @@ public class ImageConvertStrategyFactory {
         strategies.add(new JxlToOthersStrategy());
         strategies.add(new OthersToAvifStrategy());
         strategies.add(new AvifToOthersStrategy());
+        strategies.add(new WebpToOthersStrategy());
         strategies.add(new StandardImageConvertStrategy());
     }
 

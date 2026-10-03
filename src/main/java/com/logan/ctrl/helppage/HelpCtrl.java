@@ -151,13 +151,17 @@ public class HelpCtrl {
                     + "2. 程序在处理 .heic 和 .heif 的图片时，通常需要更长的时间去处理。\n\n"
                     + "3. 如果生成的pdf文件中包含 .heic 和 .heif 的图片时，建议您事先使用 (帮助-实验性功能-"
                     + SysConfig.getLang("FormatConversion") + ") 将 .heic 和 .heif 转换为 .jpg 的图片。\n\n"
+                    + "4. (帮助-实验性功能-" + SysConfig.getLang("FormatConversion") + ") 支持将 .webp 图片转换为 .jpeg 或 .png，"
+                    + "透明背景会填充为白色，动图只转换第一帧。\n\n"
                     ;
         } else {
             return "1. It is normal that the application interface is not operable during the process of processing pictures or generating files. "
                     + "Please wait patiently and do not close the program immediately.\n\n"
                     + "2. The program usually takes a longer time to process .heic and .heif pictures.\n\n"
                     +"3. If the generated PDF file contains pictures of .heic and .heif, it is recommended that you use (help-experimental function-"
-                    + SysConfig.getLang("formatconversion") + ") convert .heic and. Heif to .jpg pictures.\n\n";
+                    + SysConfig.getLang("formatconversion") + ") convert .heic and. Heif to .jpg pictures.\n\n"
+                    + "4. (help-experimental function-" + SysConfig.getLang("FormatConversion") + ") supports converting .webp pictures to .jpeg or .png. "
+                    + "Transparent backgrounds are filled with white, and only the first frame of animated pictures is converted.\n\n";
         }
     }
 

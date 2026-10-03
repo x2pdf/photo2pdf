@@ -18,6 +18,7 @@ public enum PhotoFormat {
     HEIF("heif", "heif"),
     JXL("jxl", "jxl"),
     AVIF("avif", "avif"),
+    WEBP("webp", "webp"),
     ;
 
     private String value;

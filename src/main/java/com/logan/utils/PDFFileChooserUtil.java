@@ -141,6 +141,7 @@ public class PDFFileChooserUtil {
                             "*.heif", "*.HEIF", "*.Heif",
                             "*.jxl", "*.JXL",
                             "*.avif", "*.AVIF",
+                            "*.webp", "*.WEBP", "*.Webp",
                             "*.jfif", "*.JFIF",
                             "*.bmp", "*.BMP",
                             "*.gif", "*.GIF"

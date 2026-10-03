@@ -25,7 +25,7 @@ public class StandardImageConvertStrategy implements ImageConvertStrategy {
     @Override
     public boolean convert(String srcFilePath, String descFilePath, float quality) {
         try {
-            BufferedImage src = ImageIO.read(new File(srcFilePath));
+            BufferedImage src = readImage(srcFilePath);
             if (src == null) {
                 LogUtils.error("No ImageIO reader found for: " + srcFilePath);
                 return false;
@@ -62,6 +62,14 @@ public class StandardImageConvertStrategy implements ImageConvertStrategy {
                 descLower.endsWith("." + PhotoFormat.AVIF.getValue());
 
         return !isSpecialSrc && !isSpecialDesc;
+    }
+
+    /**
+     * 读取源图片，子类可覆盖以处理需要特殊读取逻辑的格式
+     * @return 读取到的图片，没有可用的 ImageIO 读取器时返回 null
+     */
+    protected BufferedImage readImage(String srcFilePath) throws Exception {
+        return ImageIO.read(new File(srcFilePath));
     }
 
     /**
