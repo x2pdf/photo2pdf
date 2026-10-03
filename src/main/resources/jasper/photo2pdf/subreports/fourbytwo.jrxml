@@ -21,23 +21,23 @@
 		<band splitType="Stretch"/>
 	</background>
 	<detail>
-		<band height="190" splitType="Stretch">
+		<band height="192" splitType="Stretch">
 			<image hAlign="Center" vAlign="Middle">
-				<reportElement x="0" y="0" width="252" height="142" uuid="2aba2396-fb30-4b9c-ae48-4ff1bb5b5312">
+				<reportElement x="0" y="0" width="257" height="158" uuid="2aba2396-fb30-4b9c-ae48-4ff1bb5b5312">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<imageExpression><![CDATA[$F{photo1}]]></imageExpression>
 			</image>
 			<image hAlign="Center" vAlign="Middle">
-				<reportElement x="271" y="0" width="252" height="142" uuid="517d51ab-3cec-497b-9d85-4732f2e23990">
+				<reportElement x="266" y="0" width="257" height="158" uuid="517d51ab-3cec-497b-9d85-4732f2e23990">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<imageExpression><![CDATA[$F{photo2}]]></imageExpression>
 			</image>
 			<textField textAdjust="ScaleFont" isBlankWhenNull="true">
-				<reportElement x="0" y="142" width="252" height="44" uuid="b7800f2d-43d4-4f49-9be9-efdf5c01fb39">
+				<reportElement x="0" y="158" width="257" height="30" uuid="b7800f2d-43d4-4f49-9be9-efdf5c01fb39">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -47,7 +47,7 @@
 				<textFieldExpression><![CDATA[$F{photo1Mark}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="ScaleFont" isBlankWhenNull="true">
-				<reportElement x="271" y="142" width="252" height="44" uuid="96781388-1442-4ea3-834c-02ffe492c736">
+				<reportElement x="266" y="158" width="257" height="30" uuid="96781388-1442-4ea3-834c-02ffe492c736">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
