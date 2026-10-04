@@ -132,7 +132,7 @@ public class SysConfig implements Serializable {
     }
 
     public static String getLang(String key) {
-        String value = SysConfig.LANG_MAP.get(key);
+        String value = getLangValue(key);
         if (value == null) {
             return key;
         }
@@ -140,7 +140,7 @@ public class SysConfig implements Serializable {
     }
 
     public static String getLang(String key, String replaceKey, String newValue) {
-        String value = SysConfig.LANG_MAP.get(key);
+        String value = getLangValue(key);
         if (value == null) {
             return key;
         }
@@ -149,6 +149,29 @@ public class SysConfig implements Serializable {
         }
         String res = value.replace("{" + replaceKey + "}", newValue);
         return res;
+    }
+
+    /**
+     * 缓存的语言文件是旧版本时可能缺少新增的 key，此时从程序自带的语言文件中读取
+     */
+    private static String getLangValue(String key) {
+        String value = SysConfig.LANG_MAP.get(key);
+        if (value != null) {
+            return value;
+        }
+        try (InputStream in = SysConfig.class.getClassLoader().getResourceAsStream("lang/" + AppInfoConfig.LANG + ".properties")) {
+            if (in == null) {
+                return null;
+            }
+            Properties pps = new Properties();
+            pps.load(new InputStreamReader(in, StandardCharsets.UTF_8));
+            for (String strKey : pps.stringPropertyNames()) {
+                LANG_MAP.putIfAbsent(strKey, pps.getProperty(strKey));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return SysConfig.LANG_MAP.get(key);
     }
 
     @Override

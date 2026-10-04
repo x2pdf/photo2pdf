@@ -7,6 +7,7 @@ import java.io.*;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.StandardCharsets;
+import java.text.Normalizer;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -24,6 +25,46 @@ public class LocalFileUtils {
 
     public static String getLogPath() {
         return logPath;
+    }
+
+    /**
+     * macOS 上 JavaFX FileChooser / 拖拽返回的路径中，文件名含 emoji 等 4 字节 UTF-8 字符时路径会被损坏
+     * （emoji 被逐字节变成乱码字符，路径末尾也会被截掉），程序无法读取这类文件。
+     * 这里把损坏的路径尽量还原成可读的文件名，仅用于提示用户。
+     *
+     * @param path FileChooser 返回的路径
+     * @return 用于展示的文件名
+     */
+    public static String getDisplayNameOfMisreadPath(String path) {
+        String name = path.substring(path.lastIndexOf(File.separator) + 1);
+        StringBuilder sb = new StringBuilder();
+        int i = 0;
+        while (i < name.length()) {
+            char c = name.charAt(i);
+            if (c >= 0xF0 && c <= 0xF4 && i + 4 <= name.length()) {
+                byte[] bytes = new byte[4];
+                boolean valid = true;
+                for (int j = 0; j < 4; j++) {
+                    char b = name.charAt(i + j);
+                    if (b > 0xFF || (j > 0 && (b < 0x80 || b > 0xBF))) {
+                        valid = false;
+                        break;
+                    }
+                    bytes[j] = (byte) b;
+                }
+                if (valid) {
+                    sb.append(new String(bytes, StandardCharsets.UTF_8));
+                    i += 4;
+                    continue;
+                }
+            }
+            // 末尾残缺的乱码字节直接丢弃
+            if (c < 0x80 || c > 0xFF || Character.isLetterOrDigit(c)) {
+                sb.append(c);
+            }
+            i++;
+        }
+        return Normalizer.normalize(sb.toString(), Normalizer.Form.NFC) + "…";
     }
 
     /**

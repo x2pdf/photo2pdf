@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -65,6 +66,7 @@ public class PDFFileChooserUtil {
 //            CacheData.getPhotosPathUserSelectOrder().add(file.getAbsolutePath());
             strings.add(file.getAbsolutePath());
         }
+        strings = AlertUtils.filterUnreadablePaths(strings);
 
         LogUtils.info("selectPhotos photo size: " + CacheData.getPhotosPathUserSelectOrder().size());
         return strings;
@@ -98,6 +100,7 @@ public class PDFFileChooserUtil {
             File file = list.get(i);
             strings.add(file.getAbsolutePath());
         }
+        strings = AlertUtils.filterUnreadablePaths(strings);
 
         ArrayList<String> selectPhotosFilter = HeifConvertUtils.asyncConvert(strings,
                 "jpeg", String.valueOf(GeneParamConfig.getPdfPhotoCompressionQuality()));
@@ -159,6 +162,7 @@ public class PDFFileChooserUtil {
             File file = list.get(i);
             strings.add(file.getAbsolutePath());
         }
+        strings = AlertUtils.filterUnreadablePaths(strings);
 
         ArrayList<String> selectPhotosFilter = HeifConvertUtils.asyncConvert(strings, toFormat, quality);
         LogUtils.info("selectPhotos photo size: " + selectPhotosFilter.size());
@@ -186,6 +190,7 @@ public class PDFFileChooserUtil {
             File file = list.get(i);
             strings.add(file.getAbsolutePath());
         }
+        strings = AlertUtils.filterUnreadablePaths(strings);
 
         LogUtils.info("selectPhotos photo size: " + strings.size());
         return strings;
@@ -217,7 +222,11 @@ public class PDFFileChooserUtil {
             return null;
         }
 
-        return list.get(list.size() - 1);
+        String path = list.get(list.size() - 1).getAbsolutePath();
+        if (AlertUtils.filterUnreadablePaths(Collections.singletonList(path)).isEmpty()) {
+            return null;
+        }
+        return new File(path);
     }
 
 
@@ -237,10 +246,11 @@ public class PDFFileChooserUtil {
         }
         for (int i = 0; i < list.size(); i++) {
             File file = list.get(i);
-            // 添加用户选择的数据，需要顺序
-            CacheData.getPhotosPathUserSelectOrder().add(file.getAbsolutePath());
             strings.add(file.getAbsolutePath());
         }
+        strings = AlertUtils.filterUnreadablePaths(strings);
+        // 添加用户选择的数据，需要顺序
+        CacheData.getPhotosPathUserSelectOrder().addAll(strings);
 
         LogUtils.info("selectPDFs pdf size: " + strings.size());
         return strings;
@@ -262,7 +272,11 @@ public class PDFFileChooserUtil {
             return null;
         }
 
-        return list.get(list.size() - 1);
+        String path = list.get(list.size() - 1).getAbsolutePath();
+        if (AlertUtils.filterUnreadablePaths(Collections.singletonList(path)).isEmpty()) {
+            return null;
+        }
+        return new File(path);
     }
 
 
@@ -270,6 +284,9 @@ public class PDFFileChooserUtil {
         DirectoryChooser directoryChooser = new DirectoryChooser();
         File file = directoryChooser.showDialog(stage);
         if (file == null) {
+            return null;
+        }
+        if (AlertUtils.filterUnreadablePaths(Collections.singletonList(file.getAbsolutePath())).isEmpty()) {
             return null;
         }
         return file.getAbsolutePath();

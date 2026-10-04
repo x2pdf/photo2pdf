@@ -1,6 +1,7 @@
 package com.logan.ctrl.helppage.experfunc.zip;
 
 import com.logan.config.SysConfig;
+import com.logan.utils.AlertUtils;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -9,6 +10,7 @@ import java.io.File;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ZipFileChooserUtil {
@@ -23,7 +25,9 @@ public class ZipFileChooserUtil {
         if (list == null || list.size() == 0) {
             return files;
         }
-        files.addAll(list);
+        for (String path : AlertUtils.filterUnreadablePaths(getFilesPath(list))) {
+            files.add(new File(path));
+        }
         return files;
     }
 
@@ -32,7 +36,14 @@ public class ZipFileChooserUtil {
         directoryChooser.setTitle(SysConfig.getLang("SelectFile"));
         // 可以设置初始目录
         // directoryChooser.setInitialDirectory(new File("/path/to/default"));
-        return directoryChooser.showDialog(new Stage());
+        File dir = directoryChooser.showDialog(new Stage());
+        if (dir == null) {
+            return null;
+        }
+        if (AlertUtils.filterUnreadablePaths(Collections.singletonList(dir.getAbsolutePath())).isEmpty()) {
+            return null;
+        }
+        return dir;
     }
 
 

@@ -205,7 +205,8 @@ public class ZIPHomepage {
         listView.setOnDragDropped(event -> {
             Dragboard db = event.getDragboard();
             if (db.hasFiles()) {
-                for (File file : db.getFiles()) {
+                for (String path : AlertUtils.filterUnreadablePaths(ZipFileChooserUtil.getFilesPath(db.getFiles()))) {
+                    File file = new File(path);
                     // 如果不存在
                     if (!isListviewContainsFile(file)){
                         boolean isAdd = false;

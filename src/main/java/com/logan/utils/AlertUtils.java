@@ -5,6 +5,7 @@ import com.logan.config.SysConfig;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.*;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -12,6 +13,8 @@ import javafx.scene.shape.Circle;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -47,6 +50,42 @@ public class AlertUtils {
         Optional<ButtonType> buttonType = alert.showAndWait();
     }
 
+
+    /**
+     * 过滤掉选择后无法读取的文件（macOS 上文件名含 emoji 时路径会被 JavaFX 损坏），并弹窗提示用户
+     *
+     * @param paths 用户选择的文件路径
+     * @return 可以读取的文件路径
+     */
+    public static ArrayList<String> filterUnreadablePaths(List<String> paths) {
+        ArrayList<String> readable = new ArrayList<>();
+        List<String> unreadable = new ArrayList<>();
+        for (String path : paths) {
+            if (new File(path).exists()) {
+                readable.add(path);
+            } else {
+                unreadable.add(path);
+                LogUtils.error("chooser path not exists: " + path);
+            }
+        }
+        if (unreadable.size() > 0) {
+            int showMax = 10;
+            StringBuilder names = new StringBuilder();
+            for (int i = 0; i < unreadable.size() && i < showMax; i++) {
+                names.append("\n").append(LocalFileUtils.getDisplayNameOfMisreadPath(unreadable.get(i)));
+            }
+            if (unreadable.size() > showMax) {
+                names.append("\n").append(SysConfig.getLang("AndMoreFiles", "count", String.valueOf(unreadable.size())));
+            }
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setHeaderText(SysConfig.getLang("UnreadableFileName", "count", String.valueOf(unreadable.size())));
+            alert.setContentText(SysConfig.getLang("UnreadableFileNameDetail") + "\n" + names);
+            alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+            alert.showAndWait();
+        }
+        return readable;
+    }
 
     public static void error(String msg) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
